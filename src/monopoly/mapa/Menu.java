@@ -77,9 +77,13 @@ public class Menu {
         }while(!iniciarJuego);
 
         Turno turno = new Turno(jgdrs);
-        tablero.getCasillas().get(0).get(0).setAvatares(avatares); /*Insercion de avatares y jugadores en el tablero*/
+        Iterator avatares_i = avatares.values().iterator(); /*Insercion de avatares y jugadores en el tablero*/
+        while (avatares_i.hasNext()) {
+            Avatar av = (Avatar) avatares_i.next();
+            this.tablero.getCasillas().get(0).get(0).getAvatares().put(av.getId(), av);
+            this.tablero.getAvatares().put(av.getId(), av);
+        }
         tablero.setJugadores(jugadores);
-        tablero.setAvatares(avatares);
 
         System.out.println(tablero);
 
@@ -176,7 +180,7 @@ public class Menu {
                                 System.out.println(tablero);
                             break;
                         case "avatares":
-                            for(Avatar avatar: avatares.values()){
+                            for(Avatar avatar: tablero.getAvatares().values()){
                                 System.out.println(avatar);
                             }
                                 System.out.println(tablero);

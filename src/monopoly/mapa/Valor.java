@@ -112,6 +112,10 @@ public class Valor {
     public static final String CASILLA_TIPO_IMPUESTO = "impuesto";
     public static final String CASILLA_TIPO_IR_CARCEL = "ir_carcel";
     public static final String CASILLA_TIPO_CAJA = "caja";
+    public static final String EDIFICIO_CASA = "casa";
+    public static final String EDIFICIO_HOTEL = "hotel";
+    public static final String EDIFICIO_PISCINA = "piscina";
+    public static final String EDIFICIO_PISTA = "pista_deporte";
 
     // numeros de posicion en tablero de las casillas
     public static final int POSICION_CASILLA_SALIDA = 0;

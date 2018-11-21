@@ -94,8 +94,6 @@ public class Avatar {
        
        System.out.println("Desde " + this.casilla.getNombre() + " hasta " + tablero.getCasillas().get(lado).get(posicionNueva).getNombre());
        this.casilla.eliminarAvatar(this);  /*Cambio el avatar de una casilla a otra*/
-        if (!tablero.getAvatares().containsKey(this.getId()))
-            tablero.getAvatares().put(this.getId(), this);
        this.casilla = tablero.getCasillas().get(lado).get(posicionNueva);
        this.casilla.getAvatares().put(this.id, this);
        
