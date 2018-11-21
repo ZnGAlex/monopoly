@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="monopoly">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/monopoly.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
