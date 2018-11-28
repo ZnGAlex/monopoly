@@ -233,6 +233,24 @@ public class Menu {
                         }
                     }
                     break;
+                    
+                case "hipotecar":
+                    if(partes.length != 2)
+                        System.out.println("Comando incorrecto");
+                    else if (tablero.casillaByName(partes[1]) == null)
+                        System.out.println("La casilla no existe");
+                    else
+                        turno.turnoActual().hipotecar(tablero.casillaByName(partes[1]));
+                    break;
+                    
+                case "deshipotecar":
+                    if(partes.length != 2)
+                        System.out.println("Comando incorrecto");
+                    else if (tablero.casillaByName(partes[1]) == null)
+                        System.out.println("La casilla no existe");
+                    else
+                        turno.turnoActual().deshipotecar(tablero.casillaByName(partes[1]));
+                    break;
                 default:
                     System.out.println("\nComando incorrecto.");
                     break;
