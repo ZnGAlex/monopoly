@@ -246,7 +246,7 @@ public class Jugador {
     // obtencion del listado de edificios del jugador
 
     /**
-     *Obtiene el string de los nombres de las hipotecas del jugador
+     *Obtiene el string de los nombres de los edificios del jugador
      */
     public String obtenerEdificios() {
         String cadena = "";
