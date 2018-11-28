@@ -13,7 +13,7 @@ public class Jugador {
     private int fortuna;
     private HashMap<String, Casilla> propiedades;
     private HashMap<String, Casilla> hipotecas;
-    private HashMap<String, Edificio> edificios;
+    private ArrayList<Edificio> edificios;
     private HashMap<String, Grupo> grupos;
     private boolean inCarcel;
     private boolean dadosTirados;
@@ -99,11 +99,11 @@ public class Jugador {
         this.hipotecas = hipotecas;
     }
 
-    public HashMap<String, Edificio> getEdificios() {
+    public ArrayList<Edificio> getEdificios() {
         return edificios;
     }
 
-    public void setEdificios(HashMap<String, Edificio> edificios) {
+    public void setEdificios(ArrayList<Edificio> edificios) {
         if (edificios == null) {
             System.out.println(Valor.ANSI_ROJO + "Edificios nulo." + Valor.ANSI_RESET);
             System.exit(1);
@@ -171,7 +171,7 @@ public class Jugador {
         this.fortuna = Valor.FORTUNA_INICIAL;
         this.propiedades = new HashMap<>();
         this.hipotecas = new HashMap<>();
-        this.edificios = new HashMap<>();
+        this.edificios = new ArrayList<>();
         this.inCarcel = false;
         this.dadosTirados = false;
         this.dadosDobles = 0;
@@ -189,7 +189,7 @@ public class Jugador {
         this.fortuna = Valor.FORTUNA_BANCA;
         this.propiedades = new HashMap<>();
         this.hipotecas = new HashMap<>();
-        this.edificios = new HashMap<>();
+        this.edificios = new ArrayList<>();
         this.avatar = null;
         this.inCarcel = false;
         this.dadosTirados = false;
@@ -254,9 +254,7 @@ public class Jugador {
         if (this.edificios.size() == 0)
             cadena = "no tiene edificios";
         else {
-            Iterator edificios_i = this.edificios.values().iterator();
-            while (edificios_i.hasNext()) {
-                Casilla edificio = (Casilla) edificios_i.next();
+            for (Edificio edificio : edificios) {
                 cadena = cadena.concat(edificio.getNombre() + " ");
             }
         }
