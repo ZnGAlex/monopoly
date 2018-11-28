@@ -405,6 +405,22 @@ public class Casilla {
     }
 
     /**
+     *Obtiene el string de los nombres de los edificios de la casilla
+     */
+    public String obtenerEdificios() {
+        String cadena = "";
+
+        if (this.edificios.size() == 0)
+            cadena = "no tiene edificios";
+        else {
+            for (Edificio edificio : edificios) {
+                cadena = cadena.concat(edificio.getNombre() + " ");
+            }
+        }
+        return cadena;
+    }
+    
+    /**
      * Info breve sobre las casillas
      */
     public String shortInfo() {
@@ -442,7 +458,8 @@ public class Casilla {
                         ",\n\t valor: " + this.valor +
                         ",\n\t alquiler actual: " + this.alquiler +
                         ",\n\t alquiler inicial: " + this.valor * 0.9 +
-                        ",\n\t valor hotel: " + this.valor * 0.6 + " (mas cuatro casas)" +
+                        ",\n\t edificios: [" + this.obtenerEdificios() +
+                        "]\n\t valor hotel: " + this.valor * 0.6 + " (mas cuatro casas)" +
                         ",\n\t valor casa: " + this.valor * 0.6 +
                         ",\n\t valor piscina: " + this.valor * 0.4 +
                         ",\n\t valor pista de deporte: " + this.valor * 1.25 +
