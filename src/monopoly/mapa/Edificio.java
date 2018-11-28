@@ -3,6 +3,7 @@ package monopoly.mapa;
 
 // Esta clase todavia no se utiliza
 public class Edificio {
+    private String nombre;
     private String tipo;
     private Casilla casilla;
     private Grupo grupo;
@@ -13,7 +14,6 @@ public class Edificio {
         this.tipo = "";
         this.casilla = null;
         this.valor = 0;
-        this.alquiler = 0;
     }
 
     public Edificio(String tipo, Casilla casilla) {
@@ -30,13 +30,37 @@ public class Edificio {
         this.grupo = casilla.getGrupo();
         switch (tipo) {
             case Valor.EDIFICIO_CASA:
+                this.valor = (int) (casilla.getValor() * 0.6);
+                switch (casilla.getNumCasas()) {
+                    case 0:
+                        this.alquiler = casilla.getAlquiler() * 5;
+                        casilla.setNumCasas(1);
+                        break;
+                    case 1:
+                        this.alquiler = casilla.getAlquiler() * 15;
+                        casilla.setNumCasas(2);
+                        break;
+                    case 2:
+                        this.alquiler = casilla.getAlquiler() * 35;
+                        casilla.setNumCasas(3);
+                        break;
+                    case 3:
+                        this.alquiler = casilla.getAlquiler() * 50;
+                        casilla.setNumCasas(4);
+                        break;
+                }
                 break;
             case Valor.EDIFICIO_HOTEL:
+                this.valor = (int) (casilla.getValor() * 0.6);
+                this.alquiler = casilla.getAlquiler() * 70;
                 break;
             case Valor.EDIFICIO_PISCINA:
-            case Valor.EDIFICIO_PISTA:
-
+                this.valor = (int) (casilla.getValor() * 0.4);
+                this.alquiler = casilla.getAlquiler() * 25;
                 break;
+            case Valor.EDIFICIO_PISTA:
+                this.valor = (int) (casilla.getValor() * 1.25);
+                this.alquiler = casilla.getAlquiler() * 25;
         }
 
     }
@@ -73,6 +97,14 @@ public class Edificio {
         this.alquiler = alquiler;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Grupo getGrupo() {
         return grupo;
     }
@@ -88,9 +120,10 @@ public class Edificio {
     @Override
     public String toString() {
         String cadena = "{\n " +
-                            "\n\t tipo: " + this.tipo +
-                            ",\n\t precio: " + this.valor +
-                            ",\n\t alquiler: " + this.alquiler +
+                            "\n\t id: " + this.nombre +
+                            "\n\t propietario: " + this.casilla.getPropietario().getNombre() +
+                            "\n\t grupo: " + this.grupo.getColor() +
+                            ",\n\t coste: " + this.valor +
                             "\n}";
         return cadena;
     }

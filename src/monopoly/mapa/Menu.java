@@ -126,10 +126,10 @@ public class Menu {
                                     System.out.println("Indique el nombre del avatar.");
                                     break;
                                 }
-                                if (!avatares.containsKey(partes[2]))
+                                if (!tablero.getAvatares().containsKey(partes[2]))
                                     System.out.println("El avatar " + partes[2] + " no existe.");
                                 else
-                                    System.out.println(avatares.get(partes[2]));
+                                    System.out.println(tablero.getAvatares().get(partes[2]));
                                 break;
                             default:
                                 if (tablero.casillaByName(partes[1]) == null)
@@ -174,7 +174,7 @@ public class Menu {
                 case "listar": /*listar jugadores/avatares/enventa*/
                     switch(partes[1]){
                         case "jugadores":
-                            for(Jugador jugador: jgdrs){
+                            for(Jugador jugador: tablero.getJugadores().values()){
                                 System.out.println(jugador);
                             }
                                 System.out.println(tablero);
@@ -204,6 +204,33 @@ public class Menu {
                             else
                                 System.out.println("No estas en " + partes[1]);
                                 
+                    }
+                    break;
+                case "edificar":
+                    if (partes.length > 2) {
+                        System.out.println("Comando incorrecto.");
+                    } else {
+                        if (turno.turnoActual().getAvatar().getCasilla().getNumMaximoEdificios() == 0) {
+                            System.out.println("No se puede edificar en " + turno.turnoActual().getAvatar().getCasilla().getNombre());
+                        } else {
+                            switch (partes[1]) {
+                                case "casa":
+
+                                    break;
+                                case "hotel":
+
+                                    break;
+                                case "pista":
+
+                                    break;
+                                case "piscina":
+
+                                    break;
+                                default:
+                                    System.out.println("Comando incorrecto.");
+                                    break;
+                            }
+                        }
                     }
                     break;
                 default:

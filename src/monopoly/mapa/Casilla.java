@@ -15,8 +15,108 @@ public class Casilla {
     private int valor;
     private int alquiler;
     private HashMap<String, Avatar> avatares;
-    private HashMap<String, Edificio> edificios;
+    private ArrayList<Edificio> edificios;
+    private int numCasas;
+    private int numMaximoEdificios;
+    private int numHoteles;
+    private int numPiscinas;
+    private int numPistas;
 
+    public Casilla (String nombre, String tipo, Grupo grupo,int posicion, Jugador banca) {
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.grupo = grupo;
+        this.posicion = posicion;
+        this.propietario = banca;
+        switch (grupo.getColor()) {
+            case Valor.GRUPO_NEGRO:
+                this.valor = Valor.COSTE_GRUPO_NEGRO;
+                this.alquiler = Valor.ALQUILER_GRUPO_NEGRO;
+                this.numMaximoEdificios = 3;
+                break;
+            case Valor.GRUPO_CYAN:
+                this.valor = Valor.COSTE_GRUPO_CYAN;
+                this.alquiler = Valor.ALQUILER_GRUPO_CYAN;
+                this.numMaximoEdificios = 4;
+                break;
+            case Valor.GRUPO_ROSA:
+                this.valor = Valor.COSTE_GRUPO_ROSA;
+                this.alquiler = Valor.ALQUILER_GRUPO_ROSA;
+                this.numMaximoEdificios = 4;
+                break;
+            case Valor.GRUPO_NARANJA:
+                this.valor = Valor.COSTE_GRUPO_NARANJA;
+                this.alquiler = Valor.ALQUILER_GRUPO_NARANJA;
+                this.numMaximoEdificios = 4;
+                break;
+            case Valor.GRUPO_ROJO:
+                this.valor = Valor.COSTE_GRUPO_ROJO;
+                this.alquiler = Valor.ALQUILER_GRUPO_ROJO;
+                this.numMaximoEdificios = 4;
+                break;
+            case Valor.GRUPO_AMARILLO:
+                this.valor = Valor.COSTE_GRUPO_AMARILLO;
+                this.alquiler = Valor.ALQUILER_GRUPO_AMARILLO;
+                this.numMaximoEdificios = 4;
+                break;
+            case Valor.GRUPO_VERDE:
+                this.valor = Valor.COSTE_GRUPO_VERDE;
+                this.alquiler = Valor.ALQUILER_GRUPO_VERDE;
+                this.numMaximoEdificios = 4;
+                break;
+            case Valor.GRUPO_AZUL:
+                this.valor = Valor.COSTE_GRUPO_AZUL;
+                this.alquiler =Valor.ALQUILER_GRUPO_AZUL;
+                this.numMaximoEdificios = 3;
+                break;
+        }
+        this.avatares = new HashMap<>();
+        this.edificios = new ArrayList<>();
+        this.numCasas = 0;
+        this.numHoteles = 0;
+        this.numPiscinas = 0;
+        this.numPistas = 0;
+    }
+
+    public Casilla (String nombre, String tipo, int posicion, Jugador banca){
+        if (nombre == null) {
+            System.out.println(Valor.ANSI_ROJO + "Nombre nulo." + Valor.ANSI_RESET);
+            System.exit(1);
+        }
+        if (tipo == null) {
+            System.out.println(Valor.ANSI_ROJO + "Tipo nulo." + Valor.ANSI_RESET);
+            System.exit(1);
+        }
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.posicion = posicion;
+        this.grupo = null;
+        this.propietario = banca;
+        this.avatares = new HashMap<>();
+        this.edificios = null;
+        this.numCasas = 0;
+        this.numHoteles = 0;
+        this.numPiscinas = 0;
+        this.numPistas = 0;
+        this.numMaximoEdificios = 0;
+
+        switch(tipo){
+            case "transporte":
+                this.valor = Valor.COSTE_CASILLA_TRANSPORTE;
+                this.alquiler = Valor.ALQUILER_TRANSPORTE;
+                break;
+            case "servicio":
+                this.valor = Valor.COSTE_CASILLA_SERVIVIO;
+                this.alquiler=Valor.ALQUILER_SERVICIO;
+                break;
+            case "impuesto":
+                if(this.nombre.equals("Impuesto1")) this.alquiler = Valor.ALQUILER_IMPUESTO1;
+                else this.alquiler = Valor.ALQUILER_IMPUESTO2;
+            default:
+                this.valor = 0;
+        }
+
+    }
     
     //Setters y getters
     public String getNombre() {
@@ -112,11 +212,11 @@ public class Casilla {
         this.avatares = avatares;
     }
 
-    public HashMap<String, Edificio> getEdificios() {
+    public ArrayList<Edificio> getEdificios() {
         return edificios;
     }
 
-    public void setEdificios(HashMap<String, Edificio> edificios) {
+    public void setEdificios(ArrayList<Edificio> edificios) {
         if (edificios == null) {
             System.out.println(Valor.ANSI_ROJO + "Edificios nulo." + Valor.ANSI_RESET);
             System.exit(1);
@@ -128,85 +228,44 @@ public class Casilla {
         return this.posicion;
     }
 
-    // constructores
-
-    public Casilla (String nombre, String tipo, Grupo grupo,int posicion, Jugador banca) {
-        this.nombre = nombre;
-        this.tipo = tipo;
-        this.grupo = grupo;
-        this.posicion = posicion;
-        this.propietario = banca;
-        switch (grupo.getColor()) {
-            case Valor.GRUPO_NEGRO:
-                this.valor = Valor.COSTE_GRUPO_NEGRO;
-                this.alquiler = Valor.ALQUILER_GRUPO_NEGRO;
-                break;
-            case Valor.GRUPO_CYAN:
-                this.valor = Valor.COSTE_GRUPO_CYAN;
-                this.alquiler = Valor.ALQUILER_GRUPO_CYAN;
-                break;
-            case Valor.GRUPO_ROSA:
-                this.valor = Valor.COSTE_GRUPO_ROSA;
-                this.alquiler = Valor.ALQUILER_GRUPO_ROSA;
-                break;
-            case Valor.GRUPO_NARANJA:
-                this.valor = Valor.COSTE_GRUPO_NARANJA;
-                this.alquiler = Valor.ALQUILER_GRUPO_NARANJA;
-                break;
-            case Valor.GRUPO_ROJO:
-                this.valor = Valor.COSTE_GRUPO_ROJO;
-                this.alquiler = Valor.ALQUILER_GRUPO_ROJO;
-                break;
-            case Valor.GRUPO_AMARILLO:
-                this.valor = Valor.COSTE_GRUPO_AMARILLO;
-                this.alquiler = Valor.ALQUILER_GRUPO_AMARILLO;
-                break;
-            case Valor.GRUPO_VERDE:
-                this.valor = Valor.COSTE_GRUPO_VERDE;
-                this.alquiler = Valor.ALQUILER_GRUPO_VERDE;
-                break;
-            case Valor.GRUPO_AZUL:
-                this.valor = Valor.COSTE_GRUPO_AZUL;
-                this.alquiler =Valor.ALQUILER_GRUPO_AZUL;
-                break;
-        }
-        this.avatares = new HashMap<>();
-        this.edificios = new HashMap<>();
+    public int getNumCasas() {
+        return numCasas;
     }
-    
-    public Casilla (String nombre, String tipo, int posicion, Jugador banca){
-        if (nombre == null) {
-            System.out.println(Valor.ANSI_ROJO + "Nombre nulo." + Valor.ANSI_RESET);
-            System.exit(1);
-        }
-        if (tipo == null) {
-            System.out.println(Valor.ANSI_ROJO + "Tipo nulo." + Valor.ANSI_RESET);
-            System.exit(1);
-        }
-        this.nombre = nombre;
-        this.tipo = tipo;
-        this.posicion = posicion;
-        this.grupo = null;
-        this.propietario = banca;
-        this.avatares = new HashMap<>();
-        this.edificios = null;
-        
-        switch(tipo){
-            case "transporte":
-                this.valor = Valor.COSTE_CASILLA_TRANSPORTE;
-                this.alquiler = Valor.ALQUILER_TRANSPORTE;
-                break;
-            case "servicio":
-                this.valor = Valor.COSTE_CASILLA_SERVIVIO;
-                this.alquiler=Valor.ALQUILER_SERVICIO;
-                break;
-            case "impuesto":
-                if(this.nombre.equals("Impuesto1")) this.alquiler = Valor.ALQUILER_IMPUESTO1;
-                else this.alquiler = Valor.ALQUILER_IMPUESTO2;
-            default:
-                this.valor = 0;
-        }
-               
+
+    public void setNumCasas(int numCasas) {
+        this.numCasas = numCasas;
+    }
+
+    public int getNumHoteles() {
+        return numHoteles;
+    }
+
+    public void setNumHoteles(int numHoteles) {
+        this.numHoteles = numHoteles;
+    }
+
+    public int getNumPiscinas() {
+        return numPiscinas;
+    }
+
+    public void setNumPiscinas(int numPiscinas) {
+        this.numPiscinas = numPiscinas;
+    }
+
+    public int getNumPistas() {
+        return numPistas;
+    }
+
+    public void setNumPistas(int numPistas) {
+        this.numPistas = numPistas;
+    }
+
+    public int getNumMaximoEdificios() {
+        return numMaximoEdificios;
+    }
+
+    public void setNumMaximoEdificios(int numMaximoEdificios) {
+        this.numMaximoEdificios = numMaximoEdificios;
     }
    
     //Metodos

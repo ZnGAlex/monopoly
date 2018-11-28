@@ -10,11 +10,13 @@ public class Tablero {
     private HashMap<String, Avatar> avatares;
     private HashMap<String, Jugador> jugadores;
     private HashMap<String, Grupo> grupos;
+    private ArrayList<Edificio> edificios;
 
     public Tablero() {
         Jugador banca = new Jugador("banca");
         this.casillas = new ArrayList<>();
         this.avatares = new HashMap<>();
+        this.edificios = new ArrayList<>();
         ArrayList<Casilla> abajo = new ArrayList<>();
         ArrayList<Casilla> izquierda = new ArrayList<>();
         ArrayList<Casilla> derecha = new ArrayList<>();
