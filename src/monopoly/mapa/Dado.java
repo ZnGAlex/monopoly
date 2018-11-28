@@ -58,8 +58,10 @@ public class Dado {
      */
     public int tirarDados(){
         Random random = new Random();
-        dado1 = random.nextInt((6-1) + 1) + 1;
-        dado2 = random.nextInt((6-1) + 1) + 1;
+        // dado1 = random.nextInt((6-1) + 1) + 1;
+        // dado2 = random.nextInt((6-1) + 1) + 1;
+        dado1 = 8;
+        dado2 = 0;
         return dado1 + dado2;
     }
     

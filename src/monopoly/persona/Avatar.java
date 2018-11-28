@@ -2,6 +2,8 @@ package monopoly.persona;
 
 import monopoly.mapa.*;
 
+import java.util.Iterator;
+
 public class Avatar {
     private String id;
     private String ficha;
@@ -94,8 +96,15 @@ public class Avatar {
        
        System.out.println("Desde " + this.casilla.getNombre() + " hasta " + tablero.getCasillas().get(lado).get(posicionNueva).getNombre());
        this.casilla.eliminarAvatar(this);  /*Cambio el avatar de una casilla a otra*/
-       this.casilla = tablero.getCasillas().get(lado).get(posicionNueva);
+       // this.casilla = tablero.getCasillas().get(lado).get(posicionNueva);
+       this.casilla = tablero.getCasillas().get(0).get(8);
        this.casilla.getAvatares().put(this.id, this);
+       this.casilla.getVecesCaidas().put(this.jugador, this.casilla.getVecesCaidas().get(this.jugador) + 1);
+
+       if (this.casilla.getPropietario().getNombre().equals(this.jugador.getNombre()) && (this.casilla.getVecesCaidas().get(this.jugador).equals(3)))
+        this.casilla.setEdificable(true);
+
+       this.casilla.getVecesCaidas().forEach((k,v) -> System.out.println(k.getNombre() + " -> " + v));
        
        switch(tablero.getCasillas().get(lado).get(posicionNueva).getPosicion()){ /*switch de la accion que sucede al caer en cada tipo de casilla*/
             case Valor.POSICION_CASILLA_IR_CARCEL:

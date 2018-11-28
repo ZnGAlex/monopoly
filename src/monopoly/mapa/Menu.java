@@ -216,38 +216,44 @@ public class Menu {
                         } else {
                             Jugador j = turno.turnoActual();
                             Casilla c = j.getAvatar().getCasilla();
-                            switch (partes[1]) {
-                                case "casa":
-                                    if (j.getFortuna() < (c.getValor() * 0.60)) {
-                                        System.out.println("El jugador " + j.getNombre() + " no dispone de suficiente dinero para edificar una casa.");
-                                    } else {
-                                        c.edificar(Valor.EDIFICIO_CASA, j);
-                                    }
-                                    break;
-                                case "hotel":
-                                    if (j.getFortuna() < (c.getValor() * 0.60)) {
-                                        System.out.println("El jugador " + j.getNombre() + " no dispone de suficiente dinero para edificar un hotel.");
-                                    } else {
-                                        c.edificar(Valor.EDIFICIO_HOTEL, j);
-                                    }
-                                    break;
-                                case "pista":
-                                    if (j.getFortuna() < (c.getValor() * 0.40)) {
-                                        System.out.println("El jugador " + j.getNombre() + " no dispone de suficiente dinero para edificar una pista.");
-                                    } else {
-                                        c.edificar(Valor.EDIFICIO_PISTA, j);
-                                    }
-                                    break;
-                                case "piscina":
-                                    if (j.getFortuna() < (c.getValor() * 1.25)) {
-                                        System.out.println("El jugador " + j.getNombre() + " no dispone de suficiente dinero para edificar una piscina.");
-                                    } else {
-                                        c.edificar(Valor.EDIFICIO_PISCINA, j);
-                                    }
-                                    break;
-                                default:
-                                    System.out.println("Comando incorrecto.");
-                                    break;
+                            if (!c.getPropietario().getNombre().equals(j.getNombre())) {
+                                System.out.println("El jugador " + j.getNombre() + " no es propietario de " + c.getNombre());
+                            } else if (!c.getEdificable()) {
+                                System.out.println("El jugador no ha caido 2 veces en " + c.getNombre());
+                            } else {
+                                switch (partes[1]) {
+                                    case "casa":
+                                        if (j.getFortuna() < (c.getValor() * 0.60)) {
+                                            System.out.println("El jugador " + j.getNombre() + " no dispone de suficiente dinero para edificar una casa.");
+                                        } else {
+                                            c.edificar(Valor.EDIFICIO_CASA, j);
+                                        }
+                                        break;
+                                    case "hotel":
+                                        if (j.getFortuna() < (c.getValor() * 0.60)) {
+                                            System.out.println("El jugador " + j.getNombre() + " no dispone de suficiente dinero para edificar un hotel.");
+                                        } else {
+                                            c.edificar(Valor.EDIFICIO_HOTEL, j);
+                                        }
+                                        break;
+                                    case "pista":
+                                        if (j.getFortuna() < (c.getValor() * 0.40)) {
+                                            System.out.println("El jugador " + j.getNombre() + " no dispone de suficiente dinero para edificar una pista.");
+                                        } else {
+                                            c.edificar(Valor.EDIFICIO_PISTA, j);
+                                        }
+                                        break;
+                                    case "piscina":
+                                        if (j.getFortuna() < (c.getValor() * 1.25)) {
+                                            System.out.println("El jugador " + j.getNombre() + " no dispone de suficiente dinero para edificar una piscina.");
+                                        } else {
+                                            c.edificar(Valor.EDIFICIO_PISCINA, j);
+                                        }
+                                        break;
+                                    default:
+                                        System.out.println("Comando incorrecto.");
+                                        break;
+                                }
                             }
                         }
                     }

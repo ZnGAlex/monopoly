@@ -26,6 +26,7 @@ public class Casilla {
     private int numPistas;
     private int numMaximoPistas;
     private int numTotalEdificios;
+    private boolean edificable;
 
     public Casilla (String nombre, String tipo, Grupo grupo,int posicion, Jugador banca) {
         this.nombre = nombre;
@@ -107,6 +108,7 @@ public class Casilla {
         this.numHoteles = 0;
         this.numPiscinas = 0;
         this.numPistas = 0;
+        this.edificable = false;
     }
 
     public Casilla (String nombre, String tipo, int posicion, Jugador banca){
@@ -125,12 +127,13 @@ public class Casilla {
         this.propietario = banca;
         this.avatares = new HashMap<>();
         this.vecesCaidas = new HashMap<>();
-        this.edificios = null;
+        this.edificios = new ArrayList<>();
         this.numCasas = 0;
         this.numHoteles = 0;
         this.numPiscinas = 0;
         this.numPistas = 0;
         this.numMaximoCasas = 0;
+        this.edificable = false;
 
         switch(tipo){
             case "transporte":
@@ -331,6 +334,22 @@ public class Casilla {
     public void setNumMaximoPistas(int numMaximoPistas) {
         this.numMaximoPistas = numMaximoPistas;
     }
+
+    public int getNumTotalEdificios() {
+        return numTotalEdificios;
+    }
+
+    public void setNumTotalEdificios(int numTotalEdificios) {
+        this.numTotalEdificios = numTotalEdificios;
+    }
+
+    public boolean getEdificable() {
+        return edificable;
+    }
+
+    public void setEdificable(boolean edificable) {
+        this.edificable = edificable;
+    }
    
     //Metodos
 
@@ -347,7 +366,6 @@ public class Casilla {
                         System.out.println("El solar " + nombre + " no se pueden construir mas casas.");
                     } else {
                         construir = true;
-                        numCasas++;
                     }
                     break;
                 case Valor.EDIFICIO_HOTEL:
@@ -358,8 +376,7 @@ public class Casilla {
                     } else if (numCasas != 4) {
                         System.out.println("El solar " + nombre + " no tiene 4 casas. No se puede construir un hotel");
                     } else {
-                        numHoteles++;
-                        if (numHoteles == 3 || (numHoteles == 2 && numMaximoHoteles == 2))
+                        if ((numHoteles == 3 && numMaximoHoteles == 3) || (numHoteles == 2 && numMaximoHoteles == 2))
                             numMaximoCasas = 3;
                         construir = true;
                         numCasas = 0;
@@ -377,7 +394,6 @@ public class Casilla {
                     } else if (numHoteles < 1 && numCasas < 2){
                         System.out.println("El solar " + nombre + " no dispone de 1 hotel y 2 casas para construir una piscina.");
                     } else {
-                        numPiscinas++;
                         construir = true;
                     }
                     break;
@@ -389,18 +405,35 @@ public class Casilla {
                     } else if (numHoteles < 2) {
                         System.out.println("El solar " + nombre + " no tiene 2 hoteles. No se puede construir unha pista.");
                     } else {
-                        numPistas++;
                         construir = true;
                     }
                     break;
             }
             if (construir) {
                 Edificio edificio = new Edificio(tipo, this);
+                incrementarNumTipoEdificio(tipo);
                 edificios.add(edificio);
                 jugador.setFortuna(jugador.getFortuna() - edificio.getValor());
                 jugador.getEdificios().add(edificio);
                 grupo.getEdificios().add(edificio);
             }
+        }
+    }
+
+    public void incrementarNumTipoEdificio(String tipo) {
+        switch (tipo) {
+            case Valor.EDIFICIO_CASA:
+                numCasas++;
+                break;
+            case Valor.EDIFICIO_HOTEL:
+                numHoteles++;
+                break;
+            case Valor.EDIFICIO_PISCINA:
+                numPiscinas++;
+                break;
+            case Valor.EDIFICIO_PISTA:
+                numPistas++;
+                break;
         }
     }
 

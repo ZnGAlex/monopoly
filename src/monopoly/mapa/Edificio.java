@@ -29,22 +29,18 @@ public class Edificio {
                     case 0:
                         this.nombre = "casa-1";
                         this.alquiler = casilla.getAlquiler() * 5;
-                        casilla.setNumCasas(1);
                         break;
                     case 1:
                         this.nombre = "casa-2";
                         this.alquiler = casilla.getAlquiler() * 15;
-                        casilla.setNumCasas(2);
                         break;
                     case 2:
                         this.nombre = "casa-3";
                         this.alquiler = casilla.getAlquiler() * 35;
-                        casilla.setNumCasas(3);
                         break;
                     case 3:
                         this.nombre = "casa-4";
                         this.alquiler = casilla.getAlquiler() * 50;
-                        casilla.setNumCasas(4);
                         break;
                 }
                 break;
