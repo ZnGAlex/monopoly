@@ -16,11 +16,16 @@ public class Casilla {
     private int alquiler;
     private HashMap<String, Avatar> avatares;
     private ArrayList<Edificio> edificios;
+    private HashMap<Jugador, Integer> vecesCaidas;
     private int numCasas;
-    private int numMaximoEdificios;
+    private int numMaximoCasas;
     private int numHoteles;
+    private int numMaximoHoteles;
     private int numPiscinas;
+    private int numMaximoPiscinas;
     private int numPistas;
+    private int numMaximoPistas;
+    private int numTotalEdificios;
 
     public Casilla (String nombre, String tipo, Grupo grupo,int posicion, Jugador banca) {
         this.nombre = nombre;
@@ -28,50 +33,76 @@ public class Casilla {
         this.grupo = grupo;
         this.posicion = posicion;
         this.propietario = banca;
+        this.numMaximoCasas = 4;
         switch (grupo.getColor()) {
             case Valor.GRUPO_NEGRO:
                 this.valor = Valor.COSTE_GRUPO_NEGRO;
                 this.alquiler = Valor.ALQUILER_GRUPO_NEGRO;
-                this.numMaximoEdificios = 3;
+                this.numMaximoHoteles = 2;
+                this.numMaximoPiscinas = 2;
+                this.numMaximoPistas = 2;
+                this.numTotalEdificios = 8;
                 break;
             case Valor.GRUPO_CYAN:
                 this.valor = Valor.COSTE_GRUPO_CYAN;
                 this.alquiler = Valor.ALQUILER_GRUPO_CYAN;
-                this.numMaximoEdificios = 4;
+                this.numMaximoHoteles = 3;
+                this.numMaximoPiscinas = 3;
+                this.numMaximoPistas = 3;
+                this.numTotalEdificios = 12;
                 break;
             case Valor.GRUPO_ROSA:
                 this.valor = Valor.COSTE_GRUPO_ROSA;
                 this.alquiler = Valor.ALQUILER_GRUPO_ROSA;
-                this.numMaximoEdificios = 4;
+                this.numMaximoHoteles = 3;
+                this.numMaximoPiscinas = 3;
+                this.numMaximoPistas = 3;
+                this.numTotalEdificios = 12;
                 break;
             case Valor.GRUPO_NARANJA:
                 this.valor = Valor.COSTE_GRUPO_NARANJA;
                 this.alquiler = Valor.ALQUILER_GRUPO_NARANJA;
-                this.numMaximoEdificios = 4;
+                this.numMaximoHoteles = 3;
+                this.numMaximoPiscinas = 3;
+                this.numMaximoPistas = 3;
+                this.numTotalEdificios = 12;
                 break;
             case Valor.GRUPO_ROJO:
                 this.valor = Valor.COSTE_GRUPO_ROJO;
                 this.alquiler = Valor.ALQUILER_GRUPO_ROJO;
-                this.numMaximoEdificios = 4;
+                this.numMaximoHoteles = 3;
+                this.numMaximoPiscinas = 3;
+                this.numMaximoPistas = 3;
+                this.numTotalEdificios = 12;
                 break;
             case Valor.GRUPO_AMARILLO:
                 this.valor = Valor.COSTE_GRUPO_AMARILLO;
                 this.alquiler = Valor.ALQUILER_GRUPO_AMARILLO;
-                this.numMaximoEdificios = 4;
+                this.numMaximoHoteles = 3;
+                this.numMaximoPiscinas = 3;
+                this.numMaximoPistas = 3;
+                this.numTotalEdificios = 12;
                 break;
             case Valor.GRUPO_VERDE:
                 this.valor = Valor.COSTE_GRUPO_VERDE;
                 this.alquiler = Valor.ALQUILER_GRUPO_VERDE;
-                this.numMaximoEdificios = 4;
+                this.numMaximoHoteles = 3;
+                this.numMaximoPiscinas = 3;
+                this.numMaximoPistas = 3;
+                this.numTotalEdificios = 12;
                 break;
             case Valor.GRUPO_AZUL:
                 this.valor = Valor.COSTE_GRUPO_AZUL;
                 this.alquiler =Valor.ALQUILER_GRUPO_AZUL;
-                this.numMaximoEdificios = 3;
+                this.numMaximoHoteles = 2;
+                this.numMaximoPiscinas = 2;
+                this.numMaximoPistas = 2;
+                this.numTotalEdificios = 8;
                 break;
         }
         this.avatares = new HashMap<>();
         this.edificios = new ArrayList<>();
+        this.vecesCaidas = new HashMap<>();
         this.numCasas = 0;
         this.numHoteles = 0;
         this.numPiscinas = 0;
@@ -93,12 +124,13 @@ public class Casilla {
         this.grupo = null;
         this.propietario = banca;
         this.avatares = new HashMap<>();
+        this.vecesCaidas = new HashMap<>();
         this.edificios = null;
         this.numCasas = 0;
         this.numHoteles = 0;
         this.numPiscinas = 0;
         this.numPistas = 0;
-        this.numMaximoEdificios = 0;
+        this.numMaximoCasas = 0;
 
         switch(tipo){
             case "transporte":
@@ -224,6 +256,14 @@ public class Casilla {
         this.edificios = edificios;
     }
 
+    public HashMap<Jugador, Integer> getVecesCaidas() {
+        return vecesCaidas;
+    }
+
+    public void setVecesCaidas(HashMap<Jugador, Integer> vecesCaidas) {
+        this.vecesCaidas = vecesCaidas;
+    }
+
     public int getPosicion() {
         return this.posicion;
     }
@@ -260,16 +300,110 @@ public class Casilla {
         this.numPistas = numPistas;
     }
 
-    public int getNumMaximoEdificios() {
-        return numMaximoEdificios;
+    public int getNumMaximoCasas() {
+        return numMaximoCasas;
     }
 
-    public void setNumMaximoEdificios(int numMaximoEdificios) {
-        this.numMaximoEdificios = numMaximoEdificios;
+    public void setNumMaximoCasas(int numMaximoCasas) {
+        this.numMaximoCasas = numMaximoCasas;
+    }
+
+    public int getNumMaximoHoteles() {
+        return numMaximoHoteles;
+    }
+
+    public void setNumMaximoHoteles(int numMaximoHoteles) {
+        this.numMaximoHoteles = numMaximoHoteles;
+    }
+
+    public int getNumMaximoPiscinas() {
+        return numMaximoPiscinas;
+    }
+
+    public void setNumMaximoPiscinas(int numMaximoPiscinas) {
+        this.numMaximoPiscinas = numMaximoPiscinas;
+    }
+
+    public int getNumMaximoPistas() {
+        return numMaximoPistas;
+    }
+
+    public void setNumMaximoPistas(int numMaximoPistas) {
+        this.numMaximoPistas = numMaximoPistas;
     }
    
     //Metodos
-    
+
+    public void edificar(String tipo, Jugador jugador) {
+        boolean construir = false;
+        if (numCasas + numHoteles + numPiscinas + numPistas == numTotalEdificios) {
+            System.out.println("No se pueden construir mas edificios en la casilla " + nombre);
+        } else {
+            switch (tipo) {
+                case Valor.EDIFICIO_CASA:
+                    if (numCasas == 4) {
+                        System.out.println("El solar " + nombre + " ya tiene 4 casas. No se pueden construir mas.");
+                    } else if (numCasas == 3 && numMaximoCasas == 3) {
+                        System.out.println("El solar " + nombre + " no se pueden construir mas casas.");
+                    } else {
+                        construir = true;
+                        numCasas++;
+                    }
+                    break;
+                case Valor.EDIFICIO_HOTEL:
+                    if (numHoteles == 3) {
+                        System.out.println("El solar " + nombre + " ya tiene 3 hoteles. No se pueden construir mas.");
+                    } else if (numHoteles == 2 && numMaximoHoteles == 2) {
+                        System.out.println("En el solar " + nombre + " no se pueden construir mas hoteles.");
+                    } else if (numCasas != 4) {
+                        System.out.println("El solar " + nombre + " no tiene 4 casas. No se puede construir un hotel");
+                    } else {
+                        numHoteles++;
+                        if (numHoteles == 3 || (numHoteles == 2 && numMaximoHoteles == 2))
+                            numMaximoCasas = 3;
+                        construir = true;
+                        numCasas = 0;
+                        for (Edificio e : edificios) {
+                            if (e.getTipo().equals(Valor.EDIFICIO_CASA))
+                                edificios.remove(e);
+                        }
+                    }
+                    break;
+                case Valor.EDIFICIO_PISCINA:
+                    if (numPiscinas == 3) {
+                        System.out.println("El solar " + nombre + " ya tiene 3 piscinas. No se pueden construir mas.");
+                    } else if (numPiscinas == 2 && numMaximoPiscinas == 2) {
+                        System.out.println("En el solar " + nombre + " no se pueden construir mas piscinas.");
+                    } else if (numHoteles < 1 && numCasas < 2){
+                        System.out.println("El solar " + nombre + " no dispone de 1 hotel y 2 casas para construir una piscina.");
+                    } else {
+                        numPiscinas++;
+                        construir = true;
+                    }
+                    break;
+                case Valor.EDIFICIO_PISTA:
+                    if (numPistas == 3) {
+                        System.out.println("El solar " + nombre + " ya tiene 3 pistas. No se pueden construir");
+                    } else if (numPistas == 2 && numMaximoPistas == 2) {
+                        System.out.println("En el solar " + nombre + " no se pueden construir mas pistas.");
+                    } else if (numHoteles < 2) {
+                        System.out.println("El solar " + nombre + " no tiene 2 hoteles. No se puede construir unha pista.");
+                    } else {
+                        numPistas++;
+                        construir = true;
+                    }
+                    break;
+            }
+            if (construir) {
+                Edificio edificio = new Edificio(tipo, this);
+                edificios.add(edificio);
+                jugador.setFortuna(jugador.getFortuna() - edificio.getValor());
+                jugador.getEdificios().add(edificio);
+                grupo.getEdificios().add(edificio);
+            }
+        }
+    }
+
     /**
      * Info breve sobre las casillas
      */

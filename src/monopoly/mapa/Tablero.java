@@ -2,6 +2,7 @@ package monopoly.mapa;
 
 import monopoly.persona.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -203,6 +204,16 @@ public class Tablero {
             }
         }
             return null;      
+    }
+
+    public void iniciarCaidaCasilla(ArrayList<Jugador> jugadores) {
+        for (ArrayList<Casilla> lado : casillas) {
+            for (Casilla casilla : lado) {
+                for (Jugador jugador : jugadores) {
+                    casilla.getVecesCaidas().put(jugador, 0);
+                }
+            }
+        }
     }
     
     public ArrayList<Casilla> casillasEnVenta(){

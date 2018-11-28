@@ -10,12 +10,6 @@ public class Edificio {
     private int valor;
     private int alquiler;
 
-    public Edificio() {
-        this.tipo = "";
-        this.casilla = null;
-        this.valor = 0;
-    }
-
     public Edificio(String tipo, Casilla casilla) {
         if (tipo == null) {
             System.out.println("Tipo nulo.");
@@ -33,36 +27,72 @@ public class Edificio {
                 this.valor = (int) (casilla.getValor() * 0.6);
                 switch (casilla.getNumCasas()) {
                     case 0:
+                        this.nombre = "casa-1";
                         this.alquiler = casilla.getAlquiler() * 5;
                         casilla.setNumCasas(1);
                         break;
                     case 1:
+                        this.nombre = "casa-2";
                         this.alquiler = casilla.getAlquiler() * 15;
                         casilla.setNumCasas(2);
                         break;
                     case 2:
+                        this.nombre = "casa-3";
                         this.alquiler = casilla.getAlquiler() * 35;
                         casilla.setNumCasas(3);
                         break;
                     case 3:
+                        this.nombre = "casa-4";
                         this.alquiler = casilla.getAlquiler() * 50;
                         casilla.setNumCasas(4);
                         break;
                 }
                 break;
             case Valor.EDIFICIO_HOTEL:
+                switch (casilla.getNumHoteles()) {
+                    case 1:
+                        this.nombre = "hotel-1";
+                        break;
+                    case 2:
+                        this.nombre = "hotel-2";
+                        break;
+                    case 3:
+                        this.nombre = "hotel-3";
+                        break;
+                }
                 this.valor = (int) (casilla.getValor() * 0.6);
                 this.alquiler = casilla.getAlquiler() * 70;
                 break;
             case Valor.EDIFICIO_PISCINA:
+                switch (casilla.getNumPiscinas()) {
+                    case 1:
+                        this.nombre = "piscina-1";
+                        break;
+                    case 2:
+                        this.nombre = "piscina-2";
+                        break;
+                    case 3:
+                        this.nombre = "piscina-3";
+                        break;
+                }
                 this.valor = (int) (casilla.getValor() * 0.4);
                 this.alquiler = casilla.getAlquiler() * 25;
                 break;
             case Valor.EDIFICIO_PISTA:
+                switch (casilla.getNumPistas()) {
+                    case 1:
+                        this.nombre = "pista-1";
+                        break;
+                    case 2:
+                        this.nombre = "pista-2";
+                        break;
+                    case 3:
+                        this.nombre = "pista-3";
+                        break;
+                }
                 this.valor = (int) (casilla.getValor() * 1.25);
                 this.alquiler = casilla.getAlquiler() * 25;
         }
-
     }
 
     public String getTipo() {
