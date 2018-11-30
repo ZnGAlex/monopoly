@@ -414,6 +414,7 @@ public class Casilla {
                 incrementarNumTipoEdificio(tipo);
                 edificios.add(edificio);
                 jugador.setFortuna(jugador.getFortuna() - edificio.getValor());
+                jugador.setDineroInvertido(jugador.getDineroInvertido() + edificio.getValor());
                 jugador.getEdificios().add(edificio);
                 grupo.getEdificios().add(edificio);
             }
