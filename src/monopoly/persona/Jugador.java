@@ -21,8 +21,101 @@ public class Jugador {
     private int dadosDobles;
     private int turnosEnCarcel;
     private boolean bancarrota;
-
+    private int dineroInvertido;
+    private int pagoDeAlquileres;
+    private int pagoDeTasas;
+    private int cobroDeAlquileres;
+    private int pasarPorCasillaDeSalida;
+    private int premiosInversionesOBote;
+    private int vecesEnLaCarcel;
+    
     //setters y getters
+
+    public int getPagoDeTasas() {
+        return pagoDeTasas;
+    }
+
+    public void setPagoDeTasas(int pagoDeTasas) {
+        if (pagoDeTasas < 0) {
+            System.out.println(Valor.ANSI_ROJO + "pagoDeTasas negativo." + Valor.ANSI_RESET);
+            System.exit(1);
+        }
+        this.pagoDeTasas = pagoDeTasas;
+    }
+    
+    public int getPremiosInversionesOBote() {
+        return premiosInversionesOBote;
+    }
+
+    public void setPremiosInversionesOBote(int premiosInversionesOBote) {
+        if (premiosInversionesOBote < 0) {
+            System.out.println(Valor.ANSI_ROJO + "premiosInversionesOBote negativo." + Valor.ANSI_RESET);
+            System.exit(1);
+        }
+        this.premiosInversionesOBote = premiosInversionesOBote;
+    }
+
+    public int getDineroInvertido() {
+        return dineroInvertido;
+    }
+
+    public void setDineroInvertido(int dineroInvertido) {
+        if (dineroInvertido < 0) {
+            System.out.println(Valor.ANSI_ROJO + "dineroInvertido negativo." + Valor.ANSI_RESET);
+            System.exit(1);
+        }
+        this.dineroInvertido = dineroInvertido;
+    }
+
+    public int getPagoDeAlquileres() {
+        return pagoDeAlquileres;
+    }
+
+    public void setPagoDeAlquileres(int pagoDeAlquileres) {
+        if (pagoDeAlquileres < 0) {
+            System.out.println(Valor.ANSI_ROJO + "pagoDeAlquileres negativo." + Valor.ANSI_RESET);
+            System.exit(1);
+        }
+        this.pagoDeAlquileres = pagoDeAlquileres;
+    }
+
+    public int getCobroDeAlquileres() {
+        return cobroDeAlquileres;
+    }
+
+    public void setCobroDeAlquileres(int cobroDeAlquileres) {
+        if (cobroDeAlquileres < 0) {
+            System.out.println(Valor.ANSI_ROJO + "cobroDeAlquileres negativo." + Valor.ANSI_RESET);
+            System.exit(1);
+        }
+        this.cobroDeAlquileres = cobroDeAlquileres;
+    }
+
+    public int getPasarPorCasillaDeSalida() {
+        return pasarPorCasillaDeSalida;
+    }
+
+    public void setPasarPorCasillaDeSalida(int pasarPorCasillaDeSalida) {
+        if (pasarPorCasillaDeSalida < 0) {
+            System.out.println(Valor.ANSI_ROJO + "pasarPorCasillaDeSalida negativo." + Valor.ANSI_RESET);
+            System.exit(1);
+        }
+        this.pasarPorCasillaDeSalida = pasarPorCasillaDeSalida;
+    }
+
+    public int getVecesEnLaCarcel() {
+        return vecesEnLaCarcel;
+    }
+
+    public void setVecesEnLaCarcel(int vecesEnLaCarcel) {
+        if (vecesEnLaCarcel < 0) {
+            System.out.println(Valor.ANSI_ROJO + "vecesEnLaCarcel negativo." + Valor.ANSI_RESET);
+            System.exit(1);
+        }
+        this.vecesEnLaCarcel = vecesEnLaCarcel;
+    }
+
+    
     public String getNombre() {
         return nombre;
     }
@@ -178,6 +271,11 @@ public class Jugador {
         this.turnosEnCarcel = 0;
         bancarrota = false;
         this.grupos = new HashMap<>();
+        this.dineroInvertido = 0;
+        this.pagoDeAlquileres = 0;
+        this.cobroDeAlquileres = 0;
+        this.pasarPorCasillaDeSalida = 0;
+        this.vecesEnLaCarcel = 0;
     }
 
     public Jugador(String nombre) {
@@ -201,6 +299,17 @@ public class Jugador {
 
     // Metodos
     // obtencion del listado de casillas del jugador
+    
+    public String estadisticasJugador(){
+        String cadena = "{\n"
+                + "\t dineroInvertido: " + this.dineroInvertido
+                + ",\n\t pagoDeAlquileres: " + this.pagoDeAlquileres
+                + ",\n\t pasarPorCasillaDeSalida: " + this.pasarPorCasillaDeSalida
+                + ",\n\t pagoDeTasas: " + this.pagoDeTasas
+                + "]\n\t premiosInversionesOBote: " + this.premiosInversionesOBote
+                + "]\n\t vecesEnLaCarcel: " + this.vecesEnLaCarcel + "]\n}";
+        return cadena;
+    }
     /**
      * Obtiene el String de los nombres de las propiedaddes del jugador
      */
@@ -279,7 +388,8 @@ public class Jugador {
             System.out.println("El jugador " + this.nombre + " ha tirado tres veces en la carcel. Tiene que pagar para salir.");
             if (this.fortuna >= Valor.COSTE_SALIR_CARCEL) {
                 this.fortuna -= Valor.COSTE_SALIR_CARCEL;
-                System.out.println("El jugador " + this.nombre + " ha pagado para salir de la carcel.");
+                this.pagoDeTasas += Valor.COSTE_SALIR_CARCEL;
+                System.out.println("El jugador " + this.nombre + " ha pagado para salir de la carcel y se desplaza " + desplazamiento + " casillas.");
                 this.avatar.moverAvatar(desplazamiento, tablero, turno);
                 this.inCarcel = false;
             } else {
@@ -297,13 +407,18 @@ public class Jugador {
                             break;
                         case "hipotecarse":
                             this.hipotecar(); // el usuario se hipoteca
-                            this.avatar.moverAvatar(desplazamiento, tablero, turno);
-                            this.inCarcel = false;
                             break;
                         default:
                             System.out.println("Opcion incorrecta.");
                             break;
                     }
+                }
+                if(!this.bancarrota){
+                    this.inCarcel = false;
+                    this.fortuna -= Valor.COSTE_SALIR_CARCEL;
+                    this.pagoDeTasas += Valor.COSTE_SALIR_CARCEL;
+                    System.out.println("El jugador " + this.nombre + " ha pagado para salir de la carcel y se desplaza" + desplazamiento + " casillas.");
+                    this.avatar.moverAvatar(desplazamiento, tablero, turno);
                 }
             }
         } else if (this.inCarcel && this.turnosEnCarcel != 3) {
@@ -325,7 +440,7 @@ public class Jugador {
             if (this.getDadosDobles() == 3) {
                 /*Si es la tercera vez que saca dobles va a la carcel*/
                 System.out.println("El jugador " + this.nombre + " ha sacado dados dobles tres veces. Va a la carcel.");
-                this.avatar.moverAvatarCasilla(tablero.getCasillas().get(Valor.POSICION_CASILLA_CARCEL / 10).get(Valor.POSICION_CASILLA_CARCEL % 10));
+                this.encarcelarJugador(tablero);
                 System.out.println("El jugador " + this.nombre + " acaba su turno.");
                 turno.siguienteTurno();
             } else {
@@ -356,6 +471,7 @@ public class Jugador {
             } else {
                 System.out.println(nombre + " paga " + Valor.COSTE_SALIR_CARCEL + " y sale de la cárcel. Puede lanzar los dados.");
                 this.fortuna -= Valor.COSTE_SALIR_CARCEL;
+                this.pagoDeTasas += Valor.COSTE_SALIR_CARCEL;
                 this.inCarcel = false;
                 this.dadosTirados = false;
             }
@@ -386,6 +502,7 @@ public class Jugador {
         }
         if (!bancarrota) {
             this.fortuna -= impuesto;
+            this.pagoDeTasas += impuesto;
             Valor.DINERO_PARKING += impuesto;
             /*El impuesto se suma al parking*/
         }
@@ -396,6 +513,7 @@ public class Jugador {
      */
     public void cobrarParking() {
         this.fortuna += Valor.DINERO_PARKING;
+        this.premiosInversionesOBote += Valor.DINERO_PARKING;
         Valor.DINERO_PARKING = 0;
     }
 
@@ -435,6 +553,7 @@ public class Jugador {
                     }
                     System.out.println("El jugador " + this.nombre + " paga " + coste + " a " + this.avatar.getCasilla().getPropietario().getNombre());
                     this.fortuna -= coste;
+                    this.pagoDeAlquileres += coste;
                     this.avatar.getCasilla().getPropietario().cobrarAlquiler(coste);
 
                 }
@@ -640,6 +759,7 @@ public class Jugador {
      */
     public void cobrarAlquiler(int dinero) {
         this.fortuna += dinero;
+        this.cobroDeAlquileres += dinero;
     }
 
     /**
@@ -670,6 +790,7 @@ public class Jugador {
             }
             cambiarAlquilerCasillas(tablero);
             System.out.println("El jugador " + this.nombre + " compra la casilla " + c.getNombre() + " por " + c.getValor() + "€");
+            this.dineroInvertido += c.getValor();
             System.out.println("Su fortuna actual es " + this.fortuna + "€");
         } else {
             System.out.println("No tienes suficiente dinero");

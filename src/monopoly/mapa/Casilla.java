@@ -432,6 +432,7 @@ public class Casilla {
                     numMaximoCasas = 2;
                 edificios.add(edificio);
                 jugador.setFortuna(jugador.getFortuna() - edificio.getValor());
+                jugador.setDineroInvertido(jugador.getDineroInvertido() + edificio.getValor());
                 jugador.getEdificios().add(edificio);
                 grupo.getEdificios().add(edificio);
                 tablero.getEdificios().add(edificio);

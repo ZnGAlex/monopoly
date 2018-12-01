@@ -94,10 +94,14 @@ public class Avatar {
        int lado = ((posicionActual + avance) / 10) % 4;
        int posicionNueva = (posicionActual + avance) % 10;
        
+       if(lado*10+posicionNueva < this.casilla.getPosicion()){ /*Si el jugador pasa por salida, cobra*/
+           System.out.println(this.jugador.getNombre() + " pasa por salida y cobra " + Valor.CANTIDAD_PASAR_SALIDA + " €");
+           this.jugador.setPasarPorCasillaDeSalida(this.jugador.getPasarPorCasillaDeSalida()+Valor.CANTIDAD_PASAR_SALIDA);
+       }
+       
        System.out.println("Desde " + this.casilla.getNombre() + " hasta " + tablero.getCasillas().get(lado).get(posicionNueva).getNombre());
        this.casilla.eliminarAvatar(this);  /*Cambio el avatar de una casilla a otra*/
-       // this.casilla = tablero.getCasillas().get(lado).get(posicionNueva);
-       this.casilla = tablero.getCasillas().get(0).get(8);
+       this.casilla = tablero.getCasillas().get(lado).get(posicionNueva);
        this.casilla.getAvatares().put(this.id, this);
        this.casilla.getVecesCaidas().put(this.jugador, this.casilla.getVecesCaidas().get(this.jugador) + 1);
 
