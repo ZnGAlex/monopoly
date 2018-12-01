@@ -39,28 +39,28 @@ public class Tablero {
         grupos.put(Valor.GRUPO_AMARILLO, grupo_amarillo);
         grupos.put(Valor.GRUPO_VERDE, grupo_verde);
         grupos.put(Valor.GRUPO_AZUL, grupo_azul);
-        Casilla solar1GrupoNegro = new Casilla(Valor.SOLAR1_GRUPO_NEGRO, Valor.CASILLA_TIPO_SOLAR, grupo_negro,Valor.POSICION_SOLAR1_GRUPO_NEGRO, banca);
-        Casilla solar2GrupoNegro = new Casilla(Valor.SOLAR2_GRUPO_NEGRO, Valor.CASILLA_TIPO_SOLAR, grupo_negro,Valor.POSICION_SOLAR2_GRUPO_NEGRO, banca);
-        Casilla solar1GrupoCyan = new Casilla(Valor.SOLAR1_GRUPO_CYAN, Valor.CASILLA_TIPO_SOLAR, grupo_cyan,Valor.POSICION_SOLAR1_GRUPO_CYAN, banca);
-        Casilla solar2GrupoCyan = new Casilla(Valor.SOLAR2_GRUPO_CYAN, Valor.CASILLA_TIPO_SOLAR, grupo_cyan,Valor.POSICION_SOLAR2_GRUPO_CYAN, banca);
-        Casilla solar3GrupoCyan = new Casilla(Valor.SOLAR3_GRUPO_CYAN, Valor.CASILLA_TIPO_SOLAR, grupo_cyan,Valor.POSICION_SOLAR3_GRUPO_CYAN, banca);
-        Casilla solar1GrupoRosa = new Casilla(Valor.SOLAR1_GRUPO_ROSA, Valor.CASILLA_TIPO_SOLAR, grupo_rosa,Valor.POSICION_SOLAR1_GRUPO_ROSA, banca);
-        Casilla solar2GrupoRosa = new Casilla(Valor.SOLAR2_GRUPO_ROSA, Valor.CASILLA_TIPO_SOLAR, grupo_rosa,Valor.POSICION_SOLAR2_GRUPO_ROSA, banca);
-        Casilla solar3GrupoRosa = new Casilla(Valor.SOLAR3_GRUPO_ROSA, Valor.CASILLA_TIPO_SOLAR, grupo_rosa,Valor.POSICION_SOLAR3_GRUPO_ROSA, banca);
-        Casilla solar1GrupoNaranja = new Casilla(Valor.SOLAR1_GRUPO_NARANJA, Valor.CASILLA_TIPO_SOLAR, grupo_naranja,Valor.POSICION_SOLAR1_GRUPO_NARANJA, banca);
-        Casilla solar2GrupoNaranja = new Casilla(Valor.SOLAR2_GRUPO_NARANJA, Valor.CASILLA_TIPO_SOLAR, grupo_naranja,Valor.POSICION_SOLAR2_GRUPO_NARANJA, banca);
-        Casilla solar3GrupoNaranja = new Casilla(Valor.SOLAR3_GRUPO_NARANJA, Valor.CASILLA_TIPO_SOLAR, grupo_naranja,Valor.POSICION_SOLAR3_GRUPO_NARANJA, banca);
-        Casilla solar1GrupoRojo = new Casilla(Valor.SOLAR1_GRUPO_ROJO, Valor.CASILLA_TIPO_SOLAR, grupo_rojo,Valor.POSICION_SOLAR1_GRUPO_ROJO, banca);
-        Casilla solar2GrupoRojo = new Casilla(Valor.SOLAR2_GRUPO_ROJO, Valor.CASILLA_TIPO_SOLAR, grupo_rojo,Valor.POSICION_SOLAR2_GRUPO_ROJO, banca);
-        Casilla solar3GrupoRojo = new Casilla(Valor.SOLAR3_GRUPO_ROJO, Valor.CASILLA_TIPO_SOLAR, grupo_rojo,Valor.POSICION_SOLAR3_GRUPO_ROJO, banca);
-        Casilla solar1GrupoAmarillo = new Casilla(Valor.SOLAR1_GRUPO_AMARILLO, Valor.CASILLA_TIPO_SOLAR, grupo_amarillo,Valor.POSICION_SOLAR1_GRUPO_AMARILLO, banca);
-        Casilla solar2GrupoAmarillo = new Casilla(Valor.SOLAR2_GRUPO_AMARILLO, Valor.CASILLA_TIPO_SOLAR, grupo_amarillo,Valor.POSICION_SOLAR2_GRUPO_AMARILLO, banca);
-        Casilla solar3GrupoAmarillo = new Casilla(Valor.SOLAR3_GRUPO_AMARILLO, Valor.CASILLA_TIPO_SOLAR, grupo_amarillo,Valor.POSICION_SOLAR3_GRUPO_AMARILLO, banca);
-        Casilla solar1GrupoVerde = new Casilla(Valor.SOLAR1_GRUPO_VERDE, Valor.CASILLA_TIPO_SOLAR, grupo_verde,Valor.POSICION_SOLAR1_GRUPO_VERDE, banca);
-        Casilla solar2GrupoVerde = new Casilla(Valor.SOLAR2_GRUPO_VERDE, Valor.CASILLA_TIPO_SOLAR, grupo_verde,Valor.POSICION_SOLAR2_GRUPO_VERDE, banca);
-        Casilla solar3GrupoVerde = new Casilla(Valor.SOLAR3_GRUPO_VERDE, Valor.CASILLA_TIPO_SOLAR, grupo_verde,Valor.POSICION_SOLAR3_GRUPO_VERDE, banca);
-        Casilla solar1GrupoAzul = new Casilla(Valor.SOLAR1_GRUPO_AZUL, Valor.CASILLA_TIPO_SOLAR, grupo_azul,Valor.POSICION_SOLAR1_GRUPO_AZUL, banca);
-        Casilla solar2GrupoAzul = new Casilla(Valor.SOLAR2_GRUPO_AZUL, Valor.CASILLA_TIPO_SOLAR, grupo_azul,Valor.POSICION_SOLAR2_GRUPO_AZUL, banca);
+        Casilla solar1GrupoNegro = new Casilla(Valor.SOLAR1_GRUPO_NEGRO, Valor.CASILLA_TIPO_SOLAR, grupo_negro,Valor.POSICION_SOLAR1_GRUPO_NEGRO, banca, this);
+        Casilla solar2GrupoNegro = new Casilla(Valor.SOLAR2_GRUPO_NEGRO, Valor.CASILLA_TIPO_SOLAR, grupo_negro,Valor.POSICION_SOLAR2_GRUPO_NEGRO, banca, this);
+        Casilla solar1GrupoCyan = new Casilla(Valor.SOLAR1_GRUPO_CYAN, Valor.CASILLA_TIPO_SOLAR, grupo_cyan,Valor.POSICION_SOLAR1_GRUPO_CYAN, banca, this);
+        Casilla solar2GrupoCyan = new Casilla(Valor.SOLAR2_GRUPO_CYAN, Valor.CASILLA_TIPO_SOLAR, grupo_cyan,Valor.POSICION_SOLAR2_GRUPO_CYAN, banca, this);
+        Casilla solar3GrupoCyan = new Casilla(Valor.SOLAR3_GRUPO_CYAN, Valor.CASILLA_TIPO_SOLAR, grupo_cyan,Valor.POSICION_SOLAR3_GRUPO_CYAN, banca, this);
+        Casilla solar1GrupoRosa = new Casilla(Valor.SOLAR1_GRUPO_ROSA, Valor.CASILLA_TIPO_SOLAR, grupo_rosa,Valor.POSICION_SOLAR1_GRUPO_ROSA, banca, this);
+        Casilla solar2GrupoRosa = new Casilla(Valor.SOLAR2_GRUPO_ROSA, Valor.CASILLA_TIPO_SOLAR, grupo_rosa,Valor.POSICION_SOLAR2_GRUPO_ROSA, banca, this);
+        Casilla solar3GrupoRosa = new Casilla(Valor.SOLAR3_GRUPO_ROSA, Valor.CASILLA_TIPO_SOLAR, grupo_rosa,Valor.POSICION_SOLAR3_GRUPO_ROSA, banca, this);
+        Casilla solar1GrupoNaranja = new Casilla(Valor.SOLAR1_GRUPO_NARANJA, Valor.CASILLA_TIPO_SOLAR, grupo_naranja,Valor.POSICION_SOLAR1_GRUPO_NARANJA, banca, this);
+        Casilla solar2GrupoNaranja = new Casilla(Valor.SOLAR2_GRUPO_NARANJA, Valor.CASILLA_TIPO_SOLAR, grupo_naranja,Valor.POSICION_SOLAR2_GRUPO_NARANJA, banca, this);
+        Casilla solar3GrupoNaranja = new Casilla(Valor.SOLAR3_GRUPO_NARANJA, Valor.CASILLA_TIPO_SOLAR, grupo_naranja,Valor.POSICION_SOLAR3_GRUPO_NARANJA, banca, this);
+        Casilla solar1GrupoRojo = new Casilla(Valor.SOLAR1_GRUPO_ROJO, Valor.CASILLA_TIPO_SOLAR, grupo_rojo,Valor.POSICION_SOLAR1_GRUPO_ROJO, banca, this);
+        Casilla solar2GrupoRojo = new Casilla(Valor.SOLAR2_GRUPO_ROJO, Valor.CASILLA_TIPO_SOLAR, grupo_rojo,Valor.POSICION_SOLAR2_GRUPO_ROJO, banca, this);
+        Casilla solar3GrupoRojo = new Casilla(Valor.SOLAR3_GRUPO_ROJO, Valor.CASILLA_TIPO_SOLAR, grupo_rojo,Valor.POSICION_SOLAR3_GRUPO_ROJO, banca, this);
+        Casilla solar1GrupoAmarillo = new Casilla(Valor.SOLAR1_GRUPO_AMARILLO, Valor.CASILLA_TIPO_SOLAR, grupo_amarillo,Valor.POSICION_SOLAR1_GRUPO_AMARILLO, banca, this);
+        Casilla solar2GrupoAmarillo = new Casilla(Valor.SOLAR2_GRUPO_AMARILLO, Valor.CASILLA_TIPO_SOLAR, grupo_amarillo,Valor.POSICION_SOLAR2_GRUPO_AMARILLO, banca, this);
+        Casilla solar3GrupoAmarillo = new Casilla(Valor.SOLAR3_GRUPO_AMARILLO, Valor.CASILLA_TIPO_SOLAR, grupo_amarillo,Valor.POSICION_SOLAR3_GRUPO_AMARILLO, banca, this);
+        Casilla solar1GrupoVerde = new Casilla(Valor.SOLAR1_GRUPO_VERDE, Valor.CASILLA_TIPO_SOLAR, grupo_verde,Valor.POSICION_SOLAR1_GRUPO_VERDE, banca, this);
+        Casilla solar2GrupoVerde = new Casilla(Valor.SOLAR2_GRUPO_VERDE, Valor.CASILLA_TIPO_SOLAR, grupo_verde,Valor.POSICION_SOLAR2_GRUPO_VERDE, banca, this);
+        Casilla solar3GrupoVerde = new Casilla(Valor.SOLAR3_GRUPO_VERDE, Valor.CASILLA_TIPO_SOLAR, grupo_verde,Valor.POSICION_SOLAR3_GRUPO_VERDE, banca, this);
+        Casilla solar1GrupoAzul = new Casilla(Valor.SOLAR1_GRUPO_AZUL, Valor.CASILLA_TIPO_SOLAR, grupo_azul,Valor.POSICION_SOLAR1_GRUPO_AZUL, banca, this);
+        Casilla solar2GrupoAzul = new Casilla(Valor.SOLAR2_GRUPO_AZUL, Valor.CASILLA_TIPO_SOLAR, grupo_azul,Valor.POSICION_SOLAR2_GRUPO_AZUL, banca, this);
         grupo_negro.getCasillas().add(solar1GrupoNegro);
         grupo_negro.getCasillas().add(solar2GrupoNegro);
         grupo_cyan.getCasillas().add(solar1GrupoCyan);
@@ -83,24 +83,24 @@ public class Tablero {
         grupo_verde.getCasillas().add(solar3GrupoVerde);
         grupo_azul.getCasillas().add(solar1GrupoAzul);
         grupo_azul.getCasillas().add(solar2GrupoAzul);
-        Casilla salida = new Casilla(Valor.CASILLA_SALIDA, Valor.CASILLA_TIPO_SALIDA,Valor.POSICION_CASILLA_SALIDA, banca);
-        Casilla suerte1 = new Casilla(Valor.CASILLA_SUERTE, Valor.CASILLA_TIPO_SUERTE,Valor.POSICION_CASILLA_SUERTE1, banca);
-        Casilla caja1 = new Casilla(Valor.CASILLA_CAJA, Valor.CASILLA_TIPO_CAJA,Valor.POSICION_CASILLA_CAJA1, banca);
-        Casilla impuesto1 = new Casilla(Valor.CASILLA_IMPUESTO, Valor.CASILLA_TIPO_IMPUESTO,Valor.POSICION_CASILLA_IMPUESTO1, banca);
-        Casilla transporte1 = new Casilla(Valor.CASILLA_TRANSPORTE, Valor.CASILLA_TIPO_TRANSPORTE,Valor.POSICION_CASILLA_TRANSPORTE1, banca);
-        Casilla carcel = new Casilla(Valor.CASILLA_CARCEL, Valor.CASILLA_TIPO_CARCEL,Valor.POSICION_CASILLA_CARCEL, banca);
-        Casilla servicio1 = new Casilla(Valor.CASILLA_SERVICIO, Valor.CASILLA_TIPO_SERVICIO,Valor.POSICION_CASILLA_SERVICIO1, banca);
-        Casilla transporte2 = new Casilla(Valor.CASILLA_TRANSPORTE2, Valor.CASILLA_TIPO_TRANSPORTE,Valor.POSICION_CASILLA_TRANSPORTE2, banca);
-        Casilla caja2 = new Casilla(Valor.CASILLA_CAJA, Valor.CASILLA_TIPO_CAJA,Valor.POSICION_CASILLA_CAJA2, banca);
-        Casilla parking = new Casilla(Valor.CASILLA_PARKING, Valor.CASILLA_TIPO_PARKING,Valor.POSICION_CASILLA_PARKING, banca);
-        Casilla suerte2 = new Casilla(Valor.CASILLA_SUERTE, Valor.CASILLA_TIPO_SUERTE,Valor.POSICION_CASILLA_SUERTE2, banca);
-        Casilla transporte3 = new Casilla(Valor.CASILLA_TRANSPORTE3, Valor.CASILLA_TIPO_TRANSPORTE,Valor.POSICION_CASILLA_TRANSPORTE3, banca);
-        Casilla servicio2 = new Casilla(Valor.CASILLA_SERVICIO, Valor.CASILLA_TIPO_SERVICIO,Valor.POSICION_CASILLA_SERVICIO2, banca);
-        Casilla ircarcel = new Casilla(Valor.CASILLA_IR_CARCEL, Valor.CASILLA_TIPO_IR_CARCEL,Valor.POSICION_CASILLA_IR_CARCEL, banca);
-        Casilla caja3 = new Casilla(Valor.CASILLA_CAJA, Valor.CASILLA_TIPO_CAJA,Valor.POSICION_CASILLA_CAJA3, banca);
-        Casilla transporte4 = new Casilla(Valor.CASILLA_TRANSPORTE4, Valor.CASILLA_TIPO_TRANSPORTE,Valor.POSICION_CASILLA_TRANSPORTE4, banca);
-        Casilla suerte3 = new Casilla(Valor.CASILLA_SUERTE, Valor.CASILLA_TIPO_SUERTE,Valor.POSICION_CASILLA_SUERTE3, banca);
-        Casilla impuesto2 = new Casilla(Valor.CASILLA_IMPUESTO2, Valor.CASILLA_TIPO_IMPUESTO,Valor.POSICION_CASILLA_IMPUESTO2, banca);
+        Casilla salida = new Casilla(Valor.CASILLA_SALIDA, Valor.CASILLA_TIPO_SALIDA,Valor.POSICION_CASILLA_SALIDA, banca, this);
+        Casilla suerte1 = new Casilla(Valor.CASILLA_SUERTE, Valor.CASILLA_TIPO_SUERTE,Valor.POSICION_CASILLA_SUERTE1, banca, this);
+        Casilla caja1 = new Casilla(Valor.CASILLA_CAJA, Valor.CASILLA_TIPO_CAJA,Valor.POSICION_CASILLA_CAJA1, banca, this);
+        Casilla impuesto1 = new Casilla(Valor.CASILLA_IMPUESTO, Valor.CASILLA_TIPO_IMPUESTO,Valor.POSICION_CASILLA_IMPUESTO1, banca, this);
+        Casilla transporte1 = new Casilla(Valor.CASILLA_TRANSPORTE, Valor.CASILLA_TIPO_TRANSPORTE,Valor.POSICION_CASILLA_TRANSPORTE1, banca, this);
+        Casilla carcel = new Casilla(Valor.CASILLA_CARCEL, Valor.CASILLA_TIPO_CARCEL,Valor.POSICION_CASILLA_CARCEL, banca, this);
+        Casilla servicio1 = new Casilla(Valor.CASILLA_SERVICIO, Valor.CASILLA_TIPO_SERVICIO,Valor.POSICION_CASILLA_SERVICIO1, banca, this);
+        Casilla transporte2 = new Casilla(Valor.CASILLA_TRANSPORTE2, Valor.CASILLA_TIPO_TRANSPORTE,Valor.POSICION_CASILLA_TRANSPORTE2, banca, this);
+        Casilla caja2 = new Casilla(Valor.CASILLA_CAJA, Valor.CASILLA_TIPO_CAJA,Valor.POSICION_CASILLA_CAJA2, banca, this);
+        Casilla parking = new Casilla(Valor.CASILLA_PARKING, Valor.CASILLA_TIPO_PARKING,Valor.POSICION_CASILLA_PARKING, banca, this);
+        Casilla suerte2 = new Casilla(Valor.CASILLA_SUERTE, Valor.CASILLA_TIPO_SUERTE,Valor.POSICION_CASILLA_SUERTE2, banca, this);
+        Casilla transporte3 = new Casilla(Valor.CASILLA_TRANSPORTE3, Valor.CASILLA_TIPO_TRANSPORTE,Valor.POSICION_CASILLA_TRANSPORTE3, banca, this);
+        Casilla servicio2 = new Casilla(Valor.CASILLA_SERVICIO, Valor.CASILLA_TIPO_SERVICIO,Valor.POSICION_CASILLA_SERVICIO2, banca, this);
+        Casilla ircarcel = new Casilla(Valor.CASILLA_IR_CARCEL, Valor.CASILLA_TIPO_IR_CARCEL,Valor.POSICION_CASILLA_IR_CARCEL, banca, this);
+        Casilla caja3 = new Casilla(Valor.CASILLA_CAJA, Valor.CASILLA_TIPO_CAJA,Valor.POSICION_CASILLA_CAJA3, banca, this);
+        Casilla transporte4 = new Casilla(Valor.CASILLA_TRANSPORTE4, Valor.CASILLA_TIPO_TRANSPORTE,Valor.POSICION_CASILLA_TRANSPORTE4, banca, this);
+        Casilla suerte3 = new Casilla(Valor.CASILLA_SUERTE, Valor.CASILLA_TIPO_SUERTE,Valor.POSICION_CASILLA_SUERTE3, banca, this);
+        Casilla impuesto2 = new Casilla(Valor.CASILLA_IMPUESTO2, Valor.CASILLA_TIPO_IMPUESTO,Valor.POSICION_CASILLA_IMPUESTO2, banca, this);
         abajo.add(salida);
         abajo.add(solar1GrupoNegro);
         abajo.add(caja1);
@@ -182,6 +182,14 @@ public class Tablero {
             System.exit(1);
         }
         this.jugadores = jugadores;
+    }
+
+    public ArrayList<Edificio> getEdificios() {
+        return edificios;
+    }
+
+    public void setEdificios(ArrayList<Edificio> edificios) {
+        this.edificios = edificios;
     }
 
     
@@ -275,6 +283,14 @@ public class Tablero {
             cadena = cadena.concat(Valor.LINEA_HORIZONTAL);
 
         return cadena;
+    }
+
+    public void imprimirEdificios() {
+        if (edificios.size() == 0)
+            System.out.println("No se ha construido ningun edificio.");
+        for (Edificio edificio : edificios) {
+            System.out.println(edificio);
+        }
     }
 
     @Override

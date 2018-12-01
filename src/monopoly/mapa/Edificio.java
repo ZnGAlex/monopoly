@@ -27,67 +27,75 @@ public class Edificio {
                 this.valor = (int) (casilla.getValor() * 0.6);
                 switch (casilla.getNumCasas()) {
                     case 0:
-                        this.nombre = "casa-1";
+                        this.nombre = "casa-1-" + casilla.getNombre();
                         this.alquiler = casilla.getAlquiler() * 5;
                         break;
                     case 1:
-                        this.nombre = "casa-2";
+                        this.nombre = "casa-2-" + casilla.getNombre();
                         this.alquiler = casilla.getAlquiler() * 15;
                         break;
                     case 2:
-                        this.nombre = "casa-3";
+                        this.nombre = "casa-3-" + casilla.getNombre();
                         this.alquiler = casilla.getAlquiler() * 35;
                         break;
                     case 3:
-                        this.nombre = "casa-4";
+                        this.nombre = "casa-4-" + casilla.getNombre();
                         this.alquiler = casilla.getAlquiler() * 50;
                         break;
                 }
+                System.out.println("Se ha construido una casa en " + casilla.getNombre() +
+                        ". La fortuna de " + casilla.getPropietario().getNombre() + " se reduce en " + valor + "€.");
                 break;
             case Valor.EDIFICIO_HOTEL:
-                switch (casilla.getNumHoteles()) {
-                    case 1:
-                        this.nombre = "hotel-1";
-                        break;
-                    case 2:
-                        this.nombre = "hotel-2";
-                        break;
-                    case 3:
-                        this.nombre = "hotel-3";
-                        break;
-                }
                 this.valor = (int) (casilla.getValor() * 0.6);
                 this.alquiler = casilla.getAlquiler() * 70;
+                switch (casilla.getNumHoteles()) {
+                    case 0:
+                        this.nombre = "hotel-1-" + casilla.getNombre();
+                        break;
+                    case 1:
+                        this.nombre = "hotel-2-" + casilla.getNombre();
+                        break;
+                    case 2:
+                        this.nombre = "hotel-3-" + casilla.getNombre();
+                        break;
+                }
+                System.out.println("Se ha construido un hotel en " + casilla.getNombre() +
+                        ". La fortuna de " + casilla.getPropietario().getNombre() + " se reduce en " + valor + "€.");
                 break;
             case Valor.EDIFICIO_PISCINA:
-                switch (casilla.getNumPiscinas()) {
-                    case 1:
-                        this.nombre = "piscina-1";
-                        break;
-                    case 2:
-                        this.nombre = "piscina-2";
-                        break;
-                    case 3:
-                        this.nombre = "piscina-3";
-                        break;
-                }
                 this.valor = (int) (casilla.getValor() * 0.4);
                 this.alquiler = casilla.getAlquiler() * 25;
-                break;
-            case Valor.EDIFICIO_PISTA:
-                switch (casilla.getNumPistas()) {
+                switch (casilla.getNumPiscinas()) {
+                    case 0:
+                        this.nombre = "piscina-1-" + casilla.getNombre();
+                        break;
                     case 1:
-                        this.nombre = "pista-1";
+                        this.nombre = "piscina-2-" + casilla.getNombre();
                         break;
                     case 2:
-                        this.nombre = "pista-2";
-                        break;
-                    case 3:
-                        this.nombre = "pista-3";
+                        this.nombre = "piscina-3-" + casilla.getNombre();
                         break;
                 }
+                System.out.println("Se ha construido una piscina en " + casilla.getNombre() +
+                        ". La fortuna de " + casilla.getPropietario().getNombre() + " se reduce en " + valor + "€.");
+                break;
+            case Valor.EDIFICIO_PISTA:
                 this.valor = (int) (casilla.getValor() * 1.25);
                 this.alquiler = casilla.getAlquiler() * 25;
+                switch (casilla.getNumPistas()) {
+                    case 0:
+                        this.nombre = "pista-1-" + casilla.getNombre();
+                        break;
+                    case 1:
+                        this.nombre = "pista-2-" + casilla.getNombre();
+                        break;
+                    case 2:
+                        this.nombre = "pista-3-" + casilla.getNombre();
+                        break;
+                }
+                System.out.println("Se ha construido una pista en " + casilla.getNombre() +
+                        ". La fortuna de " + casilla.getPropietario().getNombre() + " se reduce en " + valor + "€.");
         }
     }
 
@@ -148,6 +156,7 @@ public class Edificio {
         String cadena = "{\n " +
                             "\n\t id: " + this.nombre +
                             "\n\t propietario: " + this.casilla.getPropietario().getNombre() +
+                            "\n\t casilla: " + this.casilla.getNombre() +
                             "\n\t grupo: " + this.grupo.getColor() +
                             ",\n\t coste: " + this.valor +
                             "\n}";

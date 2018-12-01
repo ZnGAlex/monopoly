@@ -14,6 +14,7 @@ public class Casilla {
     private Jugador propietario;
     private int valor;
     private int alquiler;
+    private Tablero tablero;
     private HashMap<String, Avatar> avatares;
     private ArrayList<Edificio> edificios;
     private HashMap<Jugador, Integer> vecesCaidas;
@@ -28,7 +29,7 @@ public class Casilla {
     private int numTotalEdificios;
     private boolean edificable;
 
-    public Casilla (String nombre, String tipo, Grupo grupo,int posicion, Jugador banca) {
+    public Casilla (String nombre, String tipo, Grupo grupo,int posicion, Jugador banca, Tablero tablero) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.grupo = grupo;
@@ -104,6 +105,7 @@ public class Casilla {
         this.avatares = new HashMap<>();
         this.edificios = new ArrayList<>();
         this.vecesCaidas = new HashMap<>();
+        this.tablero = tablero;
         this.numCasas = 0;
         this.numHoteles = 0;
         this.numPiscinas = 0;
@@ -111,7 +113,7 @@ public class Casilla {
         this.edificable = false;
     }
 
-    public Casilla (String nombre, String tipo, int posicion, Jugador banca){
+    public Casilla (String nombre, String tipo, int posicion, Jugador banca, Tablero tablero){
         if (nombre == null) {
             System.out.println(Valor.ANSI_ROJO + "Nombre nulo." + Valor.ANSI_RESET);
             System.exit(1);
@@ -128,6 +130,7 @@ public class Casilla {
         this.avatares = new HashMap<>();
         this.vecesCaidas = new HashMap<>();
         this.edificios = new ArrayList<>();
+        this.tablero = tablero;
         this.numCasas = 0;
         this.numHoteles = 0;
         this.numPiscinas = 0;
@@ -350,6 +353,14 @@ public class Casilla {
     public void setEdificable(boolean edificable) {
         this.edificable = edificable;
     }
+
+    public Tablero getTablero() {
+        return tablero;
+    }
+
+    public void setTablero(Tablero tablero) {
+        this.tablero = tablero;
+    }
    
     //Metodos
 
@@ -376,13 +387,16 @@ public class Casilla {
                     } else if (numCasas != 4) {
                         System.out.println("El solar " + nombre + " no tiene 4 casas. No se puede construir un hotel");
                     } else {
-                        if ((numHoteles == 3 && numMaximoHoteles == 3) || (numHoteles == 2 && numMaximoHoteles == 2))
-                            numMaximoCasas = 3;
                         construir = true;
                         numCasas = 0;
-                        for (Edificio e : edificios) {
-                            if (e.getTipo().equals(Valor.EDIFICIO_CASA))
-                                edificios.remove(e);
+                        for (int i = 0; i < edificios.size(); i++) {
+                            Edificio ed = edificios.get(i);
+                            if (ed.getTipo().equals(Valor.EDIFICIO_CASA)) {
+                                edificios.remove(i);
+                                propietario.getEdificios().remove(ed);
+                                tablero.getEdificios().remove(ed);
+                                i--;
+                            }
                         }
                     }
                     break;
@@ -412,10 +426,16 @@ public class Casilla {
             if (construir) {
                 Edificio edificio = new Edificio(tipo, this);
                 incrementarNumTipoEdificio(tipo);
+                if (numHoteles == 3 && numMaximoHoteles == 3)
+                    numMaximoCasas = 3;
+                if (numHoteles == 2 && numMaximoHoteles == 2)
+                    numMaximoCasas = 2;
                 edificios.add(edificio);
                 jugador.setFortuna(jugador.getFortuna() - edificio.getValor());
                 jugador.getEdificios().add(edificio);
                 grupo.getEdificios().add(edificio);
+                tablero.getEdificios().add(edificio);
+                actualizarAlquiler();
             }
         }
     }
@@ -490,7 +510,7 @@ public class Casilla {
                         ",\n\t propietario: " + this.propietario.getNombre() +
                         ",\n\t valor: " + this.valor +
                         ",\n\t alquiler actual: " + this.alquiler +
-                        ",\n\t alquiler inicial: " + this.valor * 0.9 +
+                        ",\n\t alquiler inicial: " + (int) (this.valor * 0.1) +
                         ",\n\t edificios: [" + this.obtenerEdificios() +
                         "]\n\t valor hotel: " + this.valor * 0.6 + " (mas cuatro casas)" +
                         ",\n\t valor casa: " + this.valor * 0.6 +
@@ -635,6 +655,12 @@ public class Casilla {
         } else
             nombre = this.grupo.obtenerColorPrint() + this.nombre + Valor.ANSI_RESET;
         return nombre;
+    }
+
+    public void actualizarAlquiler() {
+        for (Edificio edificio : edificios) {
+            alquiler += edificio.getAlquiler();
+        }
     }
 
     @Override

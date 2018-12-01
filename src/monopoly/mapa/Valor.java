@@ -21,7 +21,7 @@ public class Valor {
     public static final int ALQUILER_GRUPO_VERDE = (int) (COSTE_GRUPO_VERDE * 0.1);
     public static final int COSTE_GRUPO_AZUL = (int) (COSTE_GRUPO_VERDE * 1.3);
     public static final int ALQUILER_GRUPO_AZUL = (int) (COSTE_GRUPO_AZUL * 0.1);
-    public static final int FORTUNA_INICIAL = (COSTE_GRUPO_NEGRO + COSTE_GRUPO_CYAN + COSTE_GRUPO_ROSA + COSTE_GRUPO_NARANJA + COSTE_GRUPO_ROJO + COSTE_GRUPO_AMARILLO + COSTE_GRUPO_VERDE + COSTE_GRUPO_AZUL) / 3;
+    public static final int FORTUNA_INICIAL = 99999999; //(COSTE_GRUPO_NEGRO + COSTE_GRUPO_CYAN + COSTE_GRUPO_ROSA + COSTE_GRUPO_NARANJA + COSTE_GRUPO_ROJO + COSTE_GRUPO_AMARILLO + COSTE_GRUPO_VERDE + COSTE_GRUPO_AZUL) / 3;
     public static final int CANTIDAD_PASAR_SALIDA = ((COSTE_GRUPO_NEGRO + COSTE_GRUPO_AZUL)*2 + (COSTE_GRUPO_CYAN + COSTE_GRUPO_ROSA + COSTE_GRUPO_NARANJA + COSTE_GRUPO_ROJO + COSTE_GRUPO_AMARILLO + COSTE_GRUPO_VERDE)*3)/22;
     public static final int ALQUILER_SERVICIO = (int)CANTIDAD_PASAR_SALIDA/200;
     public static final int ALQUILER_TRANSPORTE = CANTIDAD_PASAR_SALIDA;
@@ -115,7 +115,7 @@ public class Valor {
     public static final String EDIFICIO_CASA = "casa";
     public static final String EDIFICIO_HOTEL = "hotel";
     public static final String EDIFICIO_PISCINA = "piscina";
-    public static final String EDIFICIO_PISTA = "pista_deporte";
+    public static final String EDIFICIO_PISTA = "pista";
 
     // numeros de posicion en tablero de las casillas
     public static final int POSICION_CASILLA_SALIDA = 0;

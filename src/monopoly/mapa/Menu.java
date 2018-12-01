@@ -192,6 +192,17 @@ public class Menu {
                                System.out.println(casilla.shortInfo());
                             }
                             break;
+                        case "edificios":
+                            if (partes.length == 2)
+                                tablero.imprimirEdificios();
+                            else if (partes.length == 3) {
+                                if (tablero.getGrupos().containsKey(partes[2])) {
+                                    Grupo g = tablero.getGrupos().get(partes[2]);
+                                    g.imprimirEdificios();
+                                } else
+                                    System.out.println("El grupo no existe.");
+                            }
+                            break;
                         default:
                             System.out.println("Comando incorrecto.");
                     }
