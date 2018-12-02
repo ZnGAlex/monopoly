@@ -139,7 +139,7 @@ public class Avatar {
                         this.casilla.getVecesCaidas().put(this.jugador, this.casilla.getVecesCaidas().get(this.jugador) + 1);
                         this.casilla.getVecesCaidas().forEach((k,v) -> System.out.println(k.getNombre() + " -> " + v));
                         if (i % 2 != 0) {
-                            caidaEnCasilla(tablero, turno, lado, posicionNueva, i);
+                            caidaEnCasilla(tablero, turno, lado, posicionNueva, avance);
                         }
                     }
                 } else {
