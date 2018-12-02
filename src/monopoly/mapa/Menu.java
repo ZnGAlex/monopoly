@@ -5,7 +5,7 @@ import java.util.*;
 import monopoly.persona.*;
 
 public class Menu {
-
+    
     Tablero tablero;
     HashMap<String, Avatar> avatares;
     HashMap<String, Jugador> jugadores;
@@ -316,11 +316,11 @@ public class Menu {
                     if (partes.length == 1) {
 
                     } else if (partes.length == 2) {
-                        if (jugadores.get(partes[2]) == null) {
-                            System.out.println("El jugador " + partes[2] + " no existe.");
+                        if (!tablero.getJugadores().containsKey(partes[1])) {
+                            System.out.println("El jugador " + partes[1] + " no existe.");
                         }
                         else{
-                            System.out.println(jugadores.get(partes[2]).estadisticasJugador());
+                            System.out.println(tablero.getJugadores().get(partes[1]).estadisticasJugador());
                         }
                     } else {
                         System.out.println("Comando incorrecto");

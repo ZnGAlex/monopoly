@@ -1,10 +1,12 @@
 package monopoly.mapa;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Valor {
+
     // grupo de valores de coste
-    public static final int COSTE_INICIAL = 100000;
+    public static final int COSTE_INICIAL = 600000;
     public static final int COSTE_GRUPO_NEGRO = COSTE_INICIAL;
     public static final int ALQUILER_GRUPO_NEGRO = (int) (COSTE_INICIAL * 0.1);
     public static final int COSTE_GRUPO_CYAN = (int) (COSTE_GRUPO_NEGRO * 1.3);
@@ -21,15 +23,15 @@ public class Valor {
     public static final int ALQUILER_GRUPO_VERDE = (int) (COSTE_GRUPO_VERDE * 0.1);
     public static final int COSTE_GRUPO_AZUL = (int) (COSTE_GRUPO_VERDE * 1.3);
     public static final int ALQUILER_GRUPO_AZUL = (int) (COSTE_GRUPO_AZUL * 0.1);
-    public static final int FORTUNA_INICIAL = 99999999; //(COSTE_GRUPO_NEGRO + COSTE_GRUPO_CYAN + COSTE_GRUPO_ROSA + COSTE_GRUPO_NARANJA + COSTE_GRUPO_ROJO + COSTE_GRUPO_AMARILLO + COSTE_GRUPO_VERDE + COSTE_GRUPO_AZUL) / 3;
-    public static final int CANTIDAD_PASAR_SALIDA = ((COSTE_GRUPO_NEGRO + COSTE_GRUPO_AZUL)*2 + (COSTE_GRUPO_CYAN + COSTE_GRUPO_ROSA + COSTE_GRUPO_NARANJA + COSTE_GRUPO_ROJO + COSTE_GRUPO_AMARILLO + COSTE_GRUPO_VERDE)*3)/22;
-    public static final int ALQUILER_SERVICIO = (int)CANTIDAD_PASAR_SALIDA/200;
+    public static final int FORTUNA_INICIAL = (COSTE_GRUPO_NEGRO + COSTE_GRUPO_CYAN + COSTE_GRUPO_ROSA + COSTE_GRUPO_NARANJA + COSTE_GRUPO_ROJO + COSTE_GRUPO_AMARILLO + COSTE_GRUPO_VERDE + COSTE_GRUPO_AZUL) / 3;
+    public static final int CANTIDAD_PASAR_SALIDA = ((COSTE_GRUPO_NEGRO + COSTE_GRUPO_AZUL) * 2 + (COSTE_GRUPO_CYAN + COSTE_GRUPO_ROSA + COSTE_GRUPO_NARANJA + COSTE_GRUPO_ROJO + COSTE_GRUPO_AMARILLO + COSTE_GRUPO_VERDE) * 3) / 22;
+    public static final int ALQUILER_SERVICIO = (int) CANTIDAD_PASAR_SALIDA / 200;
     public static final int ALQUILER_TRANSPORTE = CANTIDAD_PASAR_SALIDA;
     public static final int ALQUILER_IMPUESTO1 = CANTIDAD_PASAR_SALIDA;
-    public static final int ALQUILER_IMPUESTO2 = (int)(CANTIDAD_PASAR_SALIDA/2);
-    public static final int COSTE_SALIR_CARCEL = (int)(CANTIDAD_PASAR_SALIDA * 0.25);
+    public static final int ALQUILER_IMPUESTO2 = (int) (CANTIDAD_PASAR_SALIDA / 2);
+    public static final int COSTE_SALIR_CARCEL = (int) (CANTIDAD_PASAR_SALIDA * 0.25);
     public static final int COSTE_CASILLA_TRANSPORTE = CANTIDAD_PASAR_SALIDA;
-    public static final int COSTE_CASILLA_SERVIVIO = (int) (0.75*CANTIDAD_PASAR_SALIDA);
+    public static final int COSTE_CASILLA_SERVIVIO = (int) (0.75 * CANTIDAD_PASAR_SALIDA);
     public static final int FACTOR_SERVICIO = (int) (CANTIDAD_PASAR_SALIDA / 200);
     public static final int FORTUNA_BANCA = 999999999;
     public static int DINERO_PARKING = 0;
@@ -136,7 +138,7 @@ public class Valor {
     public static final int POSICION_CASILLA_TRANSPORTE2 = 15;
     public static final int POSICION_SOLAR1_GRUPO_NARANJA = 16;
     public static final int POSICION_CASILLA_CAJA2 = 17;
-    public static final int POSICION_SOLAR2_GRUPO_NARANJA= 18;
+    public static final int POSICION_SOLAR2_GRUPO_NARANJA = 18;
     public static final int POSICION_SOLAR3_GRUPO_NARANJA = 19;
     public static final int POSICION_CASILLA_PARKING = 20;
     public static final int POSICION_SOLAR1_GRUPO_ROJO = 21;
@@ -174,14 +176,31 @@ public class Valor {
     public static final int TAMANHO_CASILLA = Valor.SOLAR3_GRUPO_AMARILLO.length() + 5; // aumentamos algo o tamaño para que non quede tan axustada a casilla
     public static final int TAMANHO_LINEA = TAMANHO_CASILLA * 11;
 
+    // Aciones de las cartas de suerte
+    public static final String ACCION_SUERTE_1 = "Ve Transporte2 y coge un avión. Si pasas por la casilla de Salida, cobra " + Valor.CANTIDAD_PASAR_SALIDA + " €.";
+    public static final String ACCION_SUERTE_2 = "Decides hacer un viaje de placer. Avanza hasta LosBaldios.";
+    public static final String ACCION_SUERTE_3 = "Vendes tu billete de avión para Vallefresno en una subasta por Internet. Cobra 500000€.";
+    public static final String ACCION_SUERTE_4 = "Ve a Dalaran. Si pasas por la casilla de Salida, cobra " + Valor.CANTIDAD_PASAR_SALIDA + " €.";
+    public static final String ACCION_SUERTE_5 = "Los acreedores te persiguen por impago. Ve a la Cárcel. Ve directamente sin pasar por la casilla de Salida y sin cobrar los " + Valor.CANTIDAD_PASAR_SALIDA + " €.";
+    public static final String ACCION_SUERTE_6 = "¡Has ganado el bote de la lotería! Recibe 1000000€.";
+    public static final ArrayList<String> ACCIONES_SUERTE = new ArrayList<>(Arrays.asList(Valor.ACCION_SUERTE_1, Valor.ACCION_SUERTE_2, Valor.ACCION_SUERTE_3, Valor.ACCION_SUERTE_4, Valor.ACCION_SUERTE_5, Valor.ACCION_SUERTE_6));
+
+    // Acciones de las cartas de caja
+    public static final String ACCION_CAJA_1 = "Paga 500000€ por un fin de semana en un balneario de 5 estrellas.";
+    public static final String ACCION_CAJA_2 = "Te investigan por fraude de identidad. Ve a la Cárcel. Ve directamente sin pasar por la casilla de Salida y sin cobrar los " + Valor.CANTIDAD_PASAR_SALIDA + " €.";
+    public static final String ACCION_CAJA_3 = "Colócate en la casilla de Salida. Cobra " + Valor.CANTIDAD_PASAR_SALIDA + " €.";
+    public static final String ACCION_CAJA_4 = "Tu compañía de Internet obtiene beneficios. Recibe 2000000€.";
+    public static final String ACCION_CAJA_5 = "Paga 1000000€ por invitar a todos tus amigos a un viaje a CimadelTrueno.";
+    public static final String ACCION_CAJA_6 = "Devolución de Hacienda. Cobra 500000€.";
+    public static final ArrayList<String> ACCIONES_CAJA = new ArrayList<>(Arrays.asList(Valor.ACCION_CAJA_1, Valor.ACCION_CAJA_2, Valor.ACCION_CAJA_3, Valor.ACCION_CAJA_4, Valor.ACCION_CAJA_5, Valor.ACCION_CAJA_6));
+    
     // incremento del valor de las variables al pasar por salida
-    public void aumentarValor5(Tablero t){
-        for(ArrayList<Casilla> a: t.getCasillas()){
-            for(Casilla casilla: a){
+    public void aumentarValor5(Tablero t) {
+        for (ArrayList<Casilla> a : t.getCasillas()) {
+            for (Casilla casilla : a) {
                 casilla.setValor((int) (1.05 * casilla.getValor()));
             }
         }
     }
-
 
 }

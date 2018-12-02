@@ -28,9 +28,8 @@ public class Jugador {
     private int pasarPorCasillaDeSalida;
     private int premiosInversionesOBote;
     private int vecesEnLaCarcel;
-    
-    //setters y getters
 
+    //setters y getters
     public int getPagoDeTasas() {
         return pagoDeTasas;
     }
@@ -42,7 +41,7 @@ public class Jugador {
         }
         this.pagoDeTasas = pagoDeTasas;
     }
-    
+
     public int getPremiosInversionesOBote() {
         return premiosInversionesOBote;
     }
@@ -115,7 +114,6 @@ public class Jugador {
         this.vecesEnLaCarcel = vecesEnLaCarcel;
     }
 
-    
     public String getNombre() {
         return nombre;
     }
@@ -269,7 +267,7 @@ public class Jugador {
         this.dadosTirados = false;
         this.dadosDobles = 0;
         this.turnosEnCarcel = 0;
-        bancarrota = false;
+        this.bancarrota = false;
         this.grupos = new HashMap<>();
         this.dineroInvertido = 0;
         this.pagoDeAlquileres = 0;
@@ -293,14 +291,18 @@ public class Jugador {
         this.dadosTirados = false;
         this.dadosDobles = 0;
         this.turnosEnCarcel = 0;
-        bancarrota = false;
+        this.bancarrota = false;
         this.grupos = new HashMap<>();
+        this.dineroInvertido = 0;
+        this.pagoDeAlquileres = 0;
+        this.cobroDeAlquileres = 0;
+        this.pasarPorCasillaDeSalida = 0;
+        this.vecesEnLaCarcel = 0;
     }
 
     // Metodos
     // obtencion del listado de casillas del jugador
-    
-    public String estadisticasJugador(){
+    public String estadisticasJugador() {
         String cadena = "{\n"
                 + "\t dineroInvertido: " + this.dineroInvertido
                 + ",\n\t pagoDeAlquileres: " + this.pagoDeAlquileres
@@ -310,6 +312,7 @@ public class Jugador {
                 + "]\n\t vecesEnLaCarcel: " + this.vecesEnLaCarcel + "]\n}";
         return cadena;
     }
+
     /**
      * Obtiene el String de los nombres de las propiedaddes del jugador
      */
@@ -403,7 +406,7 @@ public class Jugador {
                     opcion = sc.nextLine();
                     switch (opcion) {
                         case "bancarrota":
-                            this.declararBancarrota(this, tablero, turno);// funcion bancarrota
+                            this.declararBancarrota(this.getAvatar().getCasilla().getPropietario(), tablero, turno);// funcion bancarrota
                             break;
                         case "hipotecarse":
                             this.hipotecar(); // el usuario se hipoteca
@@ -413,7 +416,7 @@ public class Jugador {
                             break;
                     }
                 }
-                if(!this.bancarrota){
+                if (!this.bancarrota) {
                     this.inCarcel = false;
                     this.fortuna -= Valor.COSTE_SALIR_CARCEL;
                     this.pagoDeTasas += Valor.COSTE_SALIR_CARCEL;
@@ -752,6 +755,26 @@ public class Jugador {
             System.exit(0);
         }
 
+    }
+
+    public void hipotecarOBancarrota(Jugador jugador, Tablero tablero, Turno turno, int precio) {
+        while (precio > this.fortuna && !bancarrota) {
+            /*Si no le llega el dinero se hipoteca o declara bancarrota*/
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("No tienes suficiente dinero. ¿Quieres hipotecar o declararte en bancarrota?: ");
+            String opcion = scanner.nextLine();
+
+            switch (opcion) {
+                case "hipotecarse":
+                    this.hipotecar();
+                    break;
+                case "bancarrota":
+                    this.declararBancarrota(jugador, tablero, turno);
+                    break;
+                default:
+                    System.out.println("Opcion incorrecta, las opciones son 'hipotecarse' y 'bancarrota'");
+            }
+        }
     }
 
     /**
