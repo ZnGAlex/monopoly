@@ -5,7 +5,7 @@ import java.util.*;
 import monopoly.persona.*;
 
 public class Menu {
-
+    
     Tablero tablero;
     HashMap<String, Avatar> avatares;
     HashMap<String, Jugador> jugadores;
@@ -93,6 +93,8 @@ public class Menu {
 
         System.out.println(tablero);
 
+        boolean modoCambiado = false;
+
         while (true) {
             /*BUCLE DE JUEGO*/
             System.out.println(imprimirOpcionesJugador());
@@ -160,6 +162,7 @@ public class Menu {
                     /*mostrar turno actual*/
                     System.out.println("\t nombre: " + turno.turnoActual().getNombre());
                     System.out.println("\t avatar: " + turno.turnoActual().getAvatar().getId());
+                    System.out.println("\t modo avanzado: " + turno.turnoActual().getModoEspecial());
                     break;
                 case "lanzar":
                     /*lanzar los dados*/
@@ -168,7 +171,10 @@ public class Menu {
                     } else if (turno.turnoActual().getDadosTirados()) {
                         System.out.println("El jugador " + turno.turnoActual().getNombre() + " ya ha lanzado los dados.");
                     } else {
-                        turno.turnoActual().tirarDadosJugador(tablero, turno);
+                        if (turno.turnoActual().getModoEspecial())
+                            turno.turnoActual().tirarDadosJugadorEspecial(tablero, turno);
+                        else
+                            turno.turnoActual().tirarDadosJugador(tablero, turno);
                     }
                     System.out.println(tablero);
                     break;
@@ -179,6 +185,7 @@ public class Menu {
                     } else if (turno.turnoActual().getDadosTirados()) {
                         turno.turnoActual().setDadosTirados(false);
                         turno.siguienteTurno();
+                        modoCambiado = false;
                     } else {
                         System.out.println("Debes lanzar los dados antes de acabar tu turno");
                     }
@@ -311,26 +318,44 @@ public class Menu {
                         turno.turnoActual().deshipotecar(tablero.casillaByName(partes[1]));
                     }
                     break;
-
                 case "estadisticas":
                     if (partes.length == 1) {
-
+                        tablero.estadisticas();
                     } else if (partes.length == 2) {
-                        if (jugadores.get(partes[2]) == null) {
-                            System.out.println("El jugador " + partes[2] + " no existe.");
+                        if (tablero.getJugadores().get(partes[1]) == null) {
+                            if (!tablero.getJugadores().containsKey(partes[1])) {
+                                System.out.println("El jugador " + partes[1] + " no existe.");
+                            } else {
+                                System.out.println(tablero.getJugadores().get(partes[1]).estadisticasJugador());
+                            }
+                        } else {
+                            System.out.println("Comando incorrecto");
                         }
-                        else{
-                            System.out.println(jugadores.get(partes[2]).estadisticasJugador());
-                        }
+                    }
+                    break;
+                case "cambiar":
+                    if (partes.length != 2) {
+                        System.out.println("Comando incorrecto.");
                     } else {
-                        System.out.println("Comando incorrecto");
+                        if (modoCambiado)
+                            System.out.println("El jugador ya ha cambiado su modo de movimiento.");
+                        else if (partes[1].equals("modo")) {
+                            if (!turno.turnoActual().getModoEspecial()) {
+                                turno.turnoActual().cambiarModo();
+                                modoCambiado = true;
+                                System.out.println("A partir de ahora, el avatar " + turno.turnoActual().getAvatar().getId() + " de tipo " + turno.turnoActual().getAvatar().getFicha() + " se movera en modo avanzado.");
+                            } else {
+                                turno.turnoActual().cambiarModo();
+                                modoCambiado = false;
+                                System.out.println("A partir de ahora, el avatar " + turno.turnoActual().getAvatar().getId() + " de tipo " + turno.turnoActual().getAvatar().getFicha() + " se movera en modo normal.");
+                            }
+                        }
                     }
                     break;
                 default:
                     System.out.println("\nComando incorrecto.");
                     break;
             }
-            System.out.println("");
         }
     }
 
@@ -339,6 +364,6 @@ public class Menu {
     }
 
     public String imprimirOpcionesJugador() {
-        return "Comandos:\n lanzar dados\n comprar [casilla]\n hipotecar [casilla]\n deshipotecar [casilla]\n listar [enventa/jugadores/avatares]\n salir carcel\n acabar turno\n describir jugador [nombre]\n describir [casilla]\n describir avatar [avatar]\n estadisticas\n estadisticas [jugador] ver tablero";
+        return "Comandos:\n lanzar dados\n comprar [casilla]\n hipotecar [casilla]\n deshipotecar [casilla]\n listar [enventa/jugadores/avatares]\n salir carcel\n acabar turno\n describir jugador [nombre]\n describir [casilla]\n describir avatar [avatar]\n estadisticas\n estadisticas [jugador]\n ver tablero";
     }
 }

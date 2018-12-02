@@ -28,9 +28,67 @@ public class Jugador {
     private int pasarPorCasillaDeSalida;
     private int premiosInversionesOBote;
     private int vecesEnLaCarcel;
-    
-    //setters y getters
+    private int vecesDadosTirados;
+    private boolean modoEspecial;
 
+    // constructores
+    public Jugador(String nombre, String ficha, Casilla casilla, String id) {
+        if (nombre == null) {
+            System.out.println(Valor.ANSI_ROJO + "Nombre nulo." + Valor.ANSI_RESET);
+            System.exit(1);
+        }
+        if (ficha == null) {
+            System.out.println(Valor.ANSI_ROJO + "Ficha nula." + Valor.ANSI_RESET);
+            System.exit(1);
+        }
+        if (ficha.equalsIgnoreCase(Valor.ESFINGE) || ficha.equalsIgnoreCase(Valor.COCHE) || ficha.equalsIgnoreCase(Valor.SOMBRERO) || ficha.equalsIgnoreCase(Valor.PELOTA)) {
+            this.avatar = new Avatar(this, ficha, casilla, id);
+        } else {
+            System.out.println(Valor.ANSI_ROJO + "Ficha debe ser: Esfinge, Coche, Sombrero o Pelota");
+            System.exit(1);
+        }
+        this.nombre = nombre;
+        this.fortuna = Valor.FORTUNA_INICIAL;
+        this.propiedades = new HashMap<>();
+        this.hipotecas = new HashMap<>();
+        this.edificios = new ArrayList<>();
+        this.inCarcel = false;
+        this.dadosTirados = false;
+        this.dadosDobles = 0;
+        this.turnosEnCarcel = 0;
+        bancarrota = false;
+        this.grupos = new HashMap<>();
+        this.dineroInvertido = 0;
+        this.pagoDeAlquileres = 0;
+        this.cobroDeAlquileres = 0;
+        this.pasarPorCasillaDeSalida = 0;
+        this.vecesEnLaCarcel = 0;
+        this.vecesDadosTirados = 0;
+        this.modoEspecial = false;
+    }
+
+    public Jugador(String nombre) {
+        if (nombre == null) {
+            System.out.println(Valor.ANSI_ROJO + "Nombre nulo." + Valor.ANSI_RESET);
+            System.exit(1);
+        }
+        this.nombre = nombre;
+        this.fortuna = Valor.FORTUNA_BANCA;
+        this.propiedades = new HashMap<>();
+        this.hipotecas = new HashMap<>();
+        this.edificios = new ArrayList<>();
+        this.avatar = null;
+        this.inCarcel = false;
+        this.dadosTirados = false;
+        this.dadosDobles = 0;
+        this.turnosEnCarcel = 0;
+        bancarrota = false;
+        this.grupos = new HashMap<>();
+        this.vecesDadosTirados = 0;
+        this.modoEspecial = false;
+    }
+
+    //setters y getters
     public int getPagoDeTasas() {
         return pagoDeTasas;
     }
@@ -42,7 +100,7 @@ public class Jugador {
         }
         this.pagoDeTasas = pagoDeTasas;
     }
-    
+
     public int getPremiosInversionesOBote() {
         return premiosInversionesOBote;
     }
@@ -115,7 +173,6 @@ public class Jugador {
         this.vecesEnLaCarcel = vecesEnLaCarcel;
     }
 
-    
     public String getNombre() {
         return nombre;
     }
@@ -244,63 +301,27 @@ public class Jugador {
         this.grupos = grupos;
     }
 
-    // constructores
-    public Jugador(String nombre, String ficha, Casilla casilla, String id) {
-        if (nombre == null) {
-            System.out.println(Valor.ANSI_ROJO + "Nombre nulo." + Valor.ANSI_RESET);
-            System.exit(1);
-        }
-        if (ficha == null) {
-            System.out.println(Valor.ANSI_ROJO + "Ficha nula." + Valor.ANSI_RESET);
-            System.exit(1);
-        }
-        if (ficha.equalsIgnoreCase("Esfinge") || ficha.equalsIgnoreCase("Coche") || ficha.equalsIgnoreCase("Sombrero") || ficha.equalsIgnoreCase("Pelota")) {
-            this.avatar = new Avatar(this, ficha, casilla, id);
-        } else {
-            System.out.println(Valor.ANSI_ROJO + "Ficha debe ser: Esfinge, Coche, Sombrero o Pelota");
-            System.exit(1);
-        }
-        this.nombre = nombre;
-        this.fortuna = Valor.FORTUNA_INICIAL;
-        this.propiedades = new HashMap<>();
-        this.hipotecas = new HashMap<>();
-        this.edificios = new ArrayList<>();
-        this.inCarcel = false;
-        this.dadosTirados = false;
-        this.dadosDobles = 0;
-        this.turnosEnCarcel = 0;
-        bancarrota = false;
-        this.grupos = new HashMap<>();
-        this.dineroInvertido = 0;
-        this.pagoDeAlquileres = 0;
-        this.cobroDeAlquileres = 0;
-        this.pasarPorCasillaDeSalida = 0;
-        this.vecesEnLaCarcel = 0;
+    public int getVecesDadosTirados() {
+        return vecesDadosTirados;
     }
 
-    public Jugador(String nombre) {
-        if (nombre == null) {
-            System.out.println(Valor.ANSI_ROJO + "Nombre nulo." + Valor.ANSI_RESET);
-            System.exit(1);
-        }
-        this.nombre = nombre;
-        this.fortuna = Valor.FORTUNA_BANCA;
-        this.propiedades = new HashMap<>();
-        this.hipotecas = new HashMap<>();
-        this.edificios = new ArrayList<>();
-        this.avatar = null;
-        this.inCarcel = false;
-        this.dadosTirados = false;
-        this.dadosDobles = 0;
-        this.turnosEnCarcel = 0;
-        bancarrota = false;
-        this.grupos = new HashMap<>();
+    public void setVecesDadosTirados(int vecesDadosTirados) {
+        this.vecesDadosTirados = vecesDadosTirados;
     }
+
+    public boolean getModoEspecial() {
+        return modoEspecial;
+    }
+
+    public void setModoEspecial(boolean modoEspecial) {
+        this.modoEspecial = modoEspecial;
+    }
+
+
 
     // Metodos
     // obtencion del listado de casillas del jugador
-    
-    public String estadisticasJugador(){
+    public String estadisticasJugador() {
         String cadena = "{\n"
                 + "\t dineroInvertido: " + this.dineroInvertido
                 + ",\n\t pagoDeAlquileres: " + this.pagoDeAlquileres
@@ -310,6 +331,7 @@ public class Jugador {
                 + "]\n\t vecesEnLaCarcel: " + this.vecesEnLaCarcel + "]\n}";
         return cadena;
     }
+
     /**
      * Obtiene el String de los nombres de las propiedaddes del jugador
      */
@@ -377,6 +399,9 @@ public class Jugador {
 
         desplazamiento = dados.tirarDados();
         this.dadosTirados = true;
+        this.vecesDadosTirados++;
+
+        System.out.println("El jugador ha sacado un " + desplazamiento + "(" + dados.getDado1() + "+" + dados.getDado2() + ")");
 
         cambiarAlquilerCasillas(tablero, desplazamiento);
 
@@ -403,7 +428,7 @@ public class Jugador {
                     opcion = sc.nextLine();
                     switch (opcion) {
                         case "bancarrota":
-                            this.declararBancarrota(this, tablero, turno);// funcion bancarrota
+                            this.declararBancarrota(this.getAvatar().getCasilla().getPropietario(), tablero, turno);// funcion bancarrota
                             break;
                         case "hipotecarse":
                             this.hipotecar(); // el usuario se hipoteca
@@ -413,7 +438,7 @@ public class Jugador {
                             break;
                     }
                 }
-                if(!this.bancarrota){
+                if (!this.bancarrota) {
                     this.inCarcel = false;
                     this.fortuna -= Valor.COSTE_SALIR_CARCEL;
                     this.pagoDeTasas += Valor.COSTE_SALIR_CARCEL;
@@ -448,6 +473,20 @@ public class Jugador {
                 avatar.moverAvatar(desplazamiento, tablero, turno);
             }
         }
+    }
+
+    public void tirarDadosJugadorEspecial(Tablero tablero, Turno turno) {
+        Dado dados = new Dado();
+
+        int desplazamiento = dados.tirarDados();
+        this.dadosTirados = true;
+        this.vecesDadosTirados++;
+
+        cambiarAlquilerCasillas(tablero, desplazamiento);
+
+        System.out.println("El jugador ha sacado un " + desplazamiento + "(" + dados.getDado1() + "+" + dados.getDado2() + ")");
+
+        this.avatar.moverAvatarEspecial(desplazamiento, tablero, turno);
     }
 
     // metodo para llevar el jugador a la carcel
@@ -754,6 +793,26 @@ public class Jugador {
 
     }
 
+    public void hipotecarOBancarrota(Jugador jugador, Tablero tablero, Turno turno, int precio) {
+        while (precio > this.fortuna && !bancarrota) {
+            /*Si no le llega el dinero se hipoteca o declara bancarrota*/
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("No tienes suficiente dinero. ¿Quieres hipotecar o declararte en bancarrota?: ");
+            String opcion = scanner.nextLine();
+
+            switch (opcion) {
+                case "hipotecarse":
+                    this.hipotecar();
+                    break;
+                case "bancarrota":
+                    this.declararBancarrota(jugador, tablero, turno);
+                    break;
+                default:
+                    System.out.println("Opcion incorrecta, las opciones son 'hipotecarse' y 'bancarrota'");
+            }
+        }
+    }
+
     /**
      * Suma la cantidad 'dinero' a la fortuna del jugador
      */
@@ -859,6 +918,13 @@ public class Jugador {
                 }
             }
         }
+    }
+
+    public void cambiarModo() {
+        if (modoEspecial)
+            modoEspecial = false;
+        else
+            modoEspecial = true;
     }
 
     @Override

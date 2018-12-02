@@ -7,9 +7,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class Casilla {
+
     private String nombre;
     private String tipo;
-    int posicion;
+    private int posicion;
     private Grupo grupo;
     private Jugador propietario;
     private int valor;
@@ -29,7 +30,7 @@ public class Casilla {
     private int numTotalEdificios;
     private boolean edificable;
 
-    public Casilla (String nombre, String tipo, Grupo grupo,int posicion, Jugador banca, Tablero tablero) {
+    public Casilla(String nombre, String tipo, Grupo grupo, int posicion, Jugador banca, Tablero tablero) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.grupo = grupo;
@@ -95,7 +96,7 @@ public class Casilla {
                 break;
             case Valor.GRUPO_AZUL:
                 this.valor = Valor.COSTE_GRUPO_AZUL;
-                this.alquiler =Valor.ALQUILER_GRUPO_AZUL;
+                this.alquiler = Valor.ALQUILER_GRUPO_AZUL;
                 this.numMaximoHoteles = 2;
                 this.numMaximoPiscinas = 2;
                 this.numMaximoPistas = 2;
@@ -113,7 +114,7 @@ public class Casilla {
         this.edificable = false;
     }
 
-    public Casilla (String nombre, String tipo, int posicion, Jugador banca, Tablero tablero){
+    public Casilla(String nombre, String tipo, int posicion, Jugador banca, Tablero tablero) {
         if (nombre == null) {
             System.out.println(Valor.ANSI_ROJO + "Nombre nulo." + Valor.ANSI_RESET);
             System.exit(1);
@@ -138,37 +139,39 @@ public class Casilla {
         this.numMaximoCasas = 0;
         this.edificable = false;
 
-        switch(tipo){
+        switch (tipo) {
             case "transporte":
                 this.valor = Valor.COSTE_CASILLA_TRANSPORTE;
                 this.alquiler = Valor.ALQUILER_TRANSPORTE;
                 break;
             case "servicio":
                 this.valor = Valor.COSTE_CASILLA_SERVIVIO;
-                this.alquiler=Valor.ALQUILER_SERVICIO;
+                this.alquiler = Valor.ALQUILER_SERVICIO;
                 break;
             case "impuesto":
-                if(this.nombre.equals("Impuesto1")) this.alquiler = Valor.ALQUILER_IMPUESTO1;
-                else this.alquiler = Valor.ALQUILER_IMPUESTO2;
+                if (this.nombre.equals("Impuesto1")) {
+                    this.alquiler = Valor.ALQUILER_IMPUESTO1;
+                } else {
+                    this.alquiler = Valor.ALQUILER_IMPUESTO2;
+                }
             default:
                 this.valor = 0;
         }
 
     }
-    
+
     //Setters y getters
     public String getNombre() {
         return nombre;
     }
 
     public void setPosicion(int posicion) {
-        if (posicion <0 || posicion>40 || posicion<0 || posicion>40) {
+        if (posicion < 0 || posicion > 40 || posicion < 0 || posicion > 40) {
             System.out.println(Valor.ANSI_ROJO + "Posicion no valida." + Valor.ANSI_RESET);
             System.exit(1);
         }
         this.posicion = posicion;
     }
-
 
     public void setNombre(String nombre) {
         if (nombre == null) {
@@ -361,9 +364,8 @@ public class Casilla {
     public void setTablero(Tablero tablero) {
         this.tablero = tablero;
     }
-   
-    //Metodos
 
+    //Metodos
     public void edificar(String tipo, Jugador jugador) {
         boolean construir = false;
         if (numCasas + numHoteles + numPiscinas + numPistas == numTotalEdificios) {
@@ -405,7 +407,7 @@ public class Casilla {
                         System.out.println("El solar " + nombre + " ya tiene 3 piscinas. No se pueden construir mas.");
                     } else if (numPiscinas == 2 && numMaximoPiscinas == 2) {
                         System.out.println("En el solar " + nombre + " no se pueden construir mas piscinas.");
-                    } else if (numHoteles < 1 && numCasas < 2){
+                    } else if (numHoteles < 1 && numCasas < 2) {
                         System.out.println("El solar " + nombre + " no dispone de 1 hotel y 2 casas para construir una piscina.");
                     } else {
                         construir = true;
@@ -426,10 +428,12 @@ public class Casilla {
             if (construir) {
                 Edificio edificio = new Edificio(tipo, this);
                 incrementarNumTipoEdificio(tipo);
-                if (numHoteles == 3 && numMaximoHoteles == 3)
+                if (numHoteles == 3 && numMaximoHoteles == 3) {
                     numMaximoCasas = 3;
-                if (numHoteles == 2 && numMaximoHoteles == 2)
+                }
+                if (numHoteles == 2 && numMaximoHoteles == 2) {
                     numMaximoCasas = 2;
+                }
                 edificios.add(edificio);
                 jugador.setFortuna(jugador.getFortuna() - edificio.getValor());
                 jugador.setDineroInvertido(jugador.getDineroInvertido() + edificio.getValor());
@@ -459,42 +463,43 @@ public class Casilla {
     }
 
     /**
-     *Obtiene el string de los nombres de los edificios de la casilla
+     * Obtiene el string de los nombres de los edificios de la casilla
      */
     public String obtenerEdificios() {
         String cadena = "";
 
-        if (this.edificios.size() == 0)
+        if (this.edificios.size() == 0) {
             cadena = "no tiene edificios";
-        else {
+        } else {
             for (Edificio edificio : edificios) {
                 cadena = cadena.concat(edificio.getNombre() + " ");
             }
         }
         return cadena;
     }
-    
+
     /**
      * Info breve sobre las casillas
      */
     public String shortInfo() {
         String cadena = new String();
-        switch(tipo){
+        switch (tipo) {
             case "solar":
-                cadena = "{\n " +
-                    "\t tipo: " + this.tipo +
-                    ",\n\t grupo: " + this.grupo +
-                    ",\n\t valor: " + this.valor +
-                    "\n}";
+                cadena = "{\n "
+                        + "\t tipo: " + this.tipo
+                        + ",\n\t grupo: " + this.grupo
+                        + ",\n\t valor: " + this.valor
+                        + "\n}";
                 break;
-            case "transporte": case "servicio":
-                cadena = "{\n " +
-                    "\t tipo: " + this.tipo +
-                    ",\n\t valor: " + this.valor +
-                    "\n}";
+            case "transporte":
+            case "servicio":
+                cadena = "{\n "
+                        + "\t tipo: " + this.tipo
+                        + ",\n\t valor: " + this.valor
+                        + "\n}";
                 break;
         }
-        
+
         return cadena;
     }
 
@@ -503,108 +508,111 @@ public class Casilla {
      */
     public String info() {
         String cadena = new String();
-        switch(this.tipo){
+        switch (this.tipo) {
             case "solar":
-                cadena = "{\n " +
-                        "\t tipo: " + this.tipo +
-                        ",\n\t grupo: " + this.grupo +
-                        ",\n\t propietario: " + this.propietario.getNombre() +
-                        ",\n\t valor: " + this.valor +
-                        ",\n\t alquiler actual: " + this.alquiler +
-                        ",\n\t alquiler inicial: " + (int) (this.valor * 0.1) +
-                        ",\n\t edificios: [" + this.obtenerEdificios() +
-                        "]\n\t valor hotel: " + this.valor * 0.6 + " (mas cuatro casas)" +
-                        ",\n\t valor casa: " + this.valor * 0.6 +
-                        ",\n\t valor piscina: " + this.valor * 0.4 +
-                        ",\n\t valor pista de deporte: " + this.valor * 1.25 +
-                        ",\n\t alquiler una casa: " + this.valor * 0.9 * 5 +
-                        ",\n\t alquiler dos casas: " + this.valor * 0.9 * 15 +
-                        ",\n\t alquiler tres casas: " + this.valor * 0.9 * 35 +
-                        ",\n\t alquiler cuatro casas: " + this.valor * 0.9 * 50 +
-                        ",\n\t alquiler hotel: " + this.valor * 0.9 * 70 +
-                        ",\n\t alquiler piscina: " + this.valor * 25 +
-                        ",\n\t alquiler pista de deporte: " + this.valor * 25 +
-                        "\n}";
+                cadena = "{\n "
+                        + "\t tipo: " + this.tipo
+                        + ",\n\t grupo: " + this.grupo
+                        + ",\n\t propietario: " + this.propietario.getNombre()
+                        + ",\n\t valor: " + this.valor
+                        + ",\n\t alquiler actual: " + this.alquiler
+                        + ",\n\t alquiler inicial: " + (int) (this.valor * 0.1)
+                        + ",\n\t edificios: [" + this.obtenerEdificios()
+                        + "]\n\t valor hotel: " + this.valor * 0.6 + " (mas cuatro casas)"
+                        + ",\n\t valor casa: " + this.valor * 0.6
+                        + ",\n\t valor piscina: " + this.valor * 0.4
+                        + ",\n\t valor pista de deporte: " + this.valor * 1.25
+                        + ",\n\t alquiler una casa: " + this.valor * 0.9 * 5
+                        + ",\n\t alquiler dos casas: " + this.valor * 0.9 * 15
+                        + ",\n\t alquiler tres casas: " + this.valor * 0.9 * 35
+                        + ",\n\t alquiler cuatro casas: " + this.valor * 0.9 * 50
+                        + ",\n\t alquiler hotel: " + this.valor * 0.9 * 70
+                        + ",\n\t alquiler piscina: " + this.valor * 25
+                        + ",\n\t alquiler pista de deporte: " + this.valor * 25
+                        + "\n}";
                 break;
             case "transporte":
-                cadena = "{\n " +
-                        "\t tipo: " + this.tipo +
-                        ",\n\t propietario: " + this.propietario.getNombre() +
-                        ",\n\t valor: " + this.valor +
-                        ",\n\t alquiler: " + this.alquiler +
-                        "\n}";
+                cadena = "{\n "
+                        + "\t tipo: " + this.tipo
+                        + ",\n\t propietario: " + this.propietario.getNombre()
+                        + ",\n\t valor: " + this.valor
+                        + ",\n\t alquiler: " + this.alquiler
+                        + "\n}";
                 break;
             case "servicio":
-                cadena = "{\n " +
-                        "\t tipo: " + this.tipo +
-                        ",\n\t propietario: " + this.propietario.getNombre() +
-                        ",\n\t valor: " + this.valor +
-                        ",\n\t alquiler: " + this.alquiler +
-                        "\n}";            
+                cadena = "{\n "
+                        + "\t tipo: " + this.tipo
+                        + ",\n\t propietario: " + this.propietario.getNombre()
+                        + ",\n\t valor: " + this.valor
+                        + ",\n\t alquiler: " + this.alquiler
+                        + "\n}";
                 break;
             case "impuesto":
-                cadena = "{\n " +
-                        "\t tipo: " + this.tipo +
-                        ",\n\t alquiler: " + this.alquiler +
-                        "\n}";
+                cadena = "{\n "
+                        + "\t tipo: " + this.tipo
+                        + ",\n\t alquiler: " + this.alquiler
+                        + "\n}";
                 break;
             case "carcel":
                 ArrayList<String> jug = new ArrayList<>();
-                for(Avatar avat: this.avatares.values()){
+                for (Avatar avat : this.avatares.values()) {
                     jug.add(avat.getJugador().getNombre());
                 }
-                cadena = "{\n " +
-                        "\t salir: " + Valor.COSTE_SALIR_CARCEL +
-                        ",\n\t jugadores: " + jug +
-                        "\n}";
+                cadena = "{\n "
+                        + "\t salir: " + Valor.COSTE_SALIR_CARCEL
+                        + ",\n\t jugadores: " + jug
+                        + "\n}";
                 break;
             case "parking":
                 ArrayList<String> jugad = new ArrayList<>();
-                for(Avatar avat: this.avatares.values()){
+                for (Avatar avat : this.avatares.values()) {
                     jugad.add(avat.getJugador().getNombre());
                 }
-                cadena = "{\n " +
-                        "\t bote: " + Valor.DINERO_PARKING +
-                        ",\n\t jugadores: " + jugad +
-                        "\n}";
+                cadena = "{\n "
+                        + "\t bote: " + Valor.DINERO_PARKING
+                        + ",\n\t jugadores: " + jugad
+                        + "\n}";
                 break;
             default:
-                cadena = "{\n " +
-                        "\t tipo: " + this.tipo +
-                        "\n}";
+                cadena = "{\n "
+                        + "\t tipo: " + this.tipo
+                        + "\n}";
         }
-        
+
         return cadena;
     }
 
     /**
      * Comprueba si la casilla esta a la venta
-     * @return  True si esta a la venta
+     *
+     * @return True si esta a la venta
      */
-    public boolean seVende(){
-        return propietario.getNombre().equals("banca") && valor>0;
+    public boolean seVende() {
+        return propietario.getNombre().equals("banca") && valor > 0;
     }
-    
+
     /**
      * Añade un avatar a la casilla
      */
-    public void anhadirAvatar(Avatar avatar){
-        if(!this.avatares.containsKey(avatar.getId())){
+    public void anhadirAvatar(Avatar avatar) {
+        if (!this.avatares.containsKey(avatar.getId())) {
             this.avatares.put(avatar.getId(), avatar);
+        } else {
+            System.out.println("El avatar ya estaba en la casilla");
         }
-        else System.out.println("El avatar ya estaba en la casilla");
     }
-    
+
     /**
-     * Elimina un avatar de la casilla 
+     * Elimina un avatar de la casilla
      */
-    public void eliminarAvatar(Avatar avatar){
-        if(this.avatares.containsKey(avatar.getId())){
+    public void eliminarAvatar(Avatar avatar) {
+        if (this.avatares.containsKey(avatar.getId())) {
             this.avatares.remove(avatar.getId());
+        } else {
+            System.out.println("El avatar no esta en la casilla");
         }
-        else System.out.println("El avatar no esta en la casilla");
     }
-    
+
     /**
      * Devuelve los IDs de los avatares de la casilla
      */
@@ -613,15 +621,17 @@ public class Casilla {
         String cadena = "";
         if (this.avatares.size() != 0) {
             Iterator avatares_it = this.avatares.values().iterator();
-            while (avatares_it.hasNext()) { /*Recorro los avatares y añado los IDs al string*/
+            while (avatares_it.hasNext()) {
+                /*Recorro los avatares y añado los IDs al string*/
                 Avatar a = (Avatar) avatares_it.next();
                 cadena_avatares = cadena_avatares.concat("&" + a.getId());
             }
         }
         cadena = cadena.concat(cadena_avatares);
         int t = Valor.TAMANHO_CASILLA - cadena_avatares.length();
-        for (int i = 0; i < t; i++)
+        for (int i = 0; i < t; i++) {
             cadena = cadena.concat(" ");
+        }
 
         return cadena;
     }
@@ -634,27 +644,34 @@ public class Casilla {
         int t;
         if (this.nombre.length() < Valor.TAMANHO_CASILLA) {
             t = Valor.TAMANHO_CASILLA - this.nombre.length();
-            if (t%2 == 0) {
-                for (int i = 0; i < t / 2; i++)
+            if (t % 2 == 0) {
+                for (int i = 0; i < t / 2; i++) {
                     nombre = nombre.concat(" ");
-                if (this.grupo != null)
+                }
+                if (this.grupo != null) {
                     nombre = nombre.concat(this.grupo.obtenerColorPrint() + this.nombre + Valor.ANSI_RESET);
-                else
+                } else {
                     nombre = nombre.concat(this.nombre);
-                for (int i = 0; i < t / 2; i++)
+                }
+                for (int i = 0; i < t / 2; i++) {
                     nombre = nombre.concat(" ");
+                }
             } else {
-                for (int i = 0; i < (t / 2) + 1; i++)
+                for (int i = 0; i < (t / 2) + 1; i++) {
                     nombre = nombre.concat(" ");
-                if (this.grupo != null)
+                }
+                if (this.grupo != null) {
                     nombre = nombre.concat(this.grupo.obtenerColorPrint() + this.nombre + Valor.ANSI_RESET);
-                else
+                } else {
                     nombre = nombre.concat(this.nombre);
-                for (int i = 0; i < t / 2; i++)
+                }
+                for (int i = 0; i < t / 2; i++) {
                     nombre = nombre.concat(" ");
+                }
             }
-        } else
+        } else {
             nombre = this.grupo.obtenerColorPrint() + this.nombre + Valor.ANSI_RESET;
+        }
         return nombre;
     }
 
@@ -664,10 +681,65 @@ public class Casilla {
         }
     }
 
+    public void realizarAccion(Jugador jugador, Turno turno, int avance) {
+        switch (this.posicion) {
+            /*switch de la accion que sucede al caer en cada tipo de casilla*/
+            case Valor.POSICION_CASILLA_IR_CARCEL:
+                jugador.setDadosTirados(false);
+                jugador.encarcelarJugador(tablero);
+                jugador.setDadosTirados(false);
+                System.out.println("El jugador va a la carcel.");
+                turno.siguienteTurno();
+                break;
+            case Valor.POSICION_CASILLA_IMPUESTO1:
+                /*Impuesto1*/
+                System.out.println("El jugador paga un impuesto de " + Valor.ALQUILER_IMPUESTO1);
+                jugador.pagarImpuesto(Valor.ALQUILER_IMPUESTO1, tablero, turno);
+                break;
+            case Valor.POSICION_CASILLA_IMPUESTO2:
+                /*Impuesto2*/
+                System.out.println("El jugador paga un impuesto de " + Valor.ALQUILER_IMPUESTO2);
+                jugador.pagarImpuesto(Valor.ALQUILER_IMPUESTO2, tablero, turno);
+                break;
+            case Valor.POSICION_CASILLA_CAJA1:
+            case Valor.POSICION_CASILLA_CAJA2:
+            case Valor.POSICION_CASILLA_CAJA3:
+                /*Caja*/
+                tablero.escogerCarta('c', jugador, turno);
+                break;
+            case Valor.POSICION_CASILLA_SUERTE1:
+            case Valor.POSICION_CASILLA_SUERTE2:
+            case Valor.POSICION_CASILLA_SUERTE3:
+                /*Suerte*/
+                tablero.escogerCarta('s',jugador,turno);
+                break;
+            case Valor.POSICION_CASILLA_PARKING:
+                /*Parking*/
+                System.out.println("El jugador cobra el dinero del Parking");
+                jugador.cobrarParking();
+                break;
+            case Valor.POSICION_CASILLA_SERVICIO1:
+            case Valor.POSICION_CASILLA_SERVICIO2:
+                /*Servicio*/
+                jugador.pagarAlquiler(tablero, turno, avance);
+                break;
+            case Valor.POSICION_CASILLA_TRANSPORTE1:
+            case Valor.POSICION_CASILLA_TRANSPORTE2:
+            case Valor.POSICION_CASILLA_TRANSPORTE3:
+            case Valor.POSICION_CASILLA_TRANSPORTE4:
+                /*Transporte*/
+                jugador.pagarTransporte(tablero, turno);
+                break;
+            default:
+                /*mapa*/
+                jugador.pagarAlquiler(tablero, turno);
+        }
+    }
+
     @Override
     public String toString() {
-       String cadena = this.printNombreColor();
+        String cadena = this.printNombreColor();
 
-       return cadena;
+        return cadena;
     }
 }
