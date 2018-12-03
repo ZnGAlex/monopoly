@@ -125,6 +125,7 @@ public class Carta {
                     break;
                 case 5:
                     jugador.encarcelarJugador(tablero);
+                    turno.siguienteTurno();
                     /*Encarcelar al jugador*/
                     break;
                 case 6:
@@ -141,10 +142,12 @@ public class Carta {
                     if (!jugador.getBancarrota()) {
                         jugador.setFortuna(jugador.getFortuna() - 500000);
                         Valor.DINERO_PARKING += 500000;
+                        jugador.setPagoDeTasas(jugador.getPagoDeTasas() + 500000);
                     }
                     break;
                 case 2:
                     jugador.encarcelarJugador(tablero);
+                    turno.siguienteTurno();
                     break;
                 case 3:
                     jugador.getAvatar().moverAvatarCasilla(tablero.casillaByName("Salida"));
@@ -162,6 +165,7 @@ public class Carta {
                     if (!jugador.getBancarrota()) {
                         jugador.setFortuna(jugador.getFortuna() - 1000000);
                         Valor.DINERO_PARKING += 1000000;
+                        jugador.setPagoDeTasas(jugador.getPagoDeTasas() + 1000000);
                     }
                     break;
                 case 6:

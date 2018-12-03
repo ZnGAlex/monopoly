@@ -29,6 +29,7 @@ public class Casilla {
     private int numMaximoPistas;
     private int numTotalEdificios;
     private boolean edificable;
+    private boolean hipotecada;
 
     public Casilla(String nombre, String tipo, Grupo grupo, int posicion, Jugador banca, Tablero tablero) {
         this.nombre = nombre;
@@ -112,6 +113,7 @@ public class Casilla {
         this.numPiscinas = 0;
         this.numPistas = 0;
         this.edificable = false;
+        this.hipotecada = false;
     }
 
     public Casilla(String nombre, String tipo, int posicion, Jugador banca, Tablero tablero) {
@@ -138,6 +140,7 @@ public class Casilla {
         this.numPistas = 0;
         this.numMaximoCasas = 0;
         this.edificable = false;
+        this.hipotecada = false;
 
         switch (tipo) {
             case "transporte":
@@ -161,6 +164,16 @@ public class Casilla {
     }
 
     //Setters y getters
+
+    public boolean getHipotecada() {
+        return hipotecada;
+    }
+
+    public void setHipotecada(boolean hipotecada) {
+        this.hipotecada = hipotecada;
+    }
+    
+    
     public String getNombre() {
         return nombre;
     }
@@ -436,6 +449,7 @@ public class Casilla {
                 }
                 edificios.add(edificio);
                 jugador.setFortuna(jugador.getFortuna() - edificio.getValor());
+                jugador.setDineroInvertido(jugador.getFortuna() + edificio.getValor());
                 jugador.setDineroInvertido(jugador.getDineroInvertido() + edificio.getValor());
                 jugador.getEdificios().add(edificio);
                 grupo.getEdificios().add(edificio);

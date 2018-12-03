@@ -381,7 +381,7 @@ public class Jugador {
         desplazamiento = dados.tirarDados();
         this.dadosTirados = true;
 
-        cambiarAlquilerCasillas(tablero, desplazamiento);
+        //cambiarAlquilerCasillas(tablero, desplazamiento);
 
         if (this.inCarcel) {
             this.turnosEnCarcel++;
@@ -459,6 +459,7 @@ public class Jugador {
      */
     public void encarcelarJugador(Tablero tablero) {
         this.avatar.moverAvatarCasilla(tablero.casillaByName("Carcel"));
+        this.vecesEnLaCarcel += 1;
         this.inCarcel = true;
     }
 
@@ -525,7 +526,7 @@ public class Jugador {
      * pagar algo)
      */
     public void pagarAlquiler(Tablero tablero, Turno turno) {
-        if (!this.avatar.getCasilla().getPropietario().getNombre().equals(this.nombre)) {
+        if (!this.avatar.getCasilla().getPropietario().getNombre().equals(this.nombre) && !this.avatar.getCasilla().getHipotecada()) {
             /*Si la casilla no pertenece al jugador*/
 
             if (!this.avatar.getCasilla().getPropietario().getNombre().equals("banca")) {
@@ -550,9 +551,9 @@ public class Jugador {
                 }
                 if (!bancarrota) {
                     /*Pago del alquiler*/
-                    int coste = this.getAvatar().getCasilla().getValor();
+                    int coste = this.getAvatar().getCasilla().getAlquiler();
                     if (this.avatar.getCasilla().getPropietario().getGrupos().containsKey(this.getAvatar().getCasilla().getGrupo().getColor())) {
-                        coste = this.getAvatar().getCasilla().getValor() * 2;
+                        coste = this.getAvatar().getCasilla().getAlquiler() * 2;
                     }
                     System.out.println("El jugador " + this.nombre + " paga " + coste + " a " + this.avatar.getCasilla().getPropietario().getNombre());
                     this.fortuna -= coste;
@@ -569,7 +570,7 @@ public class Jugador {
      */
     public void pagarAlquiler(Tablero tablero, Turno turno, int valorDados) {
         int valorPagar;
-        if (!this.avatar.getCasilla().getPropietario().getNombre().equals(this.getNombre())) {
+        if (!this.avatar.getCasilla().getPropietario().getNombre().equals(this.getNombre()) && !this.avatar.getCasilla().getHipotecada()) {
             if (!this.avatar.getCasilla().getPropietario().getNombre().equals("banca")) {
                 /*Calculo del alquiler en funcion del valor de los dados y del numero de casillas de servicio poseidas por el mismo propietario*/
                 if (this.avatar.getCasilla().getPropietario().getNombre().equals(tablero.getCasillas().get(1).get(2).getPropietario().getNombre()) && this.avatar.getCasilla().getPropietario().getNombre().equals(tablero.getCasillas().get(2).get(8).getPropietario().getNombre())) {
@@ -593,13 +594,14 @@ public class Jugador {
                         default:
                             System.out.println("Opcion incorrecta, las opciones son 'hipotecarse' y 'bancarrota'");
                     }
-
+                    
                 }
 
                 if (!bancarrota) {
                     /*Pagar el alquiler*/
                     System.out.println("El jugador " + this.nombre + " paga " + valorPagar + " a " + this.avatar.getCasilla().getPropietario().getNombre());
                     this.fortuna -= valorPagar;
+                    this.pagoDeAlquileres += valorPagar;
                     this.avatar.getCasilla().getPropietario().cobrarAlquiler(valorPagar);
                 }
             }
@@ -612,7 +614,7 @@ public class Jugador {
     public void pagarTransporte(Tablero tablero, Turno turno) {
         int valorPagar, numEstaciones = 0;
 
-        if (!this.avatar.getCasilla().getPropietario().getNombre().equals(this.getNombre())) {
+        if (!this.avatar.getCasilla().getPropietario().getNombre().equals(this.getNombre()) && !this.avatar.getCasilla().getHipotecada()) {
             if (!this.avatar.getCasilla().getPropietario().getNombre().equals("banca")) {
                 /*Calculo del numero de casillas de transporte con el mismo dueño*/
                 if (this.avatar.getCasilla().getPropietario().getNombre().equals(tablero.getCasillas().get(0).get(5).getPropietario().getNombre())) {
@@ -652,6 +654,7 @@ public class Jugador {
                     /*Pagar*/
                     System.out.println("El jugador " + this.nombre + " paga " + valorPagar + " a " + this.avatar.getCasilla().getPropietario().getNombre());
                     this.fortuna -= valorPagar;
+                    this.pagoDeAlquileres += valorPagar;
                     this.avatar.getCasilla().getPropietario().cobrarAlquiler(valorPagar);
                 }
             }
@@ -674,6 +677,7 @@ public class Jugador {
                 this.fortuna += (int) (0.5 * this.propiedades.get(prop).getValor());
                 this.hipotecas.put(prop, this.propiedades.get(prop));
                 this.propiedades.remove(prop);
+                this.hipotecas.get(prop).setHipotecada(true);
                 flag = false;
             } else if (prop.equals("cancelar")) {
                 /*Para salir del bucle sin hipotecar*/
@@ -693,6 +697,7 @@ public class Jugador {
             this.fortuna += (int) (0.5 * this.propiedades.get(cas.getNombre()).getValor());
             this.hipotecas.put(cas.getNombre(), this.propiedades.get(cas.getNombre()));
             this.propiedades.remove(cas.getNombre());
+            this.hipotecas.get(cas.getNombre()).setHipotecada(true);
             System.out.println("El jugador " + this.nombre + " hipoteca " + cas.getNombre() + " por " + (0.5 * this.hipotecas.get(cas.getNombre()).getValor())
                     + " €\nSu fortuna actual es: " + this.fortuna);
         } else {
@@ -811,7 +816,7 @@ public class Jugador {
                     this.anhadirGrupo(g);
                 }
             }
-            cambiarAlquilerCasillas(tablero);
+            //cambiarAlquilerCasillas(tablero);
             System.out.println("El jugador " + this.nombre + " compra la casilla " + c.getNombre() + " por " + c.getValor() + "€");
             this.dineroInvertido += c.getValor();
             System.out.println("Su fortuna actual es " + this.fortuna + "€");
@@ -819,7 +824,7 @@ public class Jugador {
             System.out.println("No tienes suficiente dinero");
         }
     }
-
+/*
     // cambia el alquiler de las casillas de transporte en funcion del propietario
     public void cambiarAlquilerCasillas(Tablero tablero) {
         Iterator jug_it = tablero.getJugadores().values().iterator();
@@ -883,6 +888,7 @@ public class Jugador {
             }
         }
     }
+*/
 
     @Override
     public boolean equals(Object o) {

@@ -88,9 +88,10 @@ public class Avatar {
         }
         int posicionActual = this.casilla.getPosicion();
         /*Calculo de la nueva posicion*/
-        int lado = ((posicionActual + avance) / 10) % 4;
-        int posicionNueva = (posicionActual + avance) % 10;
-
+        //int lado = ((posicionActual + avance) / 10) % 4;
+        //int posicionNueva = (posicionActual + avance) % 10;
+        int lado = 0;
+        int posicionNueva = 6;
         if (lado * 10 + posicionNueva < this.casilla.getPosicion()) {
             /*Si el jugador pasa por salida, cobra*/
             System.out.println(this.jugador.getNombre() + " pasa por salida y cobra " + Valor.CANTIDAD_PASAR_SALIDA + " €");
@@ -110,58 +111,7 @@ public class Avatar {
 
         this.casilla.getVecesCaidas().forEach((k, v) -> System.out.println(k.getNombre() + " -> " + v));
 
-        tablero.getCasillas().get(lado).get(posicionNueva).realizarAccion(this.jugador, turno, avance);
-
-        /*switch (tablero.getCasillas().get(lado).get(posicionNueva).getPosicion()) {
-            /*switch de la accion que sucede al caer en cada tipo de casilla*/
- /*    case Valor.POSICION_CASILLA_IR_CARCEL:
-                this.jugador.setDadosTirados(false);
-                this.jugador.encarcelarJugador(tablero);
-                this.jugador.setDadosTirados(false);
-                System.out.println("El jugador va a la carcel.");
-                turno.siguienteTurno();
-                break;
-            case Valor.POSICION_CASILLA_IMPUESTO1:
-                /*Impuesto1*/
- /*        System.out.println("El jugador paga un impuesto de " + Valor.ALQUILER_IMPUESTO1);
-                this.jugador.pagarImpuesto(Valor.ALQUILER_IMPUESTO1, tablero, turno);
-                break;
-            case Valor.POSICION_CASILLA_IMPUESTO2:
-                /*Impuesto2*/
- /*        System.out.println("El jugador paga un impuesto de " + Valor.ALQUILER_IMPUESTO2);
-                this.jugador.pagarImpuesto(Valor.ALQUILER_IMPUESTO2, tablero, turno);
-                break;
-            case Valor.POSICION_CASILLA_CAJA1:
-            case Valor.POSICION_CASILLA_CAJA2:
-            case Valor.POSICION_CASILLA_CAJA3:
-                /*Caja*/
- /*        break;
-            case Valor.POSICION_CASILLA_SUERTE1:
-            case Valor.POSICION_CASILLA_SUERTE2:
-            case Valor.POSICION_CASILLA_SUERTE3:
-                /*Suerte*/
- /*        break;
-            case Valor.POSICION_CASILLA_PARKING:
-                /*Parking*/
- /*        System.out.println("El jugador cobra el dinero del Parking");
-                this.jugador.cobrarParking();
-                break;
-            case Valor.POSICION_CASILLA_SERVICIO1:
-            case Valor.POSICION_CASILLA_SERVICIO2:
-                /*Servicio*/
- /*        this.jugador.pagarAlquiler(tablero, turno, avance);
-                break;
-            case Valor.POSICION_CASILLA_TRANSPORTE1:
-            case Valor.POSICION_CASILLA_TRANSPORTE2:
-            case Valor.POSICION_CASILLA_TRANSPORTE3:
-            case Valor.POSICION_CASILLA_TRANSPORTE4:
-                /*Transporte*/
- /*        this.jugador.pagarTransporte(tablero, turno);
-                break;
-            default:
-                /*mapa*/
- /*        this.jugador.pagarAlquiler(tablero, turno);
-        }*/
+        this.casilla.realizarAccion(this.jugador, turno, avance);
     }
 
     /**
