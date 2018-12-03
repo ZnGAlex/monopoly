@@ -30,6 +30,10 @@ public class Jugador {
     private int vecesEnLaCarcel;
     private int vecesDadosTirados;
     private boolean modoEspecial;
+    private int turnosDadosTiradosEspecial;
+    private int turnosBloqueoModoEspecial;
+    private boolean bloqueoTiroModoEspecial;
+    private boolean haCompradoModoEspecial;
 
     // constructores
     public Jugador(String nombre, String ficha, Casilla casilla, String id) {
@@ -65,6 +69,10 @@ public class Jugador {
         this.vecesEnLaCarcel = 0;
         this.vecesDadosTirados = 0;
         this.modoEspecial = false;
+        this.turnosDadosTiradosEspecial = 0;
+        this.haCompradoModoEspecial = false;
+        this.turnosBloqueoModoEspecial = 0;
+        this.bloqueoTiroModoEspecial = false;
     }
 
     public Jugador(String nombre) {
@@ -86,6 +94,10 @@ public class Jugador {
         this.grupos = new HashMap<>();
         this.vecesDadosTirados = 0;
         this.modoEspecial = false;
+        this.turnosDadosTiradosEspecial = 0;
+        this.haCompradoModoEspecial = false;
+        this.turnosBloqueoModoEspecial = 0;
+        this.bloqueoTiroModoEspecial = false;
     }
 
     //setters y getters
@@ -317,9 +329,48 @@ public class Jugador {
         this.modoEspecial = modoEspecial;
     }
 
+    public int getTurnosDadosTiradosEspecial() {
+        return turnosDadosTiradosEspecial;
+    }
+
+    public void setTurnosDadosTiradosEspecial(int turnosDadosTiradosEspecial) {
+        this.turnosDadosTiradosEspecial = turnosDadosTiradosEspecial;
+    }
+
+    public boolean getHaCompradoModoEspecial() {
+        return haCompradoModoEspecial;
+    }
+
+    public void setHaCompradoModoEspecial(boolean haCompradoModoEspecial) {
+        this.haCompradoModoEspecial = haCompradoModoEspecial;
+    }
+
+    public int getTurnosBloqueoModoEspecial() {
+        return turnosBloqueoModoEspecial;
+    }
+
+    public void setTurnosBloqueoModoEspecial(int turnosBloqueoModoEspecial) {
+        this.turnosBloqueoModoEspecial = turnosBloqueoModoEspecial;
+    }
+
+    public boolean getBloqueoTiroModoEspecial() {
+        return bloqueoTiroModoEspecial;
+    }
+
+    public void setBloqueoTiroModoEspecial(boolean bloqueoTiroModoEspecial) {
+        this.bloqueoTiroModoEspecial = bloqueoTiroModoEspecial;
+    }
 
 
     // Metodos
+    public void aumentarTurnosDadosTiradosEspecial() {
+        this.turnosDadosTiradosEspecial++;
+    }
+
+    public void aumentarTurnosBloqueoTiroModoEspecial() {
+        this.turnosBloqueoModoEspecial++;
+    }
+
     // obtencion del listado de casillas del jugador
     public String estadisticasJugador() {
         String cadena = "{\n"
@@ -479,7 +530,6 @@ public class Jugador {
         Dado dados = new Dado();
 
         int desplazamiento = dados.tirarDados();
-        this.dadosTirados = true;
         this.vecesDadosTirados++;
 
         cambiarAlquilerCasillas(tablero, desplazamiento);
