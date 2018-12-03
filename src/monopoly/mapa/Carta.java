@@ -102,7 +102,7 @@ public class Carta {
                         jugador.setFortuna(jugador.getFortuna() + Valor.CANTIDAD_PASAR_SALIDA);
                         jugador.setPasarPorCasillaDeSalida(jugador.getPasarPorCasillaDeSalida() + Valor.CANTIDAD_PASAR_SALIDA);
                     }
-                    jugador.getAvatar().moverAvatarCasilla(tablero.casillaByName("Tansporte2"), turno);
+                    jugador.getAvatar().moverAvatarCasilla(tablero.casillaByName("Tansporte2"));
                     /*Mover avatar a la casilla Transporte2*/
                     break;
                 case 2:
@@ -120,6 +120,7 @@ public class Carta {
                         jugador.setFortuna(jugador.getFortuna() + Valor.CANTIDAD_PASAR_SALIDA);
                         jugador.setPasarPorCasillaDeSalida(jugador.getPasarPorCasillaDeSalida() + Valor.CANTIDAD_PASAR_SALIDA);
                     }
+                    jugador.getAvatar().moverAvatarCasilla(tablero.casillaByName("Dalaran"));
                     jugador.getAvatar().moverAvatarCasilla(tablero.casillaByName("Dalaran"), turno);
                     /*Mover avatar a la casilla Transporte2*/
                     break;

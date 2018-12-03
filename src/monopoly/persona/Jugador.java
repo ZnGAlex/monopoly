@@ -28,6 +28,77 @@ public class Jugador {
     private int pasarPorCasillaDeSalida;
     private int premiosInversionesOBote;
     private int vecesEnLaCarcel;
+    private int vecesDadosTirados;
+    private boolean modoEspecial;
+    private int turnosDadosTiradosEspecial;
+    private int turnosBloqueoModoEspecial;
+    private boolean bloqueoTiroModoEspecial;
+    private boolean haCompradoModoEspecial;
+
+    // constructores
+    public Jugador(String nombre, String ficha, Casilla casilla, String id) {
+        if (nombre == null) {
+            System.out.println(Valor.ANSI_ROJO + "Nombre nulo." + Valor.ANSI_RESET);
+            System.exit(1);
+        }
+        if (ficha == null) {
+            System.out.println(Valor.ANSI_ROJO + "Ficha nula." + Valor.ANSI_RESET);
+            System.exit(1);
+        }
+        if (ficha.equalsIgnoreCase(Valor.ESFINGE) || ficha.equalsIgnoreCase(Valor.COCHE) || ficha.equalsIgnoreCase(Valor.SOMBRERO) || ficha.equalsIgnoreCase(Valor.PELOTA)) {
+            this.avatar = new Avatar(this, ficha, casilla, id);
+        } else {
+            System.out.println(Valor.ANSI_ROJO + "Ficha debe ser: Esfinge, Coche, Sombrero o Pelota");
+            System.exit(1);
+        }
+        this.nombre = nombre;
+        this.fortuna = Valor.FORTUNA_INICIAL;
+        this.propiedades = new HashMap<>();
+        this.hipotecas = new HashMap<>();
+        this.edificios = new ArrayList<>();
+        this.inCarcel = false;
+        this.dadosTirados = false;
+        this.dadosDobles = 0;
+        this.turnosEnCarcel = 0;
+        bancarrota = false;
+        this.grupos = new HashMap<>();
+        this.dineroInvertido = 0;
+        this.pagoDeAlquileres = 0;
+        this.cobroDeAlquileres = 0;
+        this.pasarPorCasillaDeSalida = 0;
+        this.vecesEnLaCarcel = 0;
+        this.vecesDadosTirados = 0;
+        this.modoEspecial = false;
+        this.turnosDadosTiradosEspecial = 0;
+        this.haCompradoModoEspecial = false;
+        this.turnosBloqueoModoEspecial = 0;
+        this.bloqueoTiroModoEspecial = false;
+    }
+
+    public Jugador(String nombre) {
+        if (nombre == null) {
+            System.out.println(Valor.ANSI_ROJO + "Nombre nulo." + Valor.ANSI_RESET);
+            System.exit(1);
+        }
+        this.nombre = nombre;
+        this.fortuna = Valor.FORTUNA_BANCA;
+        this.propiedades = new HashMap<>();
+        this.hipotecas = new HashMap<>();
+        this.edificios = new ArrayList<>();
+        this.avatar = null;
+        this.inCarcel = false;
+        this.dadosTirados = false;
+        this.dadosDobles = 0;
+        this.turnosEnCarcel = 0;
+        bancarrota = false;
+        this.grupos = new HashMap<>();
+        this.vecesDadosTirados = 0;
+        this.modoEspecial = false;
+        this.turnosDadosTiradosEspecial = 0;
+        this.haCompradoModoEspecial = false;
+        this.turnosBloqueoModoEspecial = 0;
+        this.bloqueoTiroModoEspecial = false;
+    }
 
     //setters y getters
     public int getPagoDeTasas() {
@@ -242,65 +313,64 @@ public class Jugador {
         this.grupos = grupos;
     }
 
-    // constructores
-    public Jugador(String nombre, String ficha, Casilla casilla, String id) {
-        if (nombre == null) {
-            System.out.println(Valor.ANSI_ROJO + "Nombre nulo." + Valor.ANSI_RESET);
-            System.exit(1);
-        }
-        if (ficha == null) {
-            System.out.println(Valor.ANSI_ROJO + "Ficha nula." + Valor.ANSI_RESET);
-            System.exit(1);
-        }
-        if (ficha.equalsIgnoreCase("Esfinge") || ficha.equalsIgnoreCase("Coche") || ficha.equalsIgnoreCase("Sombrero") || ficha.equalsIgnoreCase("Pelota")) {
-            this.avatar = new Avatar(this, ficha, casilla, id);
-        } else {
-            System.out.println(Valor.ANSI_ROJO + "Ficha debe ser: Esfinge, Coche, Sombrero o Pelota");
-            System.exit(1);
-        }
-        this.nombre = nombre;
-        this.fortuna = Valor.FORTUNA_INICIAL;
-        this.propiedades = new HashMap<>();
-        this.hipotecas = new HashMap<>();
-        this.edificios = new ArrayList<>();
-        this.inCarcel = false;
-        this.dadosTirados = false;
-        this.dadosDobles = 0;
-        this.turnosEnCarcel = 0;
-        this.bancarrota = false;
-        this.grupos = new HashMap<>();
-        this.dineroInvertido = 0;
-        this.pagoDeAlquileres = 0;
-        this.cobroDeAlquileres = 0;
-        this.pasarPorCasillaDeSalida = 0;
-        this.vecesEnLaCarcel = 0;
+    public int getVecesDadosTirados() {
+        return vecesDadosTirados;
     }
 
-    public Jugador(String nombre) {
-        if (nombre == null) {
-            System.out.println(Valor.ANSI_ROJO + "Nombre nulo." + Valor.ANSI_RESET);
-            System.exit(1);
-        }
-        this.nombre = nombre;
-        this.fortuna = Valor.FORTUNA_BANCA;
-        this.propiedades = new HashMap<>();
-        this.hipotecas = new HashMap<>();
-        this.edificios = new ArrayList<>();
-        this.avatar = null;
-        this.inCarcel = false;
-        this.dadosTirados = false;
-        this.dadosDobles = 0;
-        this.turnosEnCarcel = 0;
-        this.bancarrota = false;
-        this.grupos = new HashMap<>();
-        this.dineroInvertido = 0;
-        this.pagoDeAlquileres = 0;
-        this.cobroDeAlquileres = 0;
-        this.pasarPorCasillaDeSalida = 0;
-        this.vecesEnLaCarcel = 0;
+    public void setVecesDadosTirados(int vecesDadosTirados) {
+        this.vecesDadosTirados = vecesDadosTirados;
     }
+
+    public boolean getModoEspecial() {
+        return modoEspecial;
+    }
+
+    public void setModoEspecial(boolean modoEspecial) {
+        this.modoEspecial = modoEspecial;
+    }
+
+    public int getTurnosDadosTiradosEspecial() {
+        return turnosDadosTiradosEspecial;
+    }
+
+    public void setTurnosDadosTiradosEspecial(int turnosDadosTiradosEspecial) {
+        this.turnosDadosTiradosEspecial = turnosDadosTiradosEspecial;
+    }
+
+    public boolean getHaCompradoModoEspecial() {
+        return haCompradoModoEspecial;
+    }
+
+    public void setHaCompradoModoEspecial(boolean haCompradoModoEspecial) {
+        this.haCompradoModoEspecial = haCompradoModoEspecial;
+    }
+
+    public int getTurnosBloqueoModoEspecial() {
+        return turnosBloqueoModoEspecial;
+    }
+
+    public void setTurnosBloqueoModoEspecial(int turnosBloqueoModoEspecial) {
+        this.turnosBloqueoModoEspecial = turnosBloqueoModoEspecial;
+    }
+
+    public boolean getBloqueoTiroModoEspecial() {
+        return bloqueoTiroModoEspecial;
+    }
+
+    public void setBloqueoTiroModoEspecial(boolean bloqueoTiroModoEspecial) {
+        this.bloqueoTiroModoEspecial = bloqueoTiroModoEspecial;
+    }
+
 
     // Metodos
+    public void aumentarTurnosDadosTiradosEspecial() {
+        this.turnosDadosTiradosEspecial++;
+    }
+
+    public void aumentarTurnosBloqueoTiroModoEspecial() {
+        this.turnosBloqueoModoEspecial++;
+    }
+
     // obtencion del listado de casillas del jugador
     public String estadisticasJugador() {
         String cadena = "{\n"
@@ -380,6 +450,9 @@ public class Jugador {
 
         desplazamiento = dados.tirarDados();
         this.dadosTirados = true;
+        this.vecesDadosTirados++;
+
+        System.out.println("El jugador ha sacado un " + desplazamiento + "(" + dados.getDado1() + "+" + dados.getDado2() + ")");
 
         //cambiarAlquilerCasillas(tablero, desplazamiento);
 
@@ -452,6 +525,73 @@ public class Jugador {
             }
         }
     }
+
+    public void tirarDadosJugadorEspecial(Tablero tablero, Turno turno) {
+        Dado dados = new Dado();
+
+        int desplazamiento = dados.tirarDados();
+        this.vecesDadosTirados++;
+
+        //cambiarAlquilerCasillas(tablero, desplazamiento);
+
+        System.out.println("El jugador ha sacado un " + desplazamiento + "(" + dados.getDado1() + "+" + dados.getDado2() + ")");
+
+        if (this.inCarcel) {
+            this.turnosEnCarcel++;
+        }
+        if (this.inCarcel && this.turnosEnCarcel == 3) {
+            /*Cuando el jugador ha cumplido todos sus intentos de salir de la carcel con los dados tiene que pagar*/
+            System.out.println("El jugador " + this.nombre + " ha tirado tres veces en la carcel. Tiene que pagar para salir.");
+            if (this.fortuna >= Valor.COSTE_SALIR_CARCEL) {
+                this.fortuna -= Valor.COSTE_SALIR_CARCEL;
+                this.pagoDeTasas += Valor.COSTE_SALIR_CARCEL;
+                System.out.println("El jugador " + this.nombre + " ha pagado para salir de la carcel y se desplaza " + desplazamiento + " casillas.");
+                this.avatar.moverAvatarEspecial(desplazamiento, tablero, turno);
+                this.inCarcel = false;
+            } else {
+                while (Valor.COSTE_SALIR_CARCEL > this.fortuna && !this.bancarrota) {
+                    /*Si no le llega el dinero para salir de la carcel debe hipotecarse o declararse en bancarrota*/
+                    System.out.println("El jugador " + this.nombre + " no dispone de suficiente dinero. Que quieres hacer?");
+                    System.out.println("Hipotecar propiedad (hipotecarse) o declararse en bancarrota (bancarrota): ");
+                    String opcion;
+
+                    Scanner sc = new Scanner(System.in);
+                    opcion = sc.nextLine();
+                    switch (opcion) {
+                        case "bancarrota":
+                            this.declararBancarrota(this.getAvatar().getCasilla().getPropietario(), tablero, turno);// funcion bancarrota
+                            break;
+                        case "hipotecarse":
+                            this.hipotecar(); // el usuario se hipoteca
+                            break;
+                        default:
+                            System.out.println("Opcion incorrecta.");
+                            break;
+                    }
+                }
+                if (!this.bancarrota) {
+                    this.inCarcel = false;
+                    this.fortuna -= Valor.COSTE_SALIR_CARCEL;
+                    this.pagoDeTasas += Valor.COSTE_SALIR_CARCEL;
+                    System.out.println("El jugador " + this.nombre + " ha pagado para salir de la carcel y se desplaza" + desplazamiento + " casillas.");
+                    this.avatar.moverAvatarEspecial(desplazamiento, tablero, turno);
+                }
+            }
+        } else if (this.inCarcel && this.turnosEnCarcel != 3) {
+            /*Si esta en la crcel pero aun puede lanzar dados para intentar salir*/
+            if (dados.dadosIguales()) {
+                System.out.println("El jugador " + this.nombre + " ha sacado dados dobles. Sale de la carcel.");
+                this.avatar.moverAvatarEspecial(desplazamiento, tablero, turno);
+                this.turnosEnCarcel = 0;
+            } else {
+                System.out.println("El jugador no ha sacado dados dobles. Permanece en la carcel. Lleva " + this.turnosEnCarcel + " turnos en la carcel.");
+                this.dadosTirados = true;
+            }
+        } else {
+                System.out.println(this.nombre + " se desplaza " + desplazamiento + " posiciones");
+                avatar.moverAvatarEspecial(desplazamiento, tablero, turno);
+            }
+        }
 
     // metodo para llevar el jugador a la carcel
     /**
@@ -889,6 +1029,13 @@ public class Jugador {
         }
     }
 */
+
+    public void cambiarModo() {
+        if (modoEspecial)
+            modoEspecial = false;
+        else
+            modoEspecial = true;
+    }
 
     @Override
     public boolean equals(Object o) {

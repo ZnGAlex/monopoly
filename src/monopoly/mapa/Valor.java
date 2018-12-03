@@ -118,6 +118,10 @@ public class Valor {
     public static final String EDIFICIO_HOTEL = "hotel";
     public static final String EDIFICIO_PISCINA = "piscina";
     public static final String EDIFICIO_PISTA = "pista";
+    public static final String ESFINGE = "esfinge";
+    public static final String COCHE = "coche";
+    public static final String PELOTA = "pelota";
+    public static final String SOMBRERO = "sombrero";
 
     // numeros de posicion en tablero de las casillas
     public static final int POSICION_CASILLA_SALIDA = 0;

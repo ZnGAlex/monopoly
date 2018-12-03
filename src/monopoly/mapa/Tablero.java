@@ -3,6 +3,7 @@ package monopoly.mapa;
 import monopoly.persona.*;
 
 import java.lang.reflect.Array;
+import java.util.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -394,6 +395,76 @@ public class Tablero {
         for (Edificio edificio : edificios) {
             System.out.println(edificio);
         }
+    }
+
+    public void estadisticas() {
+        int vecesDadosTirados = 0;
+        int vecesCaidas = 0;
+        int rentabilidadCasilla = 0;
+        int rentabilidadGrupo = 0;
+        int fortuna = 0;
+        int pasosSalida = 0;
+
+        Jugador mas_dados_tirados = null;
+        Jugador mas_rico = null;
+        Jugador pasos_por_salida = null;
+        Iterator j_it = jugadores.values().iterator();
+        while (j_it.hasNext()) {
+            Jugador j = (Jugador) j_it.next();
+            if (j.getPasarPorCasillaDeSalida() > pasosSalida) {
+                pasosSalida = j.getPasarPorCasillaDeSalida();
+                pasos_por_salida = j;
+            }
+            if (j.getFortuna() > fortuna) {
+                fortuna = j.getFortuna();
+                mas_rico = j;
+            }
+            if (j.getVecesDadosTirados() > vecesDadosTirados) {
+                mas_dados_tirados = j;
+                vecesDadosTirados = j.getVecesDadosTirados();
+            }
+        }
+
+        Casilla casilla = null;
+        Casilla masFrecuentada = null;
+        for (ArrayList<Casilla> lados : casillas) {
+            for (Casilla c : lados) {
+                int veces = 0;
+                Iterator caidas = c.getVecesCaidas().values().iterator();
+                while (caidas.hasNext()) {
+                    veces += (Integer) caidas.next();
+                }
+                if (veces > vecesCaidas) {
+                    vecesCaidas = veces;
+                    masFrecuentada = c;
+                }
+                if (c.getValor() + c.getAlquiler() > rentabilidadCasilla) {
+                    casilla = c;
+                    rentabilidadCasilla = c.getValor() + c.getAlquiler();
+                }
+            }
+        }
+
+        Grupo grupo = null;
+        Collection<Grupo> coleccion_grupos = grupos.values();
+        for (Grupo g : coleccion_grupos) {
+            int rent = 0;
+            for (Casilla c : g.getCasillas()) {
+                rent += c.getValor() + c.getAlquiler();
+            }
+            if (rent > rentabilidadGrupo) {
+                rentabilidadGrupo = rent;
+                grupo = g;
+            }
+        }
+
+        System.out.println("Casilla mas rentable: " + ((casilla != null ) ? casilla.getNombre() : "ninguna."));
+        System.out.println("Grupo mas rentable: " + ((grupo != null) ? grupo.getColor() : "ninguno."));
+        System.out.println("Casilla mas frecuentada: " + ((masFrecuentada != null) ? masFrecuentada.getNombre() : "ninuna."));
+        System.out.println("Jugador mas vueltas: " + ((pasos_por_salida != null) ? pasos_por_salida.getNombre() : "ninguno."));
+        System.out.println("Jugador mas veces dados tirados: " + ((mas_dados_tirados != null) ? mas_dados_tirados.getNombre() : "ninguno."));
+        System.out.println("Jugador en cabeza: " + ((mas_rico != null) ? mas_rico.getNombre() : "ninguno."));
+
     }
 
     @Override
