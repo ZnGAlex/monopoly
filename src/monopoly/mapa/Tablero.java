@@ -160,6 +160,7 @@ public class Tablero {
         Carta cartaS4 = new Carta("suerte", 4);
         Carta cartaS5 = new Carta("suerte", 5);
         Carta cartaS6 = new Carta("suerte", 6);
+        Carta cartaS7 = new Carta("suerte", 7);
         this.cartasSuerte = new ArrayList<>();
         this.cartasSuerte.add(cartaS1);
         this.cartasSuerte.add(cartaS2);
@@ -167,6 +168,7 @@ public class Tablero {
         this.cartasSuerte.add(cartaS4);
         this.cartasSuerte.add(cartaS5);
         this.cartasSuerte.add(cartaS6);
+        this.cartasSuerte.add(cartaS7);
 
         /*Cartas de caja*/
         Carta cartaC1 = new Carta("caja", 1);

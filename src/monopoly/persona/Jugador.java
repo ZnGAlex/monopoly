@@ -361,7 +361,6 @@ public class Jugador {
         this.bloqueoTiroModoEspecial = bloqueoTiroModoEspecial;
     }
 
-
     // Metodos
     public void aumentarTurnosDadosTiradosEspecial() {
         this.turnosDadosTiradosEspecial++;
@@ -455,7 +454,6 @@ public class Jugador {
         System.out.println("El jugador ha sacado un " + desplazamiento + "(" + dados.getDado1() + "+" + dados.getDado2() + ")");
 
         //cambiarAlquilerCasillas(tablero, desplazamiento);
-
         if (this.inCarcel) {
             this.turnosEnCarcel++;
         }
@@ -533,7 +531,6 @@ public class Jugador {
         this.vecesDadosTirados++;
 
         //cambiarAlquilerCasillas(tablero, desplazamiento);
-
         System.out.println("El jugador ha sacado un " + desplazamiento + "(" + dados.getDado1() + "+" + dados.getDado2() + ")");
 
         if (this.inCarcel) {
@@ -588,10 +585,10 @@ public class Jugador {
                 this.dadosTirados = true;
             }
         } else {
-                System.out.println(this.nombre + " se desplaza " + desplazamiento + " posiciones");
-                avatar.moverAvatarEspecial(desplazamiento, tablero, turno);
-            }
+            System.out.println(this.nombre + " se desplaza " + desplazamiento + " posiciones");
+            avatar.moverAvatarEspecial(desplazamiento, tablero, turno);
         }
+    }
 
     // metodo para llevar el jugador a la carcel
     /**
@@ -734,7 +731,7 @@ public class Jugador {
                         default:
                             System.out.println("Opcion incorrecta, las opciones son 'hipotecarse' y 'bancarrota'");
                     }
-                    
+
                 }
 
                 if (!bancarrota) {
@@ -818,6 +815,7 @@ public class Jugador {
                 this.hipotecas.put(prop, this.propiedades.get(prop));
                 this.propiedades.remove(prop);
                 this.hipotecas.get(prop).setHipotecada(true);
+                this.hipotecas.get(prop).venderEdificios();
                 flag = false;
             } else if (prop.equals("cancelar")) {
                 /*Para salir del bucle sin hipotecar*/
@@ -838,6 +836,7 @@ public class Jugador {
             this.hipotecas.put(cas.getNombre(), this.propiedades.get(cas.getNombre()));
             this.propiedades.remove(cas.getNombre());
             this.hipotecas.get(cas.getNombre()).setHipotecada(true);
+            this.hipotecas.get(cas.getNombre()).venderEdificios();
             System.out.println("El jugador " + this.nombre + " hipoteca " + cas.getNombre() + " por " + (0.5 * this.hipotecas.get(cas.getNombre()).getValor())
                     + " €\nSu fortuna actual es: " + this.fortuna);
         } else {
@@ -881,13 +880,11 @@ public class Jugador {
             hip.setPropietario(jugador);
             this.hipotecas.remove(hip.getNombre());
         }
-        tablero.getJugadores().remove(jugador.getNombre());
+        tablero.getJugadores().remove(this.getNombre());
         /*Eliminacion del jugador del tablero*/
-        for (Jugador j : turno.getJugadores()) {
-            if (j.getNombre().equals(jugador.getNombre())) {
-                turno.getJugadores().remove(j);
-            }
-        }
+
+        turno.getJugadores().remove(this);
+
         jugador.getAvatar().getCasilla().eliminarAvatar(jugador.getAvatar());
         /*Eliminacion del avatar*/
         if (tablero.getJugadores().size() == 1) {
@@ -906,7 +903,7 @@ public class Jugador {
         while (precio > this.fortuna && !bancarrota) {
             /*Si no le llega el dinero se hipoteca o declara bancarrota*/
             Scanner scanner = new Scanner(System.in);
-            System.out.println("No tienes suficiente dinero. ¿Quieres hipotecar o declararte en bancarrota?: ");
+            System.out.println("No tienes suficiente dinero para pagar " + precio + "€. ¿Quieres hipotecar o declararte en bancarrota?: ");
             String opcion = scanner.nextLine();
 
             switch (opcion) {
@@ -964,7 +961,8 @@ public class Jugador {
             System.out.println("No tienes suficiente dinero");
         }
     }
-/*
+
+    /*
     // cambia el alquiler de las casillas de transporte en funcion del propietario
     public void cambiarAlquilerCasillas(Tablero tablero) {
         Iterator jug_it = tablero.getJugadores().values().iterator();
@@ -1028,13 +1026,13 @@ public class Jugador {
             }
         }
     }
-*/
-
+     */
     public void cambiarModo() {
-        if (modoEspecial)
+        if (modoEspecial) {
             modoEspecial = false;
-        else
+        } else {
             modoEspecial = true;
+        }
     }
 
     @Override

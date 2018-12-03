@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class Valor {
 
     // grupo de valores de coste
-    public static final int COSTE_INICIAL = 600000;
+    public static final int COSTE_INICIAL = 10000;
     public static final int COSTE_GRUPO_NEGRO = COSTE_INICIAL;
     public static final int ALQUILER_GRUPO_NEGRO = (int) (COSTE_INICIAL * 0.1);
     public static final int COSTE_GRUPO_CYAN = (int) (COSTE_GRUPO_NEGRO * 1.3);
@@ -183,19 +183,20 @@ public class Valor {
     // Aciones de las cartas de suerte
     public static final String ACCION_SUERTE_1 = "Ve Transporte2 y coge un avión. Si pasas por la casilla de Salida, cobra " + Valor.CANTIDAD_PASAR_SALIDA + " €.";
     public static final String ACCION_SUERTE_2 = "Decides hacer un viaje de placer. Avanza hasta LosBaldios.";
-    public static final String ACCION_SUERTE_3 = "Vendes tu billete de avión para Vallefresno en una subasta por Internet. Cobra 500000€.";
+    public static final String ACCION_SUERTE_3 = "Vendes tu billete de avión para Vallefresno en una subasta por Internet. Cobra 5000€.";
     public static final String ACCION_SUERTE_4 = "Ve a Dalaran. Si pasas por la casilla de Salida, cobra " + Valor.CANTIDAD_PASAR_SALIDA + " €.";
     public static final String ACCION_SUERTE_5 = "Los acreedores te persiguen por impago. Ve a la Cárcel. Ve directamente sin pasar por la casilla de Salida y sin cobrar los " + Valor.CANTIDAD_PASAR_SALIDA + " €.";
-    public static final String ACCION_SUERTE_6 = "¡Has ganado el bote de la lotería! Recibe 1000000€.";
-    public static final ArrayList<String> ACCIONES_SUERTE = new ArrayList<>(Arrays.asList(Valor.ACCION_SUERTE_1, Valor.ACCION_SUERTE_2, Valor.ACCION_SUERTE_3, Valor.ACCION_SUERTE_4, Valor.ACCION_SUERTE_5, Valor.ACCION_SUERTE_6));
+    public static final String ACCION_SUERTE_6 = "¡Has ganado el bote de la lotería! Recibe 50000€.";
+    public static final String ACCION_SUERTE_7 = "El aumento del impuesto sobre bienes inmuebles afecta a todas tus propiedades. Paga 4000€ por casa, 11500€ por hotel, 2000€ por piscina y 7500€ por pista de deportes.";
+    public static final ArrayList<String> ACCIONES_SUERTE = new ArrayList<>(Arrays.asList(Valor.ACCION_SUERTE_1, Valor.ACCION_SUERTE_2, Valor.ACCION_SUERTE_3, Valor.ACCION_SUERTE_4, Valor.ACCION_SUERTE_5, Valor.ACCION_SUERTE_6, Valor.ACCION_SUERTE_7));
 
     // Acciones de las cartas de caja
-    public static final String ACCION_CAJA_1 = "Paga 500000€ por un fin de semana en un balneario de 5 estrellas.";
+    public static final String ACCION_CAJA_1 = "Paga 5000€ por un fin de semana en un balneario de 5 estrellas.";
     public static final String ACCION_CAJA_2 = "Te investigan por fraude de identidad. Ve a la Cárcel. Ve directamente sin pasar por la casilla de Salida y sin cobrar los " + Valor.CANTIDAD_PASAR_SALIDA + " €.";
     public static final String ACCION_CAJA_3 = "Colócate en la casilla de Salida. Cobra " + Valor.CANTIDAD_PASAR_SALIDA + " €.";
-    public static final String ACCION_CAJA_4 = "Tu compañía de Internet obtiene beneficios. Recibe 2000000€.";
-    public static final String ACCION_CAJA_5 = "Paga 1000000€ por invitar a todos tus amigos a un viaje a CimadelTrueno.";
-    public static final String ACCION_CAJA_6 = "Devolución de Hacienda. Cobra 500000€.";
+    public static final String ACCION_CAJA_4 = "Tu compañía de Internet obtiene beneficios. Recibe 20000€.";
+    public static final String ACCION_CAJA_5 = "Paga 10000€ por invitar a todos tus amigos a un viaje a CimadelTrueno.";
+    public static final String ACCION_CAJA_6 = "Devolución de Hacienda. Cobra 5000€.";
     public static final ArrayList<String> ACCIONES_CAJA = new ArrayList<>(Arrays.asList(Valor.ACCION_CAJA_1, Valor.ACCION_CAJA_2, Valor.ACCION_CAJA_3, Valor.ACCION_CAJA_4, Valor.ACCION_CAJA_5, Valor.ACCION_CAJA_6));
     
     // incremento del valor de las variables al pasar por salida
