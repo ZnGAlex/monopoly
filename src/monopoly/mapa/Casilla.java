@@ -688,6 +688,7 @@ public class Casilla {
     }
 
     public void actualizarAlquiler() {
+        alquiler = grupo.getAlquiler();
         for (Edificio edificio : edificios) {
             alquiler += edificio.getAlquiler();
         }
