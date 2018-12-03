@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e18c52d-e184-4e6a-b67a-bfcf8ae91b52" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/monopoly/mapa/Casilla.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/monopoly/mapa/Casilla.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/monopoly/mapa/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/monopoly/mapa/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/monopoly/persona/Avatar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/monopoly/persona/Avatar.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,12 +47,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="23090" />
+          <entry key="java" value="23747" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="23090" />
+          <entry key="JAVA" value="23747" />
         </counts>
       </usages-collector>
     </session>
@@ -143,8 +140,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/monopoly/mapa/Casilla.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="757" column="49" selection-start-line="757" selection-start-column="49" selection-end-line="757" selection-end-column="49" />
+            <state relative-caret-position="310">
+              <caret line="754" column="56" selection-start-line="754" selection-start-column="56" selection-end-line="754" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -317,15 +314,16 @@
       <workItem from="1543688029156" duration="5364000" />
       <workItem from="1543754109342" duration="22545000" />
       <workItem from="1543833574196" duration="6389000" />
-      <workItem from="1543843532345" duration="5747000" />
+      <workItem from="1543843532345" duration="5955000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74466000" />
+    <option name="totallyTimeSpent" value="74674000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.145917" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -336,7 +334,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.92805755" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.92805755" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4618705" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -499,8 +497,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/monopoly/mapa/Casilla.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="757" column="49" selection-start-line="757" selection-start-column="49" selection-end-line="757" selection-end-column="49" />
+        <state relative-caret-position="310">
+          <caret line="754" column="56" selection-start-line="754" selection-start-column="56" selection-end-line="754" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

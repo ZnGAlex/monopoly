@@ -749,33 +749,37 @@ public class Casilla {
                 jugador.pagarAlquiler(tablero, turno);
         }
     }
-    
+
+    /*
+     * tipo: tipo de edificios que se van a vender
+     * cantidad: numero de edificios que se van a vender
+     */
     public void venderEdificios(String tipo, int cantidad){
         int dinero = 0, numEliminados = 0;
 
-        switch (tipo) {
+        switch (tipo) { // control de tipo de edificio a vender
             case Valor.EDIFICIO_CASA:
                 for (int i = edificios.size() - 1; i >= 0; i--) {
                     Edificio edificio = edificios.get(i);
                     if (edificio.getTipo().equals(Valor.EDIFICIO_CASA)) {
-                        dinero += edificio.getValor() / 2;
-                        alquiler -= edificio.getAlquiler();
-                        propietario.getEdificios().remove(edificio);
-                        edificios.remove(edificio);
-                        tablero.getEdificios().remove(edificio);
-                        grupo.getEdificios().remove(edificio);
-                        numCasas--;
-                        numEliminados++;
+                        dinero += edificio.getValor() / 2; // cojemos valor de edificio/2
+                        alquiler -= edificio.getAlquiler(); // restamos alquiler de edificio a casilla
+                        propietario.getEdificios().remove(edificio); // borramos el edificio del propietario
+                        edificios.remove(edificio); // borramos el edificio de los edificios construidos en la casilla
+                        tablero.getEdificios().remove(edificio); // borramos edificio de lista de edificios total
+                        grupo.getEdificios().remove(edificio); // borramos edificio de grupo
+                        numCasas--; // reducimos numero de edificio
+                        numEliminados++; // contador edificios eliminados
                     }
-                    if (numEliminados == cantidad) {
+                    if (numEliminados == cantidad) { // si se venden los que se piden
                         System.out.println(propietario.getNombre() + " ha vendido " + cantidad + " casas en " + nombre + ", recibiendo " + dinero + "€. En la propiedad quedan " + numCasas + " casas.");
                         break;
                     }
                 }
-                propietario.setFortuna(propietario.getFortuna() + dinero);
-                if (numEliminados > 0 && numEliminados != cantidad) {
+                propietario.setFortuna(propietario.getFortuna() + dinero); // incrementamos la fortuna del expropietario
+                if (numEliminados > 0 && numEliminados != cantidad) { // si no se venden tantos como se pedia
                     System.out.println("Solamente se pueden vender " + numEliminados + " casas, recibiendo " + dinero + "€.");
-                } else if (numEliminados == 0) {
+                } else if (numEliminados == 0) { // si no se vende ninguno
                     System.out.println("No se ha vendido ninguna casa en " + nombre);
                 }
                 break;
