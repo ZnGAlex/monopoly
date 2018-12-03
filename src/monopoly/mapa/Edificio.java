@@ -48,7 +48,7 @@ public class Edificio {
                 break;
             case Valor.EDIFICIO_HOTEL:
                 this.valor = (int) (casilla.getValor() * 0.6);
-                this.alquiler = casilla.getAlquiler() * 70;
+                this.alquiler = (int) ((casilla.getValor() * 0.1) * 70);
                 switch (casilla.getNumHoteles()) {
                     case 0:
                         this.nombre = "hotel-1-" + casilla.getNombre();
@@ -65,7 +65,7 @@ public class Edificio {
                 break;
             case Valor.EDIFICIO_PISCINA:
                 this.valor = (int) (casilla.getValor() * 0.4);
-                this.alquiler = casilla.getAlquiler() * 25;
+                this.alquiler = (int) ((casilla.getAlquiler() * 0.1) * 25);
                 switch (casilla.getNumPiscinas()) {
                     case 0:
                         this.nombre = "piscina-1-" + casilla.getNombre();
@@ -82,7 +82,7 @@ public class Edificio {
                 break;
             case Valor.EDIFICIO_PISTA:
                 this.valor = (int) (casilla.getValor() * 1.25);
-                this.alquiler = casilla.getAlquiler() * 25;
+                this.alquiler = (int) ((casilla.getAlquiler() * 0.1) * 25);
                 switch (casilla.getNumPistas()) {
                     case 0:
                         this.nombre = "pista-1-" + casilla.getNombre();

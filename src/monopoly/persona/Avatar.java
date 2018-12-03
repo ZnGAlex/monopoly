@@ -3,29 +3,26 @@ package monopoly.persona;
 import monopoly.mapa.*;
 
 public class Avatar {
+
     private String id;
     private String ficha;
     private Jugador jugador;
     private Casilla casilla;
 
-
     // constructores
-
     public Avatar(Jugador jugador, String ficha, Casilla casilla, String id) {
-        if(jugador != null && ficha != null){
+        if (jugador != null && ficha != null) {
             this.id = id;
             this.jugador = jugador;
             this.ficha = ficha;
             this.casilla = casilla;
-        }
-        else{
+        } else {
             System.out.println("Error creando avatar.");
             System.exit(1);
         }
     }
 
     // getters y setters
-
     public String getId() {
         return id;
     }
@@ -75,16 +72,15 @@ public class Avatar {
     }
 
     // metodos
-
     /**
      * Mueve el avatar 'avance' casillas en el tablero
      */
-    public void moverAvatar(int avance,Tablero tablero, Turno turno){
-       if(avance < 0){
+    public void moverAvatar(int avance, Tablero tablero, Turno turno) {
+        if (avance < 0) {
             System.out.println(Valor.ANSI_ROJO + "Avance negativo.");
             System.exit(1);
-       }
-       if(tablero == null){
+        }
+        if (tablero == null) {
             System.out.println(Valor.ANSI_ROJO + "Tablero nulo.");
             System.exit(1);
        }
@@ -194,10 +190,11 @@ public class Avatar {
                 }
                 break;
         }
-    }
-    
+        }
+
     /**
-     * Mueve el avatar a la casilla destino
+     * Mueve el avatar a la casilla destino sin realizar ninguna accion en ella
+     *
      * @param destino casilla a la que mover el avatar
      */
     public void moverAvatarCasilla(Casilla destino) {
@@ -210,7 +207,6 @@ public class Avatar {
         this.casilla = destino;
         this.casilla.anhadirAvatar(this);
     }
-
     /**
      * Mueve el avatar a la casilla destino realizando la accion correspondiente (pagar alquiler, pagar impuesto...)
      */
@@ -234,11 +230,11 @@ public class Avatar {
 
     @Override
     public String toString() {
-        String cadena= "{\n " +
-                            "\t id: " + this.id +
-                            ",\n\t tipo: " + this.ficha +
-                            ",\n\t casilla: " + this.casilla.getNombre() +
-                            ",\n\t jugador: " + this.jugador.getNombre() + "\n}" ;
+        String cadena = "{\n "
+                + "\t id: " + this.id
+                + ",\n\t tipo: " + this.ficha
+                + ",\n\t casilla: " + this.casilla.getNombre()
+                + ",\n\t jugador: " + this.jugador.getNombre() + "\n}";
         return cadena;
     }
 }

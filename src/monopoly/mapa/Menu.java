@@ -351,6 +351,11 @@ public class Menu {
                             }
                         } else {
                             System.out.println("Comando incorrecto");
+                            if (!tablero.getJugadores().containsKey(partes[1])) {
+                                System.out.println("El jugador " + partes[1] + " no existe.");
+                            } else {
+                                System.out.println(tablero.getJugadores().get(partes[1]).estadisticasJugador());
+                            }
                         }
                     }
                     break;

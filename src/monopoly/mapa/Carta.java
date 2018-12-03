@@ -106,7 +106,7 @@ public class Carta {
                     /*Mover avatar a la casilla Transporte2*/
                     break;
                 case 2:
-                    jugador.getAvatar().moverAvatarCasilla(tablero.casillaByName("LosBaldios"));
+                    jugador.getAvatar().moverAvatarCasilla(tablero.casillaByName("LosBaldios"), turno);
                     /*Mover avatar a la casilla LosBaldios*/
                     break;
                 case 3:
@@ -121,6 +121,7 @@ public class Carta {
                         jugador.setPasarPorCasillaDeSalida(jugador.getPasarPorCasillaDeSalida() + Valor.CANTIDAD_PASAR_SALIDA);
                     }
                     jugador.getAvatar().moverAvatarCasilla(tablero.casillaByName("Dalaran"));
+                    jugador.getAvatar().moverAvatarCasilla(tablero.casillaByName("Dalaran"), turno);
                     /*Mover avatar a la casilla Transporte2*/
                     break;
                 case 5:

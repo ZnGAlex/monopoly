@@ -735,6 +735,10 @@ public class Casilla {
                 jugador.pagarAlquiler(tablero, turno);
         }
     }
+    
+    public void venderEdificios(){
+        
+    }
 
     @Override
     public String toString() {
