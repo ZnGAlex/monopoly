@@ -58,7 +58,7 @@ public class Dado {
         // dado1 = random.nextInt((6-1) + 1) + 1;
         // dado2 = random.nextInt((6-1) + 1) + 1;
         dado1 = 2;
-        dado2 = 3;
+        dado2 = 4;
         return dado1 + dado2;
     }
 

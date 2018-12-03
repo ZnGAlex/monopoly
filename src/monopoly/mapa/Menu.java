@@ -184,7 +184,11 @@ public class Menu {
                     /*acabar turno*/
                     if (!partes[1].equals("turno"))
                         System.out.println("Comando incorrecto.");
-                    else if (turno.turnoActual().getBloqueoTiroModoEspecial()) {
+                    else if (turno.turnoActual().getAvatar().getFicha().equals(Valor.COCHE) && turno.turnoActual().getModoEspecial()) {
+                        turno.turnoActual().setDadosTirados(false);
+                        turno.turnoActual().setTurnosDadosTiradosEspecial(0);
+                        turno.siguienteTurno();
+                    } else if (turno.turnoActual().getBloqueoTiroModoEspecial()) {
                         turno.turnoActual().aumentarTurnosBloqueoTiroModoEspecial();
                         if (turno.turnoActual().getTurnosBloqueoModoEspecial() == 2) {
                             System.out.println("El jugador acabo su bloqueo de tiros.");

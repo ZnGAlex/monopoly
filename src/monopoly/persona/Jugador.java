@@ -536,8 +536,62 @@ public class Jugador {
 
         System.out.println("El jugador ha sacado un " + desplazamiento + "(" + dados.getDado1() + "+" + dados.getDado2() + ")");
 
-        this.avatar.moverAvatarEspecial(desplazamiento, tablero, turno);
-    }
+        if (this.inCarcel) {
+            this.turnosEnCarcel++;
+        }
+        if (this.inCarcel && this.turnosEnCarcel == 3) {
+            /*Cuando el jugador ha cumplido todos sus intentos de salir de la carcel con los dados tiene que pagar*/
+            System.out.println("El jugador " + this.nombre + " ha tirado tres veces en la carcel. Tiene que pagar para salir.");
+            if (this.fortuna >= Valor.COSTE_SALIR_CARCEL) {
+                this.fortuna -= Valor.COSTE_SALIR_CARCEL;
+                this.pagoDeTasas += Valor.COSTE_SALIR_CARCEL;
+                System.out.println("El jugador " + this.nombre + " ha pagado para salir de la carcel y se desplaza " + desplazamiento + " casillas.");
+                this.avatar.moverAvatarEspecial(desplazamiento, tablero, turno);
+                this.inCarcel = false;
+            } else {
+                while (Valor.COSTE_SALIR_CARCEL > this.fortuna && !this.bancarrota) {
+                    /*Si no le llega el dinero para salir de la carcel debe hipotecarse o declararse en bancarrota*/
+                    System.out.println("El jugador " + this.nombre + " no dispone de suficiente dinero. Que quieres hacer?");
+                    System.out.println("Hipotecar propiedad (hipotecarse) o declararse en bancarrota (bancarrota): ");
+                    String opcion;
+
+                    Scanner sc = new Scanner(System.in);
+                    opcion = sc.nextLine();
+                    switch (opcion) {
+                        case "bancarrota":
+                            this.declararBancarrota(this.getAvatar().getCasilla().getPropietario(), tablero, turno);// funcion bancarrota
+                            break;
+                        case "hipotecarse":
+                            this.hipotecar(); // el usuario se hipoteca
+                            break;
+                        default:
+                            System.out.println("Opcion incorrecta.");
+                            break;
+                    }
+                }
+                if (!this.bancarrota) {
+                    this.inCarcel = false;
+                    this.fortuna -= Valor.COSTE_SALIR_CARCEL;
+                    this.pagoDeTasas += Valor.COSTE_SALIR_CARCEL;
+                    System.out.println("El jugador " + this.nombre + " ha pagado para salir de la carcel y se desplaza" + desplazamiento + " casillas.");
+                    this.avatar.moverAvatarEspecial(desplazamiento, tablero, turno);
+                }
+            }
+        } else if (this.inCarcel && this.turnosEnCarcel != 3) {
+            /*Si esta en la crcel pero aun puede lanzar dados para intentar salir*/
+            if (dados.dadosIguales()) {
+                System.out.println("El jugador " + this.nombre + " ha sacado dados dobles. Sale de la carcel.");
+                this.avatar.moverAvatarEspecial(desplazamiento, tablero, turno);
+                this.turnosEnCarcel = 0;
+            } else {
+                System.out.println("El jugador no ha sacado dados dobles. Permanece en la carcel. Lleva " + this.turnosEnCarcel + " turnos en la carcel.");
+                this.dadosTirados = true;
+            }
+        } else {
+                System.out.println(this.nombre + " se desplaza " + desplazamiento + " posiciones");
+                avatar.moverAvatarEspecial(desplazamiento, tablero, turno);
+            }
+        }
 
     // metodo para llevar el jugador a la carcel
     /**
