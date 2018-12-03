@@ -253,10 +253,15 @@ public class Menu {
                     if (partes.length > 2) {
                         System.out.println("Comando incorrecto.");
                     } else {
-                        if (turno.turnoActual().getAvatar().getCasilla().getNombre().equals(partes[1])) /*si se encuentra en la casilla que quiere comprar, la compra*/ {
-                            if (!turno.turnoActual().getAvatar().getFicha().equals(Valor.COCHE) && turno.turnoActual().getModoEspecial())
+                        if (tablero.casillaByName(partes[1]) == null)
+                            System.out.println("La casilla " + partes[1] + " no existe.");
+                        else if (turno.turnoActual().getAvatar().getCasilla().getNombre().equals(partes[1])) /*si se encuentra en la casilla que quiere comprar, la compra*/ {
+                            if (!turno.turnoActual().getModoEspecial()) {
                                 turno.turnoActual().comprarCasilla(tablero);
-                            else if (turno.turnoActual().getModoEspecial() && turno.turnoActual().getAvatar().getFicha().equals(Valor.COCHE) && !turno.turnoActual().getHaCompradoModoEspecial()) {
+                            } else if (!turno.turnoActual().getAvatar().getFicha().equals(Valor.COCHE) && turno.turnoActual().getModoEspecial()) {
+                                turno.turnoActual().comprarCasilla(tablero);
+                                System.out.println("El jugador " + turno.turnoActual().getNombre() + " ha comprado la casilla " + partes[1]);
+                            } else if (turno.turnoActual().getModoEspecial() && turno.turnoActual().getAvatar().getFicha().equals(Valor.COCHE) && !turno.turnoActual().getHaCompradoModoEspecial()) {
                                 turno.turnoActual().comprarCasilla(tablero);
                                 turno.turnoActual().setHaCompradoModoEspecial(true);
                             } else if (turno.turnoActual().getModoEspecial() && turno.turnoActual().getAvatar().getFicha().equals(Valor.COCHE) && turno.turnoActual().getHaCompradoModoEspecial()) {
@@ -281,6 +286,8 @@ public class Menu {
                                 System.out.println("El jugador " + j.getNombre() + " no es propietario de " + c.getNombre());
                             } else if (!c.getEdificable()) {
                                 System.out.println("El jugador no ha caido 2 veces en " + c.getNombre());
+                            } else if (c.getHipotecada()) {
+                                System.out.println("La casilla " + c.getNombre() + " esta hipotecada. No se puede edificar en ella.");
                             } else {
                                 switch (partes[1]) {
                                     case "casa":
@@ -374,6 +381,35 @@ public class Menu {
                                 turno.turnoActual().cambiarModo();
                                 modoCambiado = false;
                                 System.out.println("A partir de ahora, el avatar " + turno.turnoActual().getAvatar().getId() + " de tipo " + turno.turnoActual().getAvatar().getFicha() + " se movera en modo normal.");
+                            }
+                        }
+                    }
+                    break;
+                case "vender":
+                    if (partes.length != 4) {
+                        System.out.println("Comando incorrecto.");
+                    } else {
+                        if (tablero.casillaByName(partes[2]) == null) {
+                            System.out.println("La casilla " + partes[2] + " no existe.");
+                        } else if (tablero.casillaByName(partes[2]).getPropietario() != turno.turnoActual())
+                            System.out.println("La casilla " + partes[2] + " no pertenece a " + turno.turnoActual().getNombre());
+                        else {
+                            switch (partes[1]) {
+                                case "casas":
+                                    tablero.casillaByName(partes[2]).venderEdificios(Valor.EDIFICIO_CASA, Integer.parseInt(partes[3]));
+                                    break;
+                                case "hoteles":
+                                    tablero.casillaByName(partes[2]).venderEdificios(Valor.EDIFICIO_HOTEL, Integer.parseInt(partes[3]));
+                                    break;
+                                case "piscinas":
+                                    tablero.casillaByName(partes[2]).venderEdificios(Valor.EDIFICIO_PISCINA, Integer.parseInt(partes[3]));
+                                    break;
+                                case "pistas":
+                                    tablero.casillaByName(partes[2]).venderEdificios(Valor.EDIFICIO_PISTA, Integer.parseInt(partes[3]));
+                                    break;
+                                default:
+                                    System.out.println("Comando incorrecto.");
+                                    break;
                             }
                         }
                     }

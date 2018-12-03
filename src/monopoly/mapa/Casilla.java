@@ -750,8 +750,111 @@ public class Casilla {
         }
     }
     
-    public void venderEdificios(){
-        
+    public void venderEdificios(String tipo, int cantidad){
+        int dinero = 0, numEliminados = 0;
+
+        switch (tipo) {
+            case Valor.EDIFICIO_CASA:
+                for (int i = edificios.size() - 1; i >= 0; i--) {
+                    Edificio edificio = edificios.get(i);
+                    if (edificio.getTipo().equals(Valor.EDIFICIO_CASA)) {
+                        dinero += edificio.getValor() / 2;
+                        alquiler -= edificio.getAlquiler();
+                        propietario.getEdificios().remove(edificio);
+                        edificios.remove(edificio);
+                        tablero.getEdificios().remove(edificio);
+                        grupo.getEdificios().remove(edificio);
+                        numCasas--;
+                        numEliminados++;
+                    }
+                    if (numEliminados == cantidad) {
+                        System.out.println(propietario.getNombre() + " ha vendido " + cantidad + " casas en " + nombre + ", recibiendo " + dinero + "€. En la propiedad quedan " + numCasas + " casas.");
+                        break;
+                    }
+                }
+                propietario.setFortuna(propietario.getFortuna() + dinero);
+                if (numEliminados > 0 && numEliminados != cantidad) {
+                    System.out.println("Solamente se pueden vender " + numEliminados + " casas, recibiendo " + dinero + "€.");
+                } else if (numEliminados == 0) {
+                    System.out.println("No se ha vendido ninguna casa en " + nombre);
+                }
+                break;
+            case Valor.EDIFICIO_HOTEL:
+                for (int i = edificios.size() - 1; i >= 0; i--) {
+                    Edificio edificio = edificios.get(i);
+                    if (edificio.getTipo().equals(Valor.EDIFICIO_HOTEL)) {
+                        dinero += edificio.getValor() / 2;
+                        alquiler -= edificio.getAlquiler();
+                        propietario.getEdificios().remove(edificio);
+                        edificios.remove(edificio);
+                        tablero.getEdificios().remove(edificio);
+                        grupo.getEdificios().remove(edificio);
+                        numHoteles--;
+                        numEliminados++;
+                    }
+                    if (numEliminados == cantidad) {
+                        System.out.println(propietario.getNombre() + " ha vendido " + cantidad + " hoteles en " + nombre + ", recibiendo " + dinero + "€. En la propiedad quedan " + numHoteles + " hoteles.");
+                        break;
+                    }
+                }
+                propietario.setFortuna(propietario.getFortuna() + dinero);
+                if (numEliminados > 0 && numEliminados != cantidad) {
+                    System.out.println("Solamente se pueden vender " + numEliminados + " hoteles, recibiendo " + dinero + "€.");
+                } else if (numEliminados == 0) {
+                    System.out.println("No se ha vendido ningun hotel en " + nombre);
+                }
+                break;
+            case Valor.EDIFICIO_PISCINA:
+                for (int i = edificios.size() - 1; i >= 0; i--) {
+                    Edificio edificio = edificios.get(i);
+                    if (edificio.getTipo().equals(Valor.EDIFICIO_PISCINA)) {
+                        dinero += edificio.getValor() / 2;
+                        alquiler -= edificio.getAlquiler();
+                        propietario.getEdificios().remove(edificio);
+                        edificios.remove(edificio);
+                        tablero.getEdificios().remove(edificio);
+                        grupo.getEdificios().remove(edificio);
+                        numPiscinas--;
+                        numEliminados++;
+                    }
+                    if (numEliminados == cantidad) {
+                        System.out.println(propietario.getNombre() + " ha vendido " + cantidad + " piscinas en " + nombre + ", recibiendo " + dinero + "€. En la propiedad quedan " + numPiscinas + " piscinas.");
+                        break;
+                    }
+                }
+                propietario.setFortuna(propietario.getFortuna() + dinero);
+                if (numEliminados > 0 && numEliminados != cantidad) {
+                    System.out.println("Solamente se pueden vender " + numEliminados + " piscinas, recibiendo " + dinero + "€.");
+                } else if (numEliminados == 0) {
+                    System.out.println("No se ha vendido ninguna piscina en " + nombre);
+                }
+                break;
+            case Valor.EDIFICIO_PISTA:
+                for (int i = edificios.size() - 1; i >= 0; i--) {
+                    Edificio edificio = edificios.get(i);
+                    if (edificio.getTipo().equals(Valor.EDIFICIO_PISTA)) {
+                        dinero += edificio.getValor() / 2;
+                        alquiler -= edificio.getAlquiler();
+                        propietario.getEdificios().remove(edificio);
+                        edificios.remove(edificio);
+                        tablero.getEdificios().remove(edificio);
+                        grupo.getEdificios().remove(edificio);
+                        numPistas--;
+                        numEliminados++;
+                    }
+                    if (numEliminados == cantidad) {
+                        System.out.println(propietario.getNombre() + " ha vendido " + cantidad + " pistas en " + nombre + ", recibiendo " + dinero + "€. En la propiedad quedan " + numPistas + " pistas.");
+                        break;
+                    }
+                }
+                propietario.setFortuna(propietario.getFortuna() + dinero);
+                if (numEliminados > 0 && numEliminados != cantidad) {
+                    System.out.println("Solamente se pueden vender " + numEliminados + " pistas, recibiendo " + dinero + "€.");
+                } else if (numEliminados == 0) {
+                    System.out.println("No se ha vendido ninguna pista en " + nombre);
+                }
+                break;
+        }
     }
 
     @Override
