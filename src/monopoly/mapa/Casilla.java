@@ -440,9 +440,11 @@ public class Casilla {
                 Edificio edificio = new Edificio(tipo, this);
                 incrementarNumTipoEdificio(tipo);
                 if (numHoteles == 3 && numMaximoHoteles == 3) {
+                    grupo.setNumMaxCasas(grupo.getNumMaxCasas()-1);
                     numMaximoCasas = 3;
                 }
                 if (numHoteles == 2 && numMaximoHoteles == 2) {
+                    grupo.setNumMaxCasas(grupo.getNumMaxCasas()-1);
                     numMaximoCasas = 2;
                 }
                 edificios.add(edificio);
