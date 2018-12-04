@@ -22,10 +22,10 @@ public class Grupo {
         switch (color) {
             case Valor.GRUPO_NEGRO:
             case Valor.GRUPO_AZUL:
-                this.numMaxCasas = 12;
-                this.numMaxHoteles = 6;
-                this.numMaxPiscinas = 6;
-                this.numMaxPistas = 6;
+                this.numMaxCasas = 8;
+                this.numMaxHoteles = 4;
+                this.numMaxPiscinas = 4;
+                this.numMaxPistas = 4;
                 break;
             default:
                 this.numMaxCasas = 12;
