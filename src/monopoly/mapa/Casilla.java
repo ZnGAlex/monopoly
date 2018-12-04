@@ -164,7 +164,6 @@ public class Casilla {
     }
 
     //Setters y getters
-
     public boolean getHipotecada() {
         return hipotecada;
     }
@@ -172,8 +171,7 @@ public class Casilla {
     public void setHipotecada(boolean hipotecada) {
         this.hipotecada = hipotecada;
     }
-    
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -726,7 +724,7 @@ public class Casilla {
             case Valor.POSICION_CASILLA_SUERTE2:
             case Valor.POSICION_CASILLA_SUERTE3:
                 /*Suerte*/
-                tablero.escogerCarta('s',jugador,turno);
+                tablero.escogerCarta('s', jugador, turno);
                 break;
             case Valor.POSICION_CASILLA_PARKING:
                 /*Parking*/
@@ -755,7 +753,7 @@ public class Casilla {
      * tipo: tipo de edificios que se van a vender
      * cantidad: numero de edificios que se van a vender
      */
-    public void venderEdificios(String tipo, int cantidad){
+    public void venderEdificios(String tipo, int cantidad) {
         int dinero = 0, numEliminados = 0;
 
         switch (tipo) { // control de tipo de edificio a vender
@@ -860,6 +858,33 @@ public class Casilla {
                 }
                 break;
         }
+    }
+
+    public void venderEdificios() {
+        int dinero = 0;
+        int cantidad = 0;
+        for (int i = edificios.size() - 1; i >= 0; i--) {
+            Edificio edificio = edificios.get(i);
+
+            dinero += edificio.getValor() / 2; // cojemos valor de edificio/2
+            alquiler -= edificio.getAlquiler(); // restamos alquiler de edificio a casilla
+            propietario.getEdificios().remove(edificio); // borramos el edificio del propietario
+            edificios.remove(edificio); // borramos el edificio de los edificios construidos en la casilla
+            tablero.getEdificios().remove(edificio); // borramos edificio de lista de edificios total
+            grupo.getEdificios().remove(edificio); // borramos edificio de grupo
+            cantidad++;
+
+        }
+        this.numCasas = 0;
+        this.numHoteles = 0;
+        this.numPiscinas = 0;
+        this.numPistas = 0;
+        if (cantidad > 0) {
+            System.out.println(propietario.getNombre() + " ha vendido " + cantidad + " edificios en " + nombre + ", recibiendo " + dinero + "€.");
+        }
+
+        propietario.setFortuna(propietario.getFortuna() + dinero); // incrementamos la fortuna del expropietario
+
     }
 
     @Override

@@ -37,8 +37,7 @@ public class Carta {
         if (tipo.equals("suerte")) {
             this.accion = Valor.ACCIONES_SUERTE.get(numCarta - 1);
         } else {
-            this.accion = Valor.ACCIONES_CAJA
-                    .get(numCarta - 1);
+            this.accion = Valor.ACCIONES_CAJA.get(numCarta - 1);
         }
     }
 
@@ -110,8 +109,8 @@ public class Carta {
                     /*Mover avatar a la casilla LosBaldios*/
                     break;
                 case 3:
-                    jugador.setFortuna(jugador.getFortuna() + 500000);
-                    jugador.setPremiosInversionesOBote(jugador.getPremiosInversionesOBote() + 500000);
+                    jugador.setFortuna(jugador.getFortuna() + 5000);
+                    jugador.setPremiosInversionesOBote(jugador.getPremiosInversionesOBote() + 5000);
                     break;
                 case 4:
                     if (tablero.pasaPorSalida(jugador.getAvatar().getCasilla(), tablero.casillaByName("Dalaran"))) {
@@ -130,20 +129,49 @@ public class Carta {
                     /*Encarcelar al jugador*/
                     break;
                 case 6:
-                    jugador.setFortuna(jugador.getFortuna() + 1000000);
-                    jugador.setPremiosInversionesOBote(jugador.getPremiosInversionesOBote() + 1000000);
+                    jugador.setFortuna(jugador.getFortuna() + 50000);
+                    jugador.setPremiosInversionesOBote(jugador.getPremiosInversionesOBote() + 50000);
+                    break;
+                case 7:
+                    int dinero = 0;
+                    for(Edificio edificio: jugador.getEdificios()){
+                        switch(edificio.getTipo()){
+                            case "casa":
+                                dinero += 4000;
+                                break;
+                            case "hotel":
+                                dinero += 11500;
+                                break;
+                            case "piscina":
+                                dinero += 2000;
+                                break;
+                            case "pista":
+                                dinero += 7500;
+                                break;
+                        }
+                    }
+                    if (jugador.getFortuna() < dinero) {
+                        jugador.hipotecarOBancarrota(tablero.getCasillas().get(0).get(0).getPropietario(), tablero, turno, dinero);
+                    }
+                    if (!jugador.getBancarrota()) {
+                        jugador.setFortuna(jugador.getFortuna() - dinero);
+                        Valor.DINERO_PARKING += dinero;
+                        jugador.setPagoDeTasas(jugador.getPagoDeTasas() + dinero);
+                        System.out.println(jugador.getNombre() + " paga " + dinero + " €");
+                    }
+                    
                     break;
             }
         } else {
             switch (this.numCarta) {
                 case 1:
-                    if (jugador.getFortuna() < 500000) {
+                    if (jugador.getFortuna() < 5000) {
                         jugador.hipotecarOBancarrota(tablero.getCasillas().get(0).get(0).getPropietario(), tablero, turno, 500000);
                     }
                     if (!jugador.getBancarrota()) {
-                        jugador.setFortuna(jugador.getFortuna() - 500000);
-                        Valor.DINERO_PARKING += 500000;
-                        jugador.setPagoDeTasas(jugador.getPagoDeTasas() + 500000);
+                        jugador.setFortuna(jugador.getFortuna() - 5000);
+                        Valor.DINERO_PARKING += 5000;
+                        jugador.setPagoDeTasas(jugador.getPagoDeTasas() + 5000);
                     }
                     break;
                 case 2:
@@ -156,22 +184,22 @@ public class Carta {
                     jugador.setPasarPorCasillaDeSalida(jugador.getPasarPorCasillaDeSalida() + Valor.CANTIDAD_PASAR_SALIDA);
                     break;
                 case 4:
-                    jugador.setFortuna(jugador.getFortuna() + 2000000);
-                    jugador.setPremiosInversionesOBote(jugador.getPremiosInversionesOBote() + 2000000);
+                    jugador.setFortuna(jugador.getFortuna() + 20000);
+                    jugador.setPremiosInversionesOBote(jugador.getPremiosInversionesOBote() + 20000);
                     break;
                 case 5:
-                    if (jugador.getFortuna() < 1000000) {
-                        jugador.hipotecarOBancarrota(tablero.getCasillas().get(0).get(0).getPropietario(), tablero, turno, 1000000);
+                    if (jugador.getFortuna() < 10000) {
+                        jugador.hipotecarOBancarrota(tablero.getCasillas().get(0).get(0).getPropietario(), tablero, turno, 10000);
                     }
                     if (!jugador.getBancarrota()) {
-                        jugador.setFortuna(jugador.getFortuna() - 1000000);
-                        Valor.DINERO_PARKING += 1000000;
-                        jugador.setPagoDeTasas(jugador.getPagoDeTasas() + 1000000);
+                        jugador.setFortuna(jugador.getFortuna() - 10000);
+                        Valor.DINERO_PARKING += 10000;
+                        jugador.setPagoDeTasas(jugador.getPagoDeTasas() + 10000);
                     }
                     break;
                 case 6:
-                    jugador.setFortuna(jugador.getFortuna() + 500000);
-                    jugador.setPremiosInversionesOBote(jugador.getPremiosInversionesOBote() + 500000);
+                    jugador.setFortuna(jugador.getFortuna() + 5000);
+                    jugador.setPremiosInversionesOBote(jugador.getPremiosInversionesOBote() + 5000);
                     break;
             }
         }

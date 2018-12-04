@@ -28,19 +28,19 @@ public class Edificio {
                 switch (casilla.getNumCasas()) {
                     case 0:
                         this.nombre = "casa-1-" + casilla.getNombre();
-                        this.alquiler = casilla.getAlquiler() * 5;
+                        this.alquiler = (int) (casilla.getValor() * 0.1 * 5);
                         break;
                     case 1:
                         this.nombre = "casa-2-" + casilla.getNombre();
-                        this.alquiler = casilla.getAlquiler() * 15;
+                        this.alquiler = (int) (casilla.getValor() * 0.1 * 15);
                         break;
                     case 2:
                         this.nombre = "casa-3-" + casilla.getNombre();
-                        this.alquiler = casilla.getAlquiler() * 35;
+                        this.alquiler = (int) (casilla.getValor() * 0.1 * 35);
                         break;
                     case 3:
                         this.nombre = "casa-4-" + casilla.getNombre();
-                        this.alquiler = casilla.getAlquiler() * 50;
+                        this.alquiler = (int) (casilla.getValor() * 0.1 * 50);
                         break;
                 }
                 System.out.println("Se ha construido una casa en " + casilla.getNombre() +
@@ -48,7 +48,7 @@ public class Edificio {
                 break;
             case Valor.EDIFICIO_HOTEL:
                 this.valor = (int) (casilla.getValor() * 0.6);
-                this.alquiler = casilla.getValor() * 70;
+                this.alquiler = (int) (casilla.getValor() * 0.1 * 70);
                 switch (casilla.getNumHoteles()) {
                     case 0:
                         this.nombre = "hotel-1-" + casilla.getNombre();
@@ -65,7 +65,7 @@ public class Edificio {
                 break;
             case Valor.EDIFICIO_PISCINA:
                 this.valor = (int) (casilla.getValor() * 0.4);
-                this.alquiler = casilla.getGrupo().getAlquiler() * 25;
+                this.alquiler = (int) (casilla.getValor() * 0.1 * 25);
                 switch (casilla.getNumPiscinas()) {
                     case 0:
                         this.nombre = "piscina-1-" + casilla.getNombre();
@@ -82,7 +82,7 @@ public class Edificio {
                 break;
             case Valor.EDIFICIO_PISTA:
                 this.valor = (int) (casilla.getValor() * 1.25);
-                this.alquiler = casilla.getAlquiler() * 25;
+                this.alquiler = (int) (casilla.getValor() * 0.1 * 25);
                 switch (casilla.getNumPistas()) {
                     case 0:
                         this.nombre = "pista-1-" + casilla.getNombre();
