@@ -106,6 +106,7 @@ public class Avatar {
             this.casilla.setEdificable(true);
         }
 
+        System.out.println("Veces caidas en " + this.casilla.getNombre());
         this.casilla.getVecesCaidas().forEach((k, v) -> System.out.println(k.getNombre() + " -> " + v));
 
         this.casilla.realizarAccion(jugador, turno, avance);
@@ -129,6 +130,8 @@ public class Avatar {
                     this.casilla = tablero.getCasillas().get(lado).get(posicionNueva);
                     this.casilla.getAvatares().put(this.id, this);
                     this.casilla.getVecesCaidas().put(this.jugador, this.casilla.getVecesCaidas().get(this.jugador) + 1);
+                    System.out.println("Veces caidas en " + this.casilla.getNombre());
+                    this.casilla.getVecesCaidas().forEach((k, v) -> System.out.println(k.getNombre() + " -> " + v));
                     if (this.jugador.getTurnosDadosTiradosEspecial() == 4) {
                         this.jugador.setDadosTirados(true);
                     }
@@ -175,7 +178,6 @@ public class Avatar {
                         /*Cambio el avatar de una casilla a otra*/
                         this.casilla = tablero.getCasillas().get(lado).get(posicionNueva);
                         this.casilla.getAvatares().put(this.id, this);
-                        this.casilla.getVecesCaidas().forEach((k, v) -> System.out.println(k.getNombre() + " -> " + v));
                         if (i % 2 != 0) {
                             this.casilla.getVecesCaidas().put(this.jugador, this.casilla.getVecesCaidas().get(this.jugador) + 1);
                             this.casilla.realizarAccion(jugador, turno, avance);
@@ -196,8 +198,9 @@ public class Avatar {
                         /*Cambio el avatar de una casilla a otra*/
                         this.casilla = tablero.getCasillas().get(lado).get(posicionNueva);
                         this.casilla.getAvatares().put(this.id, this);
-                        this.casilla.getVecesCaidas().forEach((k, v) -> System.out.println(k.getNombre() + " -> " + v));
                         if (i % 2 != 0) {
+                            System.out.println("Veces caidas en " + this.casilla.getNombre());
+                            this.casilla.getVecesCaidas().forEach((k, v) -> System.out.println(k.getNombre() + " -> " + v));
                             this.casilla.getVecesCaidas().put(this.jugador, this.casilla.getVecesCaidas().get(this.jugador) + 1);
                             this.casilla.realizarAccion(jugador, turno, avance);
                         }
