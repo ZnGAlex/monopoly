@@ -384,10 +384,8 @@ public class Casilla {
         } else {
             switch (tipo) {
                 case Valor.EDIFICIO_CASA:
-                    if (numCasas == 4) {
-                        System.out.println("El solar " + nombre + " ya tiene 4 casas. No se pueden construir mas.");
-                    } else if (numCasas == 3 && numMaximoCasas == 3) {
-                        System.out.println("El solar " + nombre + " no se pueden construir mas casas.");
+                    if (numCasas == numMaximoCasas) {
+                        System.out.println("El solar " + nombre + " ya tiene " + numCasas + " casas. No se pueden construir mas.");
                     } else {
                         construir = true;
                     }
@@ -402,12 +400,14 @@ public class Casilla {
                     } else {
                         construir = true;
                         numCasas = 0;
+                        grupo.setNumMaxCasas(grupo.getNumMaxCasas());
                         for (int i = 0; i < edificios.size(); i++) {
                             Edificio ed = edificios.get(i);
                             if (ed.getTipo().equals(Valor.EDIFICIO_CASA)) {
                                 edificios.remove(i);
                                 propietario.getEdificios().remove(ed);
                                 tablero.getEdificios().remove(ed);
+                                grupo.getEdificios().remove(ed);
                                 i--;
                             }
                         }
@@ -444,7 +444,7 @@ public class Casilla {
                     numMaximoCasas = 3;
                 }
                 if (numHoteles == 2 && numMaximoHoteles == 2) {
-                    grupo.setNumMaxCasas(grupo.getNumMaxCasas()-1);
+                    grupo.setNumMaxCasas(grupo.getNumMaxCasas()-2);
                     numMaximoCasas = 2;
                 }
                 edificios.add(edificio);

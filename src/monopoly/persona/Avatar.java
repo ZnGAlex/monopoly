@@ -95,7 +95,7 @@ public class Avatar {
             this.jugador.setPasarPorCasillaDeSalida(this.jugador.getPasarPorCasillaDeSalida() + Valor.CANTIDAD_PASAR_SALIDA);
         }
         lado = 0;
-        posicionNueva = 6;
+        posicionNueva = 1;
 
         System.out.println("Desde " + this.casilla.getNombre() + " hasta " + tablero.getCasillas().get(lado).get(posicionNueva).getNombre());
         this.casilla.eliminarAvatar(this);
