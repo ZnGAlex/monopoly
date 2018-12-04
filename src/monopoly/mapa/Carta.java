@@ -166,7 +166,7 @@ public class Carta {
             switch (this.numCarta) {
                 case 1:
                     if (jugador.getFortuna() < 5000) {
-                        jugador.hipotecarOBancarrota(tablero.getCasillas().get(0).get(0).getPropietario(), tablero, turno, 500000);
+                        jugador.hipotecarOBancarrota(tablero.getCasillas().get(0).get(0).getPropietario(), tablero, turno, 5000);
                     }
                     if (!jugador.getBancarrota()) {
                         jugador.setFortuna(jugador.getFortuna() - 5000);

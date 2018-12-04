@@ -804,7 +804,7 @@ public class Jugador {
     public void hipotecar() {
         boolean flag = true;
         do {
-            System.out.println(this.propiedades);
+            System.out.println(this.propiedades.values());
             Scanner scanner = new Scanner(System.in);
             System.out.println("Propiedar a hipotecar o cancelar: ");
             String prop = scanner.nextLine();
@@ -872,14 +872,16 @@ public class Jugador {
             /*Traspase de las propiedades*/
             jugador.getPropiedades().put(prop.getNombre(), prop);
             prop.setPropietario(jugador);
-            this.propiedades.remove(prop.getNombre());
         }
+        this.propiedades.clear();
+        
         for (Casilla hip : this.hipotecas.values()) {
             /*Traspase de las hipotecas*/
             jugador.getHipotecas().put(hip.getNombre(), hip);
             hip.setPropietario(jugador);
-            this.hipotecas.remove(hip.getNombre());
         }
+        this.hipotecas.clear();
+        
         tablero.getJugadores().remove(this.getNombre());
         /*Eliminacion del jugador del tablero*/
 
@@ -962,71 +964,6 @@ public class Jugador {
         }
     }
 
-    /*
-    // cambia el alquiler de las casillas de transporte en funcion del propietario
-    public void cambiarAlquilerCasillas(Tablero tablero) {
-        Iterator jug_it = tablero.getJugadores().values().iterator();
-        while (jug_it.hasNext()) {
-            int numCasillas = 0;
-            Jugador j = (Jugador) jug_it.next();
-            for (ArrayList<Casilla> lado : tablero.getCasillas()) {
-                for (Casilla c : lado) {
-                    if (c.getTipo().equals(Valor.CASILLA_TIPO_TRANSPORTE)) {
-                        if (c.getPropietario().getNombre().equals(j.getNombre())) {
-                            numCasillas++;
-                        }
-                    }
-                }
-            }
-            if (numCasillas != 0) {
-                for (ArrayList<Casilla> lado : tablero.getCasillas()) {
-                    for (Casilla c : lado) {
-                        if (c.getTipo().equals(Valor.CASILLA_TIPO_TRANSPORTE)) {
-                            if (c.getPropietario().getNombre().equals(j.getNombre())) {
-                                c.setAlquiler((int) (Valor.ALQUILER_TRANSPORTE * 0.25 * numCasillas));
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    // cambio valor alquiler casillas servicio
-    public void cambiarAlquilerCasillas(Tablero tablero, int dados) {
-        Iterator jug_it = tablero.getJugadores().values().iterator();
-        while (jug_it.hasNext()) {
-            int numCasillas = 0;
-            Jugador j = (Jugador) jug_it.next();
-            for (ArrayList<Casilla> lado : tablero.getCasillas()) {
-                for (Casilla c : lado) {
-                    if (c.getTipo().equals(Valor.CASILLA_TIPO_SERVICIO)) {
-                        if (c.getPropietario().getNombre().equals(j.getNombre())) {
-                            numCasillas++;
-                        }
-                    }
-                }
-            }
-            if (numCasillas != 0) {
-                int valor = 0;
-                if (numCasillas == 1) {
-                    valor = Valor.FACTOR_SERVICIO * 4 * dados;
-                } else {
-                    valor = Valor.FACTOR_SERVICIO * 10 * dados;
-                }
-                for (ArrayList<Casilla> lado : tablero.getCasillas()) {
-                    for (Casilla c : lado) {
-                        if (c.getTipo().equals(Valor.CASILLA_TIPO_SERVICIO)) {
-                            if (c.getPropietario().getNombre().equals(j.getNombre())) {
-                                c.setAlquiler(Valor.ALQUILER_SERVICIO * valor);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-     */
     public void cambiarModo() {
         if (modoEspecial) {
             modoEspecial = false;

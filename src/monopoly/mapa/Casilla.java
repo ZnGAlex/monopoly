@@ -440,11 +440,11 @@ public class Casilla {
                 Edificio edificio = new Edificio(tipo, this);
                 incrementarNumTipoEdificio(tipo);
                 if (numHoteles == 3 && numMaximoHoteles == 3) {
-                    grupo.setNumMaxCasas(grupo.getNumMaxCasas()-1);
+                    grupo.setNumMaxCasas(grupo.getNumMaxCasas() - 1);
                     numMaximoCasas = 3;
                 }
                 if (numHoteles == 2 && numMaximoHoteles == 2) {
-                    grupo.setNumMaxCasas(grupo.getNumMaxCasas()-1);
+                    grupo.setNumMaxCasas(grupo.getNumMaxCasas() - 1);
                     numMaximoCasas = 2;
                 }
                 edificios.add(edificio);
@@ -570,7 +570,12 @@ public class Casilla {
             case "carcel":
                 ArrayList<String> jug = new ArrayList<>();
                 for (Avatar avat : this.avatares.values()) {
-                    jug.add(avat.getJugador().getNombre());
+                    String str = new String();
+                    str = avat.getJugador().getNombre();
+                    if (avat.getJugador().getInCarcel()) {
+                        str = str.concat("(" + avat.getJugador().getTurnosEnCarcel() + ")");
+                    }
+                    jug.add(str);
                 }
                 cadena = "{\n "
                         + "\t salir: " + Valor.COSTE_SALIR_CARCEL

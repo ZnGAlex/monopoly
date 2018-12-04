@@ -426,6 +426,6 @@ public class Menu {
     }
 
     public String imprimirOpcionesJugador() {
-        return "Comandos:\n lanzar dados\n comprar [casilla]\n hipotecar [casilla]\n deshipotecar [casilla]\n listar [enventa/jugadores/avatares]\n salir carcel\n acabar turno\n describir jugador [nombre]\n describir [casilla]\n describir avatar [avatar]\n estadisticas\n estadisticas [jugador]\n cambiar modo\n ver tablero";
+        return "Comandos:\n lanzar dados\n comprar [casilla]\n hipotecar [casilla]\n deshipotecar [casilla]\n edificar [casa/hotel/piscina/pista]\n vender [casas/hoteles/piscinas/pistas] [cantidad]\n listar [enventa/jugadores/avatares/edificios (grupo)]\n salir carcel\n acabar turno\n describir jugador [nombre]\n describir [casilla]\n describir avatar [avatar]\n estadisticas\n estadisticas [jugador]\n cambiar modo\n ver tablero";
     }
 }
